@@ -1,24 +1,14 @@
 import os
 import csv
 import tweepy
-import pandas
+import pandas as pd
 import csv
 
-
+from src.auth import Client
 
 def main():
-    access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
-    access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
-    consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
-    consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
-    bearer_token = os.environ.get("TWITTER_BEARER_TOKEN")
-    #client = tweepy.Client(bearer_token=bearer_token,
-    #consumer_key = consumer_key, 
-    #consumer_secret = consumer_secret,
-    #access_token = access_token,
-    #access_token_secret= access_token_secret,)
-    client = tweepy.Client(bearer_token=bearer_token)
-
+    
+    client = Client().get_client()
     response = client.search_recent_tweets(query="computer", tweet_fields=["created_at", "lang"], expansions=["author_id"], max_results=10)
     tweets = response.data
    
@@ -33,9 +23,11 @@ def main():
         #print tweet.created_at, tweet.text
     csvFile.close()
             
+    
 
-
-    print(tweets)
+    df = pd.read_csv('result.csv')
+    print(df.index)
+    print(df.columns)
     
 
 if __name__ == "__main__":
