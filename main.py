@@ -3,6 +3,7 @@ import csv
 import tweepy
 import pandas as pd
 import csv
+import textblob
 
 from src.auth import Client
 
@@ -15,7 +16,7 @@ def main():
     csvFile = open('result.csv','w')
     csvWriter = csv.writer(csvFile)
 
-    csvWriter.writerow(["Tweet ID", "Tweet Text", "Tweet created_at", "user_id" ])
+    csvWriter.writerow(["Tweet_ID", "Tweet Text", "Tweet created_at", "user_id" ])
     for tweet in tweets:
 
         # Write a row to the CSV file. I use encode UTF-8
@@ -26,8 +27,15 @@ def main():
     
 
     df = pd.read_csv('result.csv')
+
+    analysis = textblob.TextBlob(df['Tweet Text'][0])
+    print(analysis.sentiment)
+
+
     print(df.index)
     print(df.columns)
+    
+
     
 
 if __name__ == "__main__":
