@@ -8,7 +8,7 @@ class Menu:
 
     def __init__(self):
         title = "========================Twitter Data Analysis====================="
-        choices = ["[0] Get Tweets to your entered topic", "[1] Analyse Sentiment of Tweets", "[2] Get Top 10 Hashtags"]
+        choices = ["[0] Get Tweets to your entered topic", "[1] Analyse Sentiment of Tweets", "[2] Get Top 10 Hashtags", "[q] Quit"]
         cursor = "> "
         cursor_style = ("fg_red", "bold")
         self.main_menu_exit = False
@@ -36,7 +36,7 @@ class Menu:
                 time.sleep(5)
             elif main_sel == 1:
                 print("Option 1")
-            elif main_sel == 9:
+            elif main_sel == 3 or main_sel == 'q':
                 self.main_menu_exit = True
                 print("You quit!")
 

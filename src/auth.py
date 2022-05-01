@@ -6,7 +6,7 @@ import csv
 
 class Client:
 
-    def __init__(self, querystring):
+    def __init__(self):
         self.access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
         self.access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
         self.consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
@@ -15,16 +15,22 @@ class Client:
         self.client = tweepy.Client(bearer_token=self.bearer_token)
         #self.client.raise_for_status()       # if authentication failed raise_for_status will throw an exception
         self.tweets = None
-        self.querystring = querystring
-        self.csv_file = f'{querystring}.csv'
+        self.querystring = None
+        self.csv_file = f'newfile.csv'
 
-    def get_tweets(self):
+    def get_tweets(self, querystring):
+        self.querystring = querystring
         response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=10)
+        self.csv_file = f'fetched/{self.querystring}.csv'
         self.tweets = response.data
     
     # add possiblity to override store csvfilepath
-    def store_tweets_to_csv(self):#csv_vile):
-        csvFile = open(self.csv_file,'w')
+    def store_tweets_to_csv(self, override_csv_file=None):#csv_vile):
+        if override_csv_file is None:
+            csvFile = open(self.csv_file, 'w')
+        else:
+            csvFile = open(override_csv_file, 'w')
+
         csvWriter = csv.writer(csvFile)
 
         columns = ["Tweet_ID", "Tweet Text", "Tweet Entities" "Tweet created_at", "user_id" ]
