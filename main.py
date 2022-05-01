@@ -12,11 +12,15 @@ from src.menu import Menu
 
 def main():
     
-    myMenu = Menu()
-    Twitterclient = Client()       
+    #myMenu = Menu()
+    Twitterclient = Client('computer')       
     
+    Twitterclient.get_tweets()
+    Twitterclient.store_tweets_to_csv()
 
-    df = pd.read_csv('result.csv')
+
+    df = pd.read_csv('computer.csv')
+    df.to_csv("")
 
     analysis = textblob.TextBlob(df['Tweet Text'][0])
     print(analysis.sentiment)
