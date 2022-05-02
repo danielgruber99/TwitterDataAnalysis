@@ -1,1 +1,8 @@
-# includes class for storing data and loading data
+# class for processing data, getting hashtags on so forth
+
+
+class DataProcessing:
+    def __init__(self):
+        
+
+

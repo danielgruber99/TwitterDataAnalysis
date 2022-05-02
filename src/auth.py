@@ -3,6 +3,7 @@ import os
 from typing import List
 import tweepy
 import csv
+import pandas as pd
 
 class Client:
 
@@ -33,12 +34,22 @@ class Client:
 
         csvWriter = csv.writer(csvFile)
 
-        columns = ["Tweet_ID", "Tweet Text", "Tweet Entities" "Tweet created_at", "user_id" ]
-        csvWriter.writerow(columns)
-        # maybee convert it first to pandas.Dataframe and then use DataFrame.to_csv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        columns = ["Tweet_ID", "Tweet Text", "Tweet Entities", "Tweet created_at", "user_id" ]
+        data = []
+
         for tweet in self.tweets:
+            data.append([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
+        
+        tweets_df = pd.DataFrame(data, columns=columns)
+        tweets_df.to_csv(self.csv_file)
+
+
+        #csvWriter.writerow(columns)
+              
+        # maybee convert it first to pandas.Dataframe and then use DataFrame.to_csv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #for tweet in self.tweets:
             # Write a row to the CSV file. I use encode UTF-8
-            csvWriter.writerow([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
+        #    csvWriter.writerow([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
             #print tweet.created_at, tweet.text
         csvFile.close()
 

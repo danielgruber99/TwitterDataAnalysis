@@ -22,9 +22,6 @@ def main():
     df = pd.read_csv('fetched/computer.csv')
     
 
-    #analysis = textblob.TextBlob(df['Tweet Text'][0])
-    #print(analysis.sentiment)
-
 
     print(df.index)
     print(df.columns)

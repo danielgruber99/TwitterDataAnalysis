@@ -5,6 +5,8 @@ import pandas as pd
 import time
 import threading
 
+from src.sentimentanalysis import SentimentAnalysis
+
 class Menu:
     """
     This class handles the menu and provides to user a simple user interface in the command line. (Implemented with simple_term_menu)
@@ -13,6 +15,7 @@ class Menu:
         self.main_menu_exit = False
         self.twitterclient = TwitterClient
         self.main_menu = None
+        self.querystring = "computer" #default
         # start menu after setup
         self._setup_main_menu()
         self._menu_selection_loop()
@@ -36,6 +39,12 @@ class Menu:
     def _menu_selection_loop(self):
         while not self.main_menu_exit:
             main_sel = self.main_menu.show()
+            
+            # for default case
+            self.twitterclient.get_tweets(self.querystring)
+            self.twitterclient.store_tweets_to_csv()
+            df = pd.read_csv(f'fetched/{self.querystring}.csv')
+
 
             if main_sel == 0:
                 self.get_querystring_from_user()
@@ -46,6 +55,9 @@ class Menu:
                 print("Option 0")
                 time.sleep(5)
             elif main_sel == 1:
+                sa = SentimentAnalysis(f'{self.querystring}')
+                sa.analyse_all_tweets()
+                time.sleep(5)
                 print("Option 1")
             elif main_sel == 3 or main_sel == 'q':
                 self.main_menu_exit = True
