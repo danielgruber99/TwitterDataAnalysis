@@ -1,6 +1,10 @@
 import textblob
 import pandas as pd
 import re
+import wordcloud
+import numpy as np
+from PIL import Image
+import os
 
 class SentimentAnalysis:
     """
@@ -12,7 +16,7 @@ class SentimentAnalysis:
         self.csv_file = csv_file
         self.tweets = None
 
-    def clean_tweets(self, tweet):
+    def clean_tweet(self, tweet):
         '''
         Utility function to clean tweet text by removing links, special characters
         using simple regex statements.
@@ -25,7 +29,7 @@ class SentimentAnalysis:
 
         analysis_list = []
         for eachtweet in tweets_text:
-            #cleaned_tweet = self.clean_tweets(eachtweet)
+            cleaned_tweet = self.clean_tweet(eachtweet)
             analysis = textblob.TextBlob(eachtweet)
             analysis_list.append(analysis.sentiment.polarity)
         
@@ -34,6 +38,8 @@ class SentimentAnalysis:
         self.tweets.to_csv("test.csv")
         self.print_polarity_per_tweet()
         print("avg polarity: ", self.print_avg_polarity())
+
+        self.most_used_words()
     
     def print_polarity_per_tweet(self, startindex=0, endindex=10):
         # check if endindex exceeds fetchet tweets
@@ -62,6 +68,20 @@ class SentimentAnalysis:
             return 'extremely negative'
         else:
             return "error!"
+
+    def most_used_words(self):
+        tweets_text = self.tweets['Tweet Text']
+        all_tweets_text = ' '.join(tweets_text)
+
+
+        d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+        twitter_mask = np.array(Image.open(os.path.join(d, "wordcloud/masks/twitterlogo.png")))
+
+        wc = wordcloud.WordCloud(background_color="white", max_words=30, mask=twitter_mask, contour_width=3)
+        wc.generate(all_tweets_text)
+        wc.to_file(os.path.join(d, "twitterlogo_wc.png"))
+
+
 
 
 

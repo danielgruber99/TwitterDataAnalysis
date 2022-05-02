@@ -1,78 +1,161 @@
 ,Unnamed: 0,Tweet_ID,Tweet Text,Tweet Entities,Tweet created_at,user_id,sentiment
-0,0,1521084419552866304,"Computer Programs and Systems to report earnings on May 03, 2022. Earnings per share (EPS) estimate: $0.67 $CPSI #ComputerProgramsandSystems #stockmarket #stock https://t.co/BBpVZRAbSl https://t.co/YlTN7tvxLc","{'cashtags': [{'start': 107, 'end': 112, 'tag': 'CPSI'}], 'urls': [{'start': 161, 'end': 184, 'url': 'https://t.co/BBpVZRAbSl', 'expanded_url': 'https://srnk.us/go/3628898', 'display_url': 'srnk.us/go/3628898', 'unwound_url': 'https://tickeron.com/news/18275915?utm_source=twitter_free&utm_medium=news&utm_campaign=EARNING&utm_term=Stock_34064_CPSI&utm_content=category_75_PackagedSoftware'}, {'start': 185, 'end': 208, 'url': 'https://t.co/YlTN7tvxLc', 'expanded_url': 'https://twitter.com/Tickeron/status/1521084419552866304/photo/1', 'display_url': 'pic.twitter.com/YlTN7tvxLc'}], 'hashtags': [{'start': 113, 'end': 140, 'tag': 'ComputerProgramsandSystems'}, {'start': 141, 'end': 153, 'tag': 'stockmarket'}, {'start': 154, 'end': 160, 'tag': 'stock'}]}",2022-05-02 11:09:20+00:00,374729426,0.0
-1,1,1521084395758944257,"Salford City vs Mansfield Town Live
+0,0,1521207141004365824,"Manchester United Vs Brentford
 
-LIVE STREAM HD #WeAreSalford #Stags 🟡🔵
-
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
 Computer 💻
-https://t.co/WqrmYRQViJ
-https://t.co/WqrmYRQViJ
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 Mobile 📱
-https://t.co/WqrmYRQViJ
-https://t.co/WqrmYRQViJ
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 **
-RT Someone Need To This
-Follow @ALLSPOR79461730 For More https://t.co/yExJIyY0bx","{'urls': [{'start': 88, 'end': 111, 'url': 'https://t.co/WqrmYRQViJ', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 112, 'end': 135, 'url': 'https://t.co/WqrmYRQViJ', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 145, 'end': 168, 'url': 'https://t.co/WqrmYRQViJ', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 169, 'end': 192, 'url': 'https://t.co/WqrmYRQViJ', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 253, 'end': 276, 'url': 'https://t.co/yExJIyY0bx', 'expanded_url': 'https://twitter.com/ALLSOCCERFOOTB1/status/1521084395758944257/photo/1', 'display_url': 'pic.twitter.com/yExJIyY0bx'}], 'hashtags': [{'start': 52, 'end': 65, 'tag': 'WeAreSalford'}, {'start': 66, 'end': 72, 'tag': 'Stags'}], 'mentions': [{'start': 227, 'end': 243, 'username': 'ALLSPOR79461730', 'id': '1482977387583537152'}]}",2022-05-02 11:09:14+00:00,1503376669582962688,0.25757575757575757
-2,2,1521084336925286400,"Explaining how building a #SmartyKit computer can help your kid to demystify tech and to be proud of herself/himself 
-https://t.co/62fYSO3jQr
+Retweet 🔄 + Like ❤️ To Support US https://t.co/mo8ke4y7Bq","{'annotations': [{'start': 0, 'end': 16, 'probability': 0.9489, 'type': 'Organization', 'normalized_text': 'Manchester United'}, {'start': 21, 'end': 29, 'probability': 0.5883, 'type': 'Organization', 'normalized_text': 'Brentford'}], 'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/mo8ke4y7Bq', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521207141004365824/photo/1', 'display_url': 'pic.twitter.com/mo8ke4y7Bq'}]}",2022-05-02 19:16:59+00:00,1132526661130305537,0.13636363636363635
+1,1,1521207118376087552,"Manchester United Vs Brentford
 
-#buildinpublic #STEMeducation","{'urls': [{'start': 118, 'end': 141, 'url': 'https://t.co/62fYSO3jQr', 'expanded_url': 'https://smartykit.io/for-parents', 'display_url': 'smartykit.io/for-parents', 'status': 200, 'title': 'SmartyKit for parents', 'description': 'Building a SmartyKit computer with your kid is a great family project. Starting from 6+', 'unwound_url': 'https://smartykit.io/for-parents'}], 'hashtags': [{'start': 26, 'end': 36, 'tag': 'SmartyKit'}, {'start': 143, 'end': 157, 'tag': 'buildinpublic'}, {'start': 158, 'end': 172, 'tag': 'STEMeducation'}]}",2022-05-02 11:09:00+00:00,114542595,0.8
-3,3,1521084320974503939,"Salford City vs Mansfield Town Live
-
-LIVE STREAM HD #WeAreSalford #Stags 🟡🔵
-
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
 Computer 💻
-https://t.co/VEXjtwoAuz
-https://t.co/VEXjtwoAuz
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 Mobile 📱
-https://t.co/VEXjtwoAuz
-https://t.co/VEXjtwoAuz
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 **
-RT Someone Need To This
-Follow @ALLSPOR79461730 For More https://t.co/j3sVli6gqP","{'urls': [{'start': 88, 'end': 111, 'url': 'https://t.co/VEXjtwoAuz', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 112, 'end': 135, 'url': 'https://t.co/VEXjtwoAuz', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 145, 'end': 168, 'url': 'https://t.co/VEXjtwoAuz', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 169, 'end': 192, 'url': 'https://t.co/VEXjtwoAuz', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 253, 'end': 276, 'url': 'https://t.co/j3sVli6gqP', 'expanded_url': 'https://twitter.com/Barcelo94984056/status/1521084320974503939/photo/1', 'display_url': 'pic.twitter.com/j3sVli6gqP'}], 'hashtags': [{'start': 52, 'end': 65, 'tag': 'WeAreSalford'}, {'start': 66, 'end': 72, 'tag': 'Stags'}], 'mentions': [{'start': 227, 'end': 243, 'username': 'ALLSPOR79461730', 'id': '1482977387583537152'}]}",2022-05-02 11:08:57+00:00,1494347387938422786,0.25757575757575757
-4,4,1521084319778975744,"@RhodHyde 🤖 @RhodHyde  robot writing a computer program, painting
+Retweet 🔄 + Like ❤️ To Support US https://t.co/LtM1MbLT4N","{'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/LtM1MbLT4N', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521207118376087552/photo/1', 'display_url': 'pic.twitter.com/LtM1MbLT4N'}]}",2022-05-02 19:16:54+00:00,1132526661130305537,0.13636363636363635
+2,2,1521207092887306240,"Manchester United Vs Brentford
 
-@rhodhyde #elbo_ai #ai #not #dalle #digitalart https://t.co/gBizKq26nP","{'urls': [{'start': 114, 'end': 137, 'url': 'https://t.co/gBizKq26nP', 'expanded_url': 'https://twitter.com/max_elbo/status/1521084319778975744/photo/1', 'display_url': 'pic.twitter.com/gBizKq26nP'}], 'hashtags': [{'start': 77, 'end': 85, 'tag': 'elbo_ai'}, {'start': 86, 'end': 89, 'tag': 'ai'}, {'start': 90, 'end': 94, 'tag': 'not'}, {'start': 95, 'end': 101, 'tag': 'dalle'}, {'start': 102, 'end': 113, 'tag': 'digitalart'}], 'mentions': [{'start': 0, 'end': 9, 'username': 'RhodHyde', 'id': '419437464'}, {'start': 12, 'end': 21, 'username': 'RhodHyde', 'id': '419437464'}, {'start': 67, 'end': 76, 'username': 'RhodHyde', 'id': '419437464'}]}",2022-05-02 11:08:56+00:00,1491017231177707523,0.0
-5,5,1521084271158460416,"Salford City vs Mansfield Town Live
-
-LIVE STREAM HD #WeAreSalford #Stags 🟡🔵
-
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
 Computer 💻
-https://t.co/46bzFilYMd
-https://t.co/46bzFilYMd
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 Mobile 📱
-https://t.co/46bzFilYMd
-https://t.co/46bzFilYMd
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 **
-RT Someone Need To This
-Follow @ALLSPOR79461730 For More https://t.co/fmk6U4TnaV","{'urls': [{'start': 88, 'end': 111, 'url': 'https://t.co/46bzFilYMd', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 112, 'end': 135, 'url': 'https://t.co/46bzFilYMd', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 145, 'end': 168, 'url': 'https://t.co/46bzFilYMd', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 169, 'end': 192, 'url': 'https://t.co/46bzFilYMd', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=orig', 'width': 320, 'height': 180}, {'url': 'https://pbs.twimg.com/news_img/1521080132274126850/eeKxou61?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Salford City vs Mansfield Town Live', 'unwound_url': 'https://soccertvfreeh.blogspot.com/2022/05/salford-city-vs-mansfield-town-live.html'}, {'start': 253, 'end': 276, 'url': 'https://t.co/fmk6U4TnaV', 'expanded_url': 'https://twitter.com/AllFoot78929269/status/1521084271158460416/photo/1', 'display_url': 'pic.twitter.com/fmk6U4TnaV'}], 'hashtags': [{'start': 52, 'end': 65, 'tag': 'WeAreSalford'}, {'start': 66, 'end': 72, 'tag': 'Stags'}], 'mentions': [{'start': 227, 'end': 243, 'username': 'ALLSPOR79461730', 'id': '1482977387583537152'}]}",2022-05-02 11:08:45+00:00,1499384004201512964,0.25757575757575757
-6,6,1521084216024666112,"Salford City vs Mansfield Town Live
+Retweet 🔄 + Like ❤️ To Support US https://t.co/fJef6HobCp","{'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/fJef6HobCp', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521207092887306240/photo/1', 'display_url': 'pic.twitter.com/fJef6HobCp'}]}",2022-05-02 19:16:48+00:00,1132526661130305537,0.13636363636363635
+3,3,1521207067826352128,"Manchester United Vs Brentford
 
-LIVE STREAM HD #WeAreSalford #Stags 🟡🔵
-
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
 Computer 💻
-https://t.co/J8ZCXqg69s
-https://t.co/J8ZCXqg69s
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 Mobile 📱
-https://t.co/J8ZCXqg69s
-https://t.co/J8ZCXqg69s
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
 **
-RT Someone Need To This
-Follow @ALLSPOR79461730 For More https://t.co/NOfjmaxA6e","{'urls': [{'start': 88, 'end': 111, 'url': 'https://t.co/J8ZCXqg69s', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 112, 'end': 135, 'url': 'https://t.co/J8ZCXqg69s', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 145, 'end': 168, 'url': 'https://t.co/J8ZCXqg69s', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 169, 'end': 192, 'url': 'https://t.co/J8ZCXqg69s', 'expanded_url': 'https://tinyurl.com/4jwwf3jk', 'display_url': 'tinyurl.com/4jwwf3jk'}, {'start': 253, 'end': 276, 'url': 'https://t.co/NOfjmaxA6e', 'expanded_url': 'https://twitter.com/ALLSPOR59192507/status/1521084216024666112/photo/1', 'display_url': 'pic.twitter.com/NOfjmaxA6e'}], 'hashtags': [{'start': 52, 'end': 65, 'tag': 'WeAreSalford'}, {'start': 66, 'end': 72, 'tag': 'Stags'}], 'mentions': [{'start': 227, 'end': 243, 'username': 'ALLSPOR79461730', 'id': '1482977387583537152'}]}",2022-05-02 11:08:32+00:00,1502919583145279489,0.25757575757575757
-7,7,1521084196155973633,"@max_elbo
+Retweet 🔄 + Like ❤️ To Support US https://t.co/nJLxA8KDiq","{'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/nJLxA8KDiq', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521207067826352128/photo/1', 'display_url': 'pic.twitter.com/nJLxA8KDiq'}]}",2022-05-02 19:16:42+00:00,1132526661130305537,0.13636363636363635
+4,4,1521206952482820107,"Hire us to do your;
+✓Essays
+Test
+Math
+Anatomy
+English
+✓Programming
+Database
+Political science
+Finance
+Accounting
+History
+#Projects
+Economics
+Business
+Statistics
+#Calculus
+Quizzes
+Discussions
+Psychology
+Computer
+Theology @TutorReliable","{'mentions': [{'start': 220, 'end': 234, 'username': 'TutorReliable', 'id': '1502746955876864010'}], 'hashtags': [{'start': 121, 'end': 130, 'tag': 'Projects'}, {'start': 161, 'end': 170, 'tag': 'Calculus'}]}",2022-05-02 19:16:14+00:00,1502746955876864010,0.0
+5,5,1521206866982084608,"Manchester United Vs Brentford
 
-#create robot writing a computer program, painting
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
+Computer 💻
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
 
-@RhodHyde","{'hashtags': [{'start': 11, 'end': 18, 'tag': 'create'}], 'mentions': [{'start': 0, 'end': 9, 'username': 'max_elbo', 'id': '1491017231177707523'}, {'start': 63, 'end': 72, 'username': 'RhodHyde', 'id': '419437464'}]}",2022-05-02 11:08:27+00:00,419437464,0.0
-8,8,1521084184080621573,"Hello everyone, i'm an independent 3d artist and i'm trying to buy a new video card for my computer through my nfts, i hope you like it.
+Mobile 📱
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
 
-My first NFT in this collection : 
+**
+Retweet 🔄 + Like ❤️ To Support US https://t.co/OiIlWQBcWk","{'annotations': [{'start': 0, 'end': 16, 'probability': 0.9489, 'type': 'Organization', 'normalized_text': 'Manchester United'}, {'start': 21, 'end': 29, 'probability': 0.5883, 'type': 'Organization', 'normalized_text': 'Brentford'}], 'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/OiIlWQBcWk', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521206866982084608/photo/1', 'display_url': 'pic.twitter.com/OiIlWQBcWk'}]}",2022-05-02 19:15:54+00:00,1132526661130305537,0.13636363636363635
+6,6,1521206860556431360,"Manchester United Vs Brentford
 
-https://t.co/MaqoH17i2H
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
+Computer 💻
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
 
-#NFT #eth #polygon #metaverse #babyyoda 
+Mobile 📱
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
 
-Thanks for sharing 🍀✨ https://t.co/RE5I8HLJ1k","{'urls': [{'start': 174, 'end': 197, 'url': 'https://t.co/MaqoH17i2H', 'expanded_url': 'https://opensea.io/collection/3dscenescollection', 'display_url': 'opensea.io/collection/3ds…'}, {'start': 263, 'end': 286, 'url': 'https://t.co/RE5I8HLJ1k', 'expanded_url': 'https://twitter.com/andmyart3d/status/1521084184080621573/photo/1', 'display_url': 'pic.twitter.com/RE5I8HLJ1k'}, {'start': 263, 'end': 286, 'url': 'https://t.co/RE5I8HLJ1k', 'expanded_url': 'https://twitter.com/andmyart3d/status/1521084184080621573/photo/1', 'display_url': 'pic.twitter.com/RE5I8HLJ1k'}], 'hashtags': [{'start': 199, 'end': 203, 'tag': 'NFT'}, {'start': 204, 'end': 208, 'tag': 'eth'}, {'start': 209, 'end': 217, 'tag': 'polygon'}, {'start': 218, 'end': 228, 'tag': 'metaverse'}, {'start': 229, 'end': 238, 'tag': 'babyyoda'}]}",2022-05-02 11:08:24+00:00,1521060045122854913,0.1465909090909091
-9,9,1521084051410460672,"4 7 Port USB 3.0 HUB with 12V Power Adapter USB Splitter OTG Adapter For Desktop Laptop PC Computer Accessories SuperSpeed $37.78
-click&gt;&gt;https://t.co/lN0TNVJnMF
-#amazon #aliexpress #rt https://t.co/H6J0eQ7Xae","{'urls': [{'start': 143, 'end': 166, 'url': 'https://t.co/lN0TNVJnMF', 'expanded_url': 'https://s.click.aliexpress.com/e/_u8kJgn', 'display_url': 's.click.aliexpress.com/e/_u8kJgn'}, {'start': 191, 'end': 214, 'url': 'https://t.co/H6J0eQ7Xae', 'expanded_url': 'https://twitter.com/shopshop_shop_/status/1521084051410460672/photo/1', 'display_url': 'pic.twitter.com/H6J0eQ7Xae'}], 'hashtags': [{'start': 167, 'end': 174, 'tag': 'amazon'}, {'start': 175, 'end': 186, 'tag': 'aliexpress'}, {'start': 187, 'end': 190, 'tag': 'rt'}]}",2022-05-02 11:07:52+00:00,1481638754712698881,0.0
+**
+Retweet 🔄 + Like ❤️ To Support US https://t.co/WS6OKZFB8P","{'annotations': [{'start': 0, 'end': 16, 'probability': 0.9489, 'type': 'Organization', 'normalized_text': 'Manchester United'}, {'start': 21, 'end': 29, 'probability': 0.5883, 'type': 'Organization', 'normalized_text': 'Brentford'}], 'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/WS6OKZFB8P', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521206860556431360/photo/1', 'display_url': 'pic.twitter.com/WS6OKZFB8P'}]}",2022-05-02 19:15:52+00:00,1132526661130305537,0.13636363636363635
+7,7,1521206822442762240,"Manchester United Vs Brentford
+
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
+Computer 💻
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
+Mobile 📱
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
+**
+Retweet 🔄 + Like ❤️ To Support US https://t.co/yT6NjMPBOC","{'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/yT6NjMPBOC', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521206822442762240/photo/1', 'display_url': 'pic.twitter.com/yT6NjMPBOC'}]}",2022-05-02 19:15:43+00:00,1132526661130305537,0.13636363636363635
+8,8,1521206804881027073,"Hire us to do your;
+✓Essays
+Test
+Math
+Anatomy
+English
+#Programming
+Database
+Political science
+Finance
+Accounting
+History
+#Projects
+Economics
+Business
+Statistics
+Calculus
+Quizzes
+Discussions
+Psychology
+Computer
+Theology
+Finance
+Criminology
+Excel
+@TutorReliable ..","{'mentions': [{'start': 245, 'end': 259, 'username': 'TutorReliable', 'id': '1502746955876864010'}], 'hashtags': [{'start': 54, 'end': 66, 'tag': 'Programming'}, {'start': 121, 'end': 130, 'tag': 'Projects'}]}",2022-05-02 19:15:39+00:00,1502746955876864010,0.0
+9,9,1521206755753357312,"Manchester United Vs Brentford
+
+LIVE STREAM HD #MUNBRE #MUFC #EPL
+ 
+Computer 💻
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
+Mobile 📱
+https://t.co/4PeF8erWYu
+https://t.co/4PeF8erWYu
+
+**
+Retweet 🔄 + Like ❤️ To Support US https://t.co/641WFiTF6D","{'hashtags': [{'start': 47, 'end': 54, 'tag': 'MUNBRE'}, {'start': 55, 'end': 60, 'tag': 'MUFC'}, {'start': 61, 'end': 65, 'tag': 'EPL'}], 'urls': [{'start': 79, 'end': 102, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 103, 'end': 126, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 137, 'end': 160, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 161, 'end': 184, 'url': 'https://t.co/4PeF8erWYu', 'expanded_url': 'https://cutt.ly/SGFiJCm', 'display_url': 'cutt.ly/SGFiJCm', 'images': [{'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=orig', 'width': 1200, 'height': 630}, {'url': 'https://pbs.twimg.com/news_img/1521201206915649536/1C40Iqxe?format=jpg&name=150x150', 'width': 150, 'height': 150}], 'status': 200, 'title': 'Manchester United vs Brentford', 'description': 'Redirecting….', 'unwound_url': 'https://soccho47.blogspot.com/2022/05/manchester-united-vs-brentford.html'}, {'start': 223, 'end': 246, 'url': 'https://t.co/641WFiTF6D', 'expanded_url': 'https://twitter.com/SinaShihab/status/1521206755753357312/photo/1', 'display_url': 'pic.twitter.com/641WFiTF6D'}]}",2022-05-02 19:15:27+00:00,1132526661130305537,0.13636363636363635
