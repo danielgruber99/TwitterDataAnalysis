@@ -32,18 +32,19 @@ class SentimentAnalysis:
 
         self.tweets['sentiment'] = analysis_list
         self.tweets.to_csv("test.csv")
-        self.print_polarity()
+        self.print_polarity_per_tweet()
+        print("avg polarity: ", self.print_avg_polarity())
     
-    def print_polarity(self, startindex=0, endindex=10):
+    def print_polarity_per_tweet(self, startindex=0, endindex=10):
         # check if endindex exceeds fetchet tweets
         tweets_text = self.tweets['Tweet Text']
         tweets_polarity = self.tweets['sentiment']
         for i in range(10):
             print( self.get_polarity_meaning(tweets_polarity[i]))
 
-        print(self.tweets.index)
-        print(self.tweets.dtypes)
-    
+    def print_avg_polarity(self) -> str:
+        return self.tweets['sentiment'].mean()
+
     def get_polarity_meaning(self, polarity):
         if polarity > 0.8:
             return 'extremely positive'
