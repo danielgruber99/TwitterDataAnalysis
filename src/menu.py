@@ -74,7 +74,7 @@ class Menu:
         # for default case
         self.twitterclient.get_tweets(self.querystring)
         self.twitterclient.store_tweets_to_csv()
-        df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv')
+        df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv', lineterminator='\n')
         
         while not self.main_menu_exit:
             main_sel = self.main_menu.show()

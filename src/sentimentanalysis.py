@@ -20,7 +20,7 @@ class SentimentAnalysis:
         self.tweets_analyzed = False
     
     def read_csv_file(self):
-        return pd.read_csv(self.csv_file)
+        return pd.read_csv(self.csv_file, lineterminator='\n')
 
     def clean_tweet(self, tweet):
         '''
@@ -90,11 +90,10 @@ class SentimentAnalysis:
         # store to file
         wc.to_file(os.path.join(d, "wordcloud/generated/twitterlogo_wc.png"))
         # show
-        plt.imshow(wc, interpolation="bilinear")
-        plt.figure(figsize=[50,50])
-        plt.imshow(twitter_mask, cmap=plt.cm.gray, interpolation="bilinear")
-        plt.axis("off")
-        plt.show()
+        img = Image.open("wordcloud/generated/twitterlogo_wc.png")
+        img.show()
+
+
 
 
 
