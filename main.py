@@ -11,22 +11,8 @@ from src.menu import Menu
 
 
 def main():
-    
     Twitterclient = Client()  
-    myMenu = Menu(Twitterclient)     
-    
-    Twitterclient.get_tweets('computer')
-    Twitterclient.store_tweets_to_csv()
-
-
-    df = pd.read_csv('fetched/computer.csv')
-    
-
-
-    print(df.index)
-    print(df.columns)
-    
-
+    myMenu = Menu(Twitterclient)        
     
 
 if __name__ == "__main__":

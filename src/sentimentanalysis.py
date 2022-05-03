@@ -6,40 +6,45 @@ import numpy as np
 from PIL import Image
 import os
 
+import matplotlib.pyplot as plt
+
 class SentimentAnalysis:
     """
     This class is responsible for the Sentiment Analysis part with textblob. It will take the existing
     csv (or dataframe, tbd), analyse each tweet and write polarity and subjectivity back.
     """
-    def __init__(self, csv_file):
-        # or maybe I should use 
-        self.csv_file = csv_file
-        self.tweets = None
+    def __init__(self, querystring):
+        self.querystring = querystring
+        self.csv_file = f'fetched/{self.querystring}/{self.querystring}.csv'
+        self.tweets = self.read_csv_file()
+        self.tweets_analyzed = False
+    
+    def read_csv_file(self):
+        return pd.read_csv(self.csv_file)
 
     def clean_tweet(self, tweet):
         '''
-        Utility function to clean tweet text by removing links, special characters
-        using simple regex statements.
+        Utility function to clean tweet text by removing links, special characters using regex statements.
         '''
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
     def analyse_all_tweets(self):
-        self.tweets = pd.read_csv(f'fetched/{self.csv_file}.csv')
         tweets_text = self.tweets["Tweet Text"]
 
         analysis_list = []
         for eachtweet in tweets_text:
             cleaned_tweet = self.clean_tweet(eachtweet)
-            analysis = textblob.TextBlob(eachtweet)
+            analysis = textblob.TextBlob(cleaned_tweet)
             analysis_list.append(analysis.sentiment.polarity)
         
 
         self.tweets['sentiment'] = analysis_list
-        self.tweets.to_csv("test.csv")
+        self.tweets.to_csv(self.csv_file)
         self.print_polarity_per_tweet()
         print("avg polarity: ", self.print_avg_polarity())
 
-        self.most_used_words()
+        self.tweets_analyzed = True
+
     
     def print_polarity_per_tweet(self, startindex=0, endindex=10):
         # check if endindex exceeds fetchet tweets
@@ -70,16 +75,26 @@ class SentimentAnalysis:
             return "error!"
 
     def most_used_words(self):
+        """
+        Get the most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
+        """
+        # combine all tweets text to one string
         tweets_text = self.tweets['Tweet Text']
-        all_tweets_text = ' '.join(tweets_text)
-
-
+        all_tweets_text = self.clean_tweet(' '.join(tweets_text))
+        # get current working directory
         d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+        # take official twitter logo as mask
         twitter_mask = np.array(Image.open(os.path.join(d, "wordcloud/masks/twitterlogo.png")))
-
-        wc = wordcloud.WordCloud(background_color="white", max_words=30, mask=twitter_mask, contour_width=3)
-        wc.generate(all_tweets_text)
-        wc.to_file(os.path.join(d, "twitterlogo_wc.png"))
+        # generate wordcloud
+        wc = wordcloud.WordCloud(background_color="white", max_words=30, mask=twitter_mask, contour_width=3).generate(all_tweets_text)
+        # store to file
+        wc.to_file(os.path.join(d, "wordcloud/generated/twitterlogo_wc.png"))
+        # show
+        plt.imshow(wc, interpolation="bilinear")
+        plt.figure(figsize=[50,50])
+        plt.imshow(twitter_mask, cmap=plt.cm.gray, interpolation="bilinear")
+        plt.axis("off")
+        plt.show()
 
 
 
