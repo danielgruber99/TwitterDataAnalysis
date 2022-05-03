@@ -40,12 +40,16 @@ class SentimentAnalysis:
 
         self.tweets['sentiment'] = analysis_list
         self.tweets.to_csv(self.csv_file)
-        self.print_polarity_per_tweet()
-        print("avg polarity: ", self.print_avg_polarity())
-
+        #self.print_polarity_per_tweet()
+        self.get_avg_polarity()
         self.tweets_analyzed = True
 
-    
+    def analyse_single_tweet(self, index):
+        tweet_text = self.tweets["Tweet Text"][index]
+        cleaned_tweet_text = self.clean_tweet(tweet_text)
+        analysis = textblob.TextBlob(cleaned_tweet_text)
+        return self.get_polarity_meaning(analysis.sentiment.polarity)
+
     def print_polarity_per_tweet(self, startindex=0, endindex=10):
         # check if endindex exceeds fetchet tweets
         tweets_text = self.tweets['Tweet Text']
@@ -53,8 +57,11 @@ class SentimentAnalysis:
         for i in range(10):
             print( self.get_polarity_meaning(tweets_polarity[i]))
 
-    def print_avg_polarity(self) -> str:
-        return self.tweets['sentiment'].mean()
+    def get_avg_polarity(self) -> str:
+        avg_polarity = self.tweets['sentiment'].mean()
+        avg_polarity_meaning = self.get_polarity_meaning(avg_polarity)
+        print("The average polarity of your topic '", self.querystring, "' is ", f"'{avg_polarity_meaning}'")
+        
 
     def get_polarity_meaning(self, polarity):
         if polarity > 0.8:

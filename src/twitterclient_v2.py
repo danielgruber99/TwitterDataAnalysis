@@ -5,7 +5,7 @@ import tweepy
 import csv
 import pandas as pd
 
-class Client:
+class TwitterClient_v2:
 
     def __init__(self):
         self.access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
@@ -18,7 +18,7 @@ class Client:
         except:
             print("Error: Authentication Failed!")
         self.tweets = None
-        self.querystring = None
+        self.querystring = "computer" #default
         self.csv_file = f'newfile.csv'
     
     def create_folder(self):
