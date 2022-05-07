@@ -127,7 +127,7 @@ class Menu:
                         pass
                     elif submenu_2_sel == 1:
                         pass
-                    elif submenu_1_sel == 'b' or submenu_1_sel == 2:
+                    elif submenu_2_sel == 'b' or submenu_2_sel == 2:
                         self.submenu_2_exit = True
                         print("back selected")
                         time.sleep(1)

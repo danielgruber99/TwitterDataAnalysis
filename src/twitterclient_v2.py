@@ -4,6 +4,7 @@ from typing import List
 import tweepy
 import csv
 import pandas as pd
+import src.constants as const
 
 class TwitterClient_v2:
 
@@ -53,7 +54,7 @@ class TwitterClient_v2:
 
         csvWriter = csv.writer(csvFile)
 
-        columns = ["Tweet_ID", "Tweet Text", "Tweet Entities", "Tweet created_at", "user_id" ]
+        columns = [const.tweet_id, const.tweet_text, const.tweet_entities, const.tweet_createdAt, const.user_id ]
         data = []
 
         for tweet in self.tweets:

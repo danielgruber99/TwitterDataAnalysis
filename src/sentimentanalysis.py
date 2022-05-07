@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 
+import src.constants as const
 import matplotlib.pyplot as plt
 
 class SentimentAnalysis:
@@ -29,7 +30,7 @@ class SentimentAnalysis:
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
     def analyse_all_tweets(self):
-        tweets_text = self.tweets["Tweet Text"]
+        tweets_text = self.tweets[const.tweet_text]
 
         analysis_list = []
         for eachtweet in tweets_text:
@@ -45,14 +46,14 @@ class SentimentAnalysis:
         self.tweets_analyzed = True
 
     def analyse_single_tweet(self, index):
-        tweet_text = self.tweets["Tweet Text"][index]
+        tweet_text = self.tweets[const.tweet_text][index]
         cleaned_tweet_text = self.clean_tweet(tweet_text)
         analysis = textblob.TextBlob(cleaned_tweet_text)
         return self.get_polarity_meaning(analysis.sentiment.polarity)
 
     def print_polarity_per_tweet(self, startindex=0, endindex=10):
         # check if endindex exceeds fetchet tweets
-        tweets_text = self.tweets['Tweet Text']
+        tweets_text = self.tweets[const.tweet_text]
         tweets_polarity = self.tweets['sentiment']
         for i in range(10):
             print( self.get_polarity_meaning(tweets_polarity[i]))
@@ -86,7 +87,7 @@ class SentimentAnalysis:
         Get the most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
         """
         # combine all tweets text to one string
-        tweets_text = self.tweets['Tweet Text']
+        tweets_text = self.tweets[const.tweet_text]
         all_tweets_text = self.clean_tweet(' '.join(tweets_text))
         # get current working directory
         d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()

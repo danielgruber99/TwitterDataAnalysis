@@ -1,5 +1,5 @@
 import pandas as pd
-
+import src.constants
 
 class DataProcessing:
     """
@@ -14,12 +14,15 @@ class DataProcessing:
         return pd.read_csv(self.csv_file, lineterminator='\n')
     
     def get_users(self) -> list:
-        return self.tweets_df["user_id"]
+        return self.tweets_df[const.user_id]
     
+    def get_hashtags(self) -> list:
+        return self.tweets_df[const.tweet_entities]
+
     def get_top_10_users(self):
         users = self.get_users()
         print(users)
-        group_users = self.tweets_df.groupby(by='user_id').size()
+        group_users = self.tweets_df.groupby(by=const.user_id).size()
         print(type(group_users))
         group_users = sorted(group_users)
         print(group_users)
