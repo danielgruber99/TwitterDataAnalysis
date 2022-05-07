@@ -19,6 +19,12 @@ class DataProcessing:
     def get_hashtags(self) -> list:
         return self.tweets_df[const.tweet_entities]
 
+    def get_top_10_hashtags(self):
+        hashtags = self.get_hashtags()
+        print(hashtags)
+        
+        print(hashtags[0]['hashtags'])
+
     def get_top_10_users(self):
         users = self.get_users()
         print(users)
@@ -26,6 +32,8 @@ class DataProcessing:
         print(type(group_users))
         group_users = sorted(group_users)
         print(group_users)
+
+
 
 
     

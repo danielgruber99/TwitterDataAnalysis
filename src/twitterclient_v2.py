@@ -54,11 +54,12 @@ class TwitterClient_v2:
 
         csvWriter = csv.writer(csvFile)
 
-        columns = [const.tweet_id, const.tweet_text, const.tweet_entities, const.tweet_createdAt, const.user_id ]
+        columns = [const.tweet_id, const.tweet_text, const.tweet_entities, const.tweet_createdAt, const.user_id, 'hashtags' ]
         data = []
 
         for tweet in self.tweets:
-            data.append([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
+            hashtags = self.extract_hashtags(tweet)
+            data.append([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id, hashtags])
         
         tweets_df = pd.DataFrame(data, columns=columns)
         tweets_df.to_csv(self.csv_file)
@@ -72,5 +73,13 @@ class TwitterClient_v2:
         #    csvWriter.writerow([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
             #print tweet.created_at, tweet.text
         csvFile.close()
+
+    def extract_hashtags(self, tweet) -> list:
+        entity_hashtag = tweet.entities["hashtags"]
+        hashtags = []
+        for hashtag in entity_hashtag:
+            hashtags.append(hashtag['tag'])
+        
+        return hashtags
 
 
