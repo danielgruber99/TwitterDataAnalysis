@@ -17,11 +17,8 @@ def main():
     twitterclient_v2 = TwitterClient_v2()  
     twitterclient_v2.get_tweets(default_querystring)
     twitterclient_v2.store_tweets_to_csv()
-    #myMenu = Menu(twitterclient_v2)        
+    myMenu = Menu(twitterclient_v2)        
     
-    d = DataProcessing("computer")
-    print(d.get_top_10_users())
-
     #print(d.get_top_10_hashtags)
 
 

@@ -5,6 +5,7 @@ import time
 import threading
 
 from src.sentimentanalysis import SentimentAnalysis
+from src.dataprocessing import DataProcessing
 
 class Menu:
     """
@@ -123,10 +124,15 @@ class Menu:
                 # submenu 2
                 while not self.submenu_2_exit:
                     submenu_2_sel = self.submenu_2.show()
+                    d = DataProcessing("computer")
+                    # Get Top 10 Hashtags
                     if submenu_2_sel == 0:
-                        pass
+                        d.get_top_10_hashtags()
+                        time.sleep(3)
+                    # Get Top 10 Users
                     elif submenu_2_sel == 1:
-                        pass
+                        d.get_top_10_users()
+                        time.sleep(3)
                     elif submenu_2_sel == 'b' or submenu_2_sel == 2:
                         self.submenu_2_exit = True
                         print("back selected")
@@ -150,6 +156,7 @@ class Menu:
                 self.twitterclient_v2.get_tweets(self.querystring)
                 self.twitterclient_v2.store_tweets_to_csv()
                 self.sentimentanalysis = SentimentAnalysis(self.querystring)
+                self.dataprocessing = DataProcessing(self.querystring)
                 self.tweets_df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv', lineterminator='\n')
                 
             # [q] Quit

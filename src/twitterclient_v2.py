@@ -41,7 +41,7 @@ class TwitterClient_v2:
         # set csv_file path depending on querystring
         self.csv_file = f'fetched/{self.querystring}/{self.querystring}.csv'
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
-        response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=10)
+        response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=20)
         # write fetched data to member variable tweets
         self.tweets = response.data
     
@@ -81,5 +81,8 @@ class TwitterClient_v2:
             hashtags.append(hashtag['tag'])
         
         return hashtags
+
+    def get_followers(self, user_id):
+        print(self.client.get_users_followers(user_id))
 
 
