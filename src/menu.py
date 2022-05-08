@@ -29,6 +29,8 @@ class Menu:
         # Client, qerystring and startmenu
         self.twitterclient_v2 = twitterclient_v2
         self.querystring = twitterclient_v2.querystring
+        self.tweets_df = None
+        self.tweets_users = None
         self.sentimentanalysis = SentimentAnalysis(self.querystring)
         self.dataprocessing = DataProcessing(self.querystring)
 
@@ -111,6 +113,8 @@ class Menu:
             cycle_cursor=True,
             clear_screen=True,
         )
+    
+    
 
 
     def _menu_selection_loop(self):
@@ -128,31 +132,30 @@ class Menu:
                     submenu_0_sel = self.submenu_0.show()
                     # browse Tweets
                     if submenu_0_sel == 0:
-                        start = 0
-                        browse_exit = False
-                        while not browse_exit:
-                            print(f"Tweets {start} to {start+10}", self.tweets_df[start:start+10])
+                        start_browse_tweets = 0
+                        browse_tweets_exit = False
+                        while not browse_tweets_exit:
+                            print(f"Tweets {start_browse_tweets} to {start_browse_tweets+10}", self.tweets_df[start_browse_tweets:start_browse_tweets+10])
                             other_input = input("Press n/p to get next/previous 10 tweets. Press b to go back to the main menu. ")
                             if other_input == 'n':
-                                start+=10
+                                start_browse_tweets+=10
                             elif other_input == 'p':
-                                if start-10 >=0:
-                                    start-=10
-                                else:
-                                    print("You already view the first 10 tweets.")
+                                if start_browse_tweets-10 >=0:
+                                    start_browse_tweets-=10
                             elif other_input == 'b':
-                                browse_exit = True
+                                browse_tweets_exit = True
                             else:
                                 print("Input not valid.")
-                        browse_exit=False
+                        browse_tweets_exit=False
                     # browse Users
                     elif submenu_0_sel == 1:
                         pass
+                    # get markdown
                     elif submenu_0_sel == 2:
-                        pass
-                    elif submenu_0_sel == 3:
-                        pass
-                    elif submenu_0_sel == 'b' or submenu_0_sel == 4:
+                        self.tweets_df.to_markdown(f"fetched/{self.querystring}/tweets_markdown.md")
+                        print(f"Files are stored at fetched/{self.querystring}/")
+                        input("Press enter to continue...")
+                    elif submenu_0_sel == 'b' or submenu_0_sel == 3:
                         self.submenu_0_exit = True
                 self.submenu_0_exit = False
                     
@@ -206,9 +209,26 @@ class Menu:
                 print(self.tweets_df[0:20])
                 print("Enter a twitter user: ")
                 userid = self.get_userid()
-                followers_df = self.twitterclient_v2.get_followers(userid)
-                print(followers_df[0:10])
-                time.sleep(5)
+
+                if userid != -1:
+                    followers_df = self.twitterclient_v2.get_followers(userid)
+                else:
+                    print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
+                start_browse_followers = 0
+                browse_followers_exit = False
+                while not browse_followers_exit:
+                    print(f"Followers {start_browse_followers} to {start_browse_followers+10}",followers_df[start_browse_followers:start_browse_followers+20])
+                    browse_followers_input = input("Press n/p to get next/previous 20 followers. Press b to go back to the main menu. ")
+                    if browse_followers_input == 'n':
+                        start_browse_followers+=20
+                    elif browse_followers_input == 'p':
+                        if start_browse_followers-20 >=0:
+                            start_browse_followers-=20
+                    elif browse_followers_input == 'b':
+                        browse_followers_exit = True
+                    else:
+                        print("Input not valid.")
+                browse_followers_exit = False
 
             # [4] obtain...
             elif main_sel == 4:

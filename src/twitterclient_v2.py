@@ -28,11 +28,11 @@ class TwitterClient_v2:
         self.csv_folder_path = None
         self.update_csv_file_paths()
     
-    def create_folder(self):
+    def create_folder(self, folder):
         """
         For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
         """
-        folder = (f"fetched/{self.querystring}")
+        folder = (folder)
         CHECK_FOLDER = os.path.isdir(folder)
 
         if not CHECK_FOLDER:
@@ -56,7 +56,7 @@ class TwitterClient_v2:
         self.store_tweets_to_csv()
     
     def store_tweets_to_csv(self, override_csv_file=None):
-        self.create_folder()
+        self.create_folder(f"fetched/{self.querystring}")
         if override_csv_file is None:
             csvFile = open(self.csv_file_tweets, 'w')
         else:
@@ -84,6 +84,35 @@ class TwitterClient_v2:
             #print tweet.created_at, tweet.text
         csvFile.close()
     
+    def get_users(self):
+        if self.tweets is None:
+            self.get_tweets(self.querystring)
+        
+        users_with_duplicates = self.tweets[const.user_id]
+        users = list(set(users_with_duplicates))
+        
+        start = 0
+        length_users = len(users)
+
+        columns = []
+        data = []
+
+        #response_list = []
+        #for hundred_user_list in users:
+        #    if start+100 =< len(users_wo_duplicates): 
+        #        response =  self.client.get_users(hundred_user_list[start:start+100])
+        #        response
+        #        start+=100
+        #    else:
+        #        response += self.client.get_users(hundred_user_list[start:length_users])
+        response_list = []
+        for user in users:
+            self.client.get_user(user)
+            
+
+
+
+
     def store_users_to_csv(self, override_csv_file=None):
         self.create_folder()
         if override_csv_file is None:
@@ -114,6 +143,7 @@ class TwitterClient_v2:
 
     def get_followers(self, userid):
         #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
+        self.create_folder(f"fetched/{self.querystring}/followers")
         response_followers = self.client.get_users_followers(userid)
         followers = response_followers.data
         columns = [const.user_id, 'name', 'username']
