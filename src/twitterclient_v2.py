@@ -154,4 +154,9 @@ class TwitterClient_v2:
         followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df
 
+    def lookup_user(self, userid):
+        response = self.client.get_user(id=userid)
+        print(response.data)
+        return 'test' #response.data.username
+
 

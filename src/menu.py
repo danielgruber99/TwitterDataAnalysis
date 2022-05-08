@@ -205,7 +205,6 @@ class Menu:
             
             # [3] Get followers of given twitter user
             elif main_sel == 3:
-                print("Here are the first 20 Users of the dataset. For more go back to the main menu and select '[0] Browse Tweets/Users'.")
                 print(self.tweets_df[0:20])
                 print("Enter a twitter user: ")
                 userid = self.get_userid()
@@ -230,11 +229,21 @@ class Menu:
                         print("Input not valid.")
                 browse_followers_exit = False
 
-            # [4] obtain...
+            # [4] obtain tweets and profiles of followers of given twitter user
             elif main_sel == 4:
+                print(self.tweets_df[0:20])
                 print("Enter a twitter user: ")
+                userid = self.get_userid()
+                if userid != -1:
+                    username = self.twitterclient_v2.lookup_user(userid)
+                else:
+                    pass
+                
+                print(username)
+                time.sleep(4)
+                
             
-            # [c] Get followers of given twitter user
+            # [c] change Topic
             elif main_sel == 5 or main_sel == 'c':
                 print("Current Topic is:", self.querystring)
                 self.querystring = self.get_querystring_from_user()

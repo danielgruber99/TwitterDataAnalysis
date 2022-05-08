@@ -18,8 +18,6 @@ def main():
 
     # start menu
     myMenu = Menu(twitterclient_v2)        
-    
-    #print(d.get_top_10_hashtags)
 
 
 if __name__ == "__main__":
