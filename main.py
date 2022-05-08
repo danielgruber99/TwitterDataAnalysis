@@ -11,12 +11,12 @@ from src.menu import Menu
 from src.dataprocessing import DataProcessing
 
 def main():
-    default_querystring = "computer"
-
-    # prefetch
+    # prefetch of topic computer
+    default_topic = "computer"
     twitterclient_v2 = TwitterClient_v2()  
-    twitterclient_v2.get_tweets(default_querystring)
-    twitterclient_v2.store_tweets_to_csv()
+    twitterclient_v2.get_tweets(default_topic)
+
+    # start menu
     myMenu = Menu(twitterclient_v2)        
     
     #print(d.get_top_10_hashtags)

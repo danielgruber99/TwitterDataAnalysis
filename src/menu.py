@@ -3,9 +3,11 @@ from simple_term_menu import TerminalMenu
 import pandas as pd
 import time
 import threading
+import keyboard as kb
 
 from src.sentimentanalysis import SentimentAnalysis
 from src.dataprocessing import DataProcessing
+import src.constants as const
 
 class Menu:
     """
@@ -15,6 +17,9 @@ class Menu:
         # main menu
         self.main_menu_exit = False
         self.main_menu = None
+        # submenu0
+        self.submenu_0_exit = False
+        self.submenu_0 = None
         # submenu1
         self.submenu_1_exit = False
         self.submenu_1 = None
@@ -25,8 +30,10 @@ class Menu:
         self.twitterclient_v2 = twitterclient_v2
         self.querystring = twitterclient_v2.querystring
         self.sentimentanalysis = SentimentAnalysis(self.querystring)
+        self.dataprocessing = DataProcessing(self.querystring)
 
         # setup main_menu and all submenus
+        self._setup_submenu0()
         self._setup_submenu1()
         self._setup_submenu2()
         self._setup_main_menu()
@@ -35,10 +42,13 @@ class Menu:
 
 
     def _setup_main_menu(self):
+        """
+        Main Menu.
+        """
         header = "=============================Twitter Data Analysis=========================="
-        topic = "Topic:" + self.querystring
+        topic = "Topic: " + self.querystring
         title = header + "\n" + topic
-        choices = ["[0] Browse Tweets", "[1] Analyse Sentiment of Tweets", "[2] Get Top 10 Hashtags/Users", "[3] Get followers of given twitter user", 
+        choices = ["[0] Browse Tweets/Users", "[1] Analyse Sentiment of Tweets", "[2] Get Top 10 Hashtags/Users", "[3] Get followers of given twitter user", 
         "[4] Obtain tweets and profiles of followers of given twitter user","[c] change Topic", "[q] Quit"]
         cursor = "> "
         cursor_style = ("fg_red", "bold")
@@ -51,8 +61,27 @@ class Menu:
             clear_screen=True,
         )
 
+    def _setup_submenu0(self):
+        """
+        Submenu 00 for browsing Tweets/Users.
+        """
+        title="========================Submenu 00: Browse Tweets/Users====================="
+        choices = ["[0] Browse Tweets.", "[1] Browse Users.", "[2] Get Markdown of Tweets and Users.", "[b] Back."]
+        cursor = "> "
+        cursor_style = ("fg_red", "bold")
+        self.submenu_0 = TerminalMenu(
+            menu_entries = choices,
+            title = title,
+            menu_cursor = cursor,
+            menu_cursor_style = cursor_style,
+            cycle_cursor=True,
+            clear_screen=True,
+        )
 
     def _setup_submenu1(self):
+        """
+        Submenu 01 for Sentiment Analysis.
+        """
         title="========================Submenu 01: sentimentanalysis====================="
         choices = ["[0] Analyse all tweets and get avg Polarity", "[1] Analyse single tweet", "[2] Get most used words.", "[b] Back."]
         cursor = "> "
@@ -67,6 +96,9 @@ class Menu:
         )
     
     def _setup_submenu2(self):
+        """
+        Submenu 02 for getting Top 10 Hashtags/Users.
+        """
         title="========================Submenu 02: Get Top 10 Hashtags/Users====================="
         choices = ["[0] Get Top 10 Hashtags", "[1] Get Top 10 Users", "[b] Back."]
         cursor = "> "
@@ -89,13 +121,42 @@ class Menu:
             # main menu
             main_sel = self.main_menu.show()
 
-            # Browse Tweets
+            # [0] Browse Tweets/Users
+            # TODO: utilize keyboard library, alread imported above as kb
             if main_sel == 0:
-                print("Here are first 10 Tweets: ", self.tweets_df[0:10])
-                print("For all Tweets look at")
-                time.sleep(5)
-            
-            # Analyse Sentiment of Tweets
+                while not self.submenu_0_exit:
+                    submenu_0_sel = self.submenu_0.show()
+                    # browse Tweets
+                    if submenu_0_sel == 0:
+                        start = 0
+                        browse_exit = False
+                        while not browse_exit:
+                            print(f"Tweets {start} to {start+10}", self.tweets_df[start:start+10])
+                            other_input = input("Press n/p to get next/previous 10 tweets. Press b to go back to the main menu. ")
+                            if other_input == 'n':
+                                start+=10
+                            elif other_input == 'p':
+                                if start-10 >=0:
+                                    start-=10
+                                else:
+                                    print("You already view the first 10 tweets.")
+                            elif other_input == 'b':
+                                browse_exit = True
+                            else:
+                                print("Input not valid.")
+                        browse_exit=False
+                    # browse Users
+                    elif submenu_0_sel == 1:
+                        pass
+                    elif submenu_0_sel == 2:
+                        pass
+                    elif submenu_0_sel == 3:
+                        pass
+                    elif submenu_0_sel == 'b' or submenu_0_sel == 4:
+                        self.submenu_0_exit = True
+                self.submenu_0_exit = False
+                    
+            # [1] Analyse Sentiment of Tweets
             elif main_sel == 1:
                 # submenu 1
                 while not self.submenu_1_exit:
@@ -115,24 +176,24 @@ class Menu:
                         time.sleep(3)
                     elif submenu_1_sel == 'b' or submenu_1_sel == 3:
                         self.submenu_1_exit = True
-                        print("back selected")
-                        time.sleep(1)
+                        #print("back selected")
+                        #time.sleep(0.5)
                 self.submenu_1_exit = False
 
-            # Get Top 10 Hashtags/Users
+            # [2] Get Top 10 Hashtags/Users
             elif main_sel == 2:
                 # submenu 2
                 while not self.submenu_2_exit:
                     submenu_2_sel = self.submenu_2.show()
-                    d = DataProcessing("computer")
                     # Get Top 10 Hashtags
                     if submenu_2_sel == 0:
-                        d.get_top_10_hashtags()
+                        self.dataprocessing.get_top_10_hashtags()
                         time.sleep(3)
                     # Get Top 10 Users
                     elif submenu_2_sel == 1:
-                        d.get_top_10_users()
+                        self.dataprocessing.get_top_10_users()
                         time.sleep(3)
+                    # back
                     elif submenu_2_sel == 'b' or submenu_2_sel == 2:
                         self.submenu_2_exit = True
                         print("back selected")
@@ -141,7 +202,12 @@ class Menu:
             
             # [3] Get followers of given twitter user
             elif main_sel == 3:
+                print("Here are the first 20 Users of the dataset. For more go back to the main menu and select '[0] Browse Tweets/Users'.")
+                print(self.tweets_df[0:20])
                 print("Enter a twitter user: ")
+                userid = self.get_userid()
+                followers_df = self.twitterclient_v2.get_followers(userid)
+                print(followers_df[0:10])
                 time.sleep(5)
 
             # [4] obtain...
@@ -154,7 +220,6 @@ class Menu:
                 self.querystring = self.get_querystring_from_user()
                 self._setup_main_menu() # setup main menu new, so that topic refreshes
                 self.twitterclient_v2.get_tweets(self.querystring)
-                self.twitterclient_v2.store_tweets_to_csv()
                 self.sentimentanalysis = SentimentAnalysis(self.querystring)
                 self.dataprocessing = DataProcessing(self.querystring)
                 self.tweets_df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv', lineterminator='\n')
@@ -165,11 +230,34 @@ class Menu:
                 print("You quit!")
 
     def get_TwitterID_to_analyse(self):
-        twitterid = int(input("Enter Tweet ID of the Tweet to analyse: "))
-        # TODO: Eingabe überoprüfen obs TwitterID überhaupt gibt
-        # und nutzer ermöglichen, twitter id oder index einzugeben
-        return twitterid
+        twitterid = int(input("Enter Tweet ID or Index of the Tweet to analyse: "))
+        if self.check_twitterid_exists(twitterid):
+            return twitterid
+        else:
+            return -1
 
+    def get_userid(self):
+        userid = int(input("Enter User ID: "))
+        if self.check_userid_exists(userid):
+            if userid in self.dataprocessing.get_users_without_duplicates():
+                return userid
+            else:
+                return self.tweets_df[const.user_id][userid]
+        else:
+            return -1
+
+    def check_twitterid_exists(self, twitterid):
+        tweets = self.dataprocessing.get_tweets()
+        if twitterid in tweets or twitterid < self.tweets_df.shape[0]:
+            return True
+        return False
+
+    def check_userid_exists(self, userid):
+        users = self.dataprocessing.get_users_without_duplicates()
+        if userid in users or userid < self.tweets_df.shape[0]:
+            return True
+        return False
+    
 
     def get_querystring_from_user(self):
         #Input from the User
