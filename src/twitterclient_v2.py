@@ -26,6 +26,7 @@ class TwitterClient_v2:
         self.csv_file_tweets = None
         self.csv_file_users = None
         self.csv_folder_path = None
+        self.update_csv_file_paths()
     
     def create_folder(self):
         """
@@ -120,7 +121,7 @@ class TwitterClient_v2:
         for follower in followers:
             data.append([follower.id, follower.name, follower.username])
         followers_df = pd.DataFrame(data, columns=columns)
-        followers_df.to_csv(f"{self.csv_folder_path}_{userid}_followers.csv")
+        followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df
 
 
