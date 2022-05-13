@@ -155,8 +155,8 @@ class TwitterClient_v2:
         return followers_df
 
     def lookup_user(self, userid):
-        response = self.client.get_user(id=userid)
+        response = self.client.get_user(id=userid, user_fields=['username', 'name', 'id', 'created_at'])
         print(response.data)
-        return 'test' #response.data.username
+        return response.data.username
 
 
