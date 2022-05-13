@@ -13,13 +13,22 @@ class DataProcessing:
         self.csv_file_users = f"fetched/{self.querystring}/users.csv"
         self.tweets_df = self.read_csv_file()
 
-    def read_csv_file(self):
+    def read_csv_file(self)->pd.DataFrame:
+        """
+        Read csv file into pandas dataframe and return dataframe.
+        """
         return pd.read_csv(self.csv_file, lineterminator='\n')
     
     def get_users(self) -> list:
+        """
+        Get all users (can contain duplicates).
+        """
         return self.tweets_df[const.user_id]
     
-    def get_users_without_duplicates(self):
+    def get_users_without_duplicates(self)->list:
+        """
+        Get users without duplicates.
+        """
         return list(set(self.get_users()))
     
     def get_tweets(self) -> list:

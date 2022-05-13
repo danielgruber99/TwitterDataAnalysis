@@ -174,7 +174,7 @@ class Menu:
                         print("Your selected Tweet at index", index, "is", polarity_meaning)
                         time.sleep(3)
                     elif submenu_1_sel == 2:
-                        self.sentimentanalysis.most_used_words()
+                        self.sentimentanalysis.get_most_used_words()
                         print("file is in wordcloud/generated")
                         time.sleep(3)
                     elif submenu_1_sel == 'b' or submenu_1_sel == 3:
