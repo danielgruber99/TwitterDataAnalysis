@@ -7,6 +7,7 @@ from PIL import Image
 import os
 
 import src.constants as const
+import matplotlib
 import matplotlib.pyplot as plt
 
 class SentimentAnalysis:
@@ -113,8 +114,15 @@ class SentimentAnalysis:
         # store to file
         wc.to_file(os.path.join(d, "wordcloud/generated/twitterlogo_wc.png"))
         # show
-        img = Image.open("wordcloud/generated/twitterlogo_wc.png")
-        img.show()
+        plt.imshow(wc, interpolation='bilinear')
+        plt.axis('off')
+        plt.figure()
+        plt.imshow(twitter_mask, cmap=plt.cm.gray, interpolation='bilinear')
+        plt.axis('off')
+        plt.show()
+        
+        #img = Image.open("wordcloud/generated/twitterlogo_wc.png")
+        #img.show()
 
 
 
