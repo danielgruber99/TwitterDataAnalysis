@@ -37,30 +37,36 @@ class DataProcessing:
     def get_hashtags(self) -> list:
         return self.tweets_df['hashtags']
 
-    def get_top_10_hashtags(self):
+    def get_top_10_hashtags(self)->list:
+        """
+        Determine top 10 most used Hashtags.
+
+        Returns
+        -------
+        top_10_hashtags:    a list of tuples (hashtag, occurences), which contains the 10 most used hashtags
+        """
         hashtags = list(self.get_hashtags())
         all_hashtags = ','.join(hashtags)
-        print(all_hashtags)
+        #print(all_hashtags)
         hashtag_list = all_hashtags.split(',')
-        print(hashtag_list)
-
+        #print(hashtag_list)
         c = Counter(hashtag_list)
         top_10_hashtags = c.most_common(10)
-        print("Top 10 Hashtags based on frequency: ")
-
-        for i in range(10):
-            print(f"{i+1}.:", "#"+top_10_hashtags[i][0])
+        return top_10_hashtags
     
 
-    def get_top_10_users(self):
-        users = list(self.get_users())
-        print(users)
+    def get_top_10_users(self)->list:
+        """
+        Determine top 10 Users based on their number of Tweets.
 
+        Returns
+        -------
+        top_10_users:    a list of tuples (userid, occurences), which contains the 10 users with most Tweets
+        """
+        users = list(self.get_users())
+        #print(users)
         c = Counter(users)
         top_10_users = c.most_common(10)
-        print("Top 10 Users based on number of tweets in acquired data set: ")
-
-        for i in range(10):
-            print(f"{i+1}.:", top_10_users[i][0], "with", top_10_users[i][1], "tweets.")
+        return top_10_users
 
 

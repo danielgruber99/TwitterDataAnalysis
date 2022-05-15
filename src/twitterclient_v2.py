@@ -45,11 +45,11 @@ class TwitterClient_v2:
         self.csv_file_users = f'fetched/{self.querystring}/{self.querystring}_users.csv'
         self.csv_folder_path = f'fetched/{self.querystring}/'
 
-    def get_tweets(self, querystring):
+    def fetch_tweets(self, querystring):
         self.querystring = querystring
         self.update_csv_file_paths()
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
-        response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=20)
+        response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
         # write fetched data to member variable tweets
         self.tweets = response.data
         # store tweets to csv
@@ -84,19 +84,16 @@ class TwitterClient_v2:
             #print tweet.created_at, tweet.text
         csvFile.close()
     
-    def get_users(self):
+    def fetch_users(self):
         if self.tweets is None:
             self.get_tweets(self.querystring)
         
         users_with_duplicates = self.tweets[const.user_id]
         users = list(set(users_with_duplicates))
-        
         start = 0
         length_users = len(users)
-
         columns = []
         data = []
-
         #response_list = []
         #for hundred_user_list in users:
         #    if start+100 =< len(users_wo_duplicates): 
@@ -109,10 +106,6 @@ class TwitterClient_v2:
         for user in users:
             self.client.get_user(user)
             
-
-
-
-
     def store_users_to_csv(self, override_csv_file=None):
         self.create_folder()
         if override_csv_file is None:
@@ -141,22 +134,43 @@ class TwitterClient_v2:
         hashtags_string = ','.join(hashtags)
         return hashtags_string
 
-    def get_followers(self, userid):
+    def fetch_followers(self, userid):
         #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
         self.create_folder(f"fetched/{self.querystring}/followers")
-        response_followers = self.client.get_users_followers(userid)
+        response_followers = self.client.get_users_followers(userid, user_fields=['description'], max_results=500)
         followers = response_followers.data
-        columns = [const.user_id, 'name', 'username']
+        columns = [const.user_id, 'name', 'username', 'bio']        # description in user is better known as bio (profile of user)
         data = []
         for follower in followers:
-            data.append([follower.id, follower.name, follower.username])
+            data.append([follower.id, follower.name, follower.username, follower.description])
         followers_df = pd.DataFrame(data, columns=columns)
         followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df
 
+    def fetch_tweets_of_followers(self, followerids):
+        """
+        fetches tweets of specified user. Especially used for fulfilling Task4.
+        """
+        
+        columns = ['Follower ID', 'Tweet ID', 'Tweet Text']
+        data = []
+
+        for followerid in followerids:
+            response = self.client.get_users_tweets(followerid, max_results=20)
+            tweets_of_follower = response.data
+            if tweets_of_follower is not None:
+                for follower_tweet in tweets_of_follower:
+                    data.append([followerid, follower_tweet.id, follower_tweet.text])
+        
+        follower_tweets_df = pd.DataFrame(data, columns=columns)
+        print(follower_tweets_df)
+        input("Press enter to continue...")
+
+
     def lookup_user(self, userid):
-        response = self.client.get_user(id=userid, user_fields=['username', 'name', 'id', 'created_at'])
-        print(response.data)
+        response = self.client.get_user(id=userid, user_fields=["name","username"])
+        #print(response.data)
         return response.data.username
+
 
 

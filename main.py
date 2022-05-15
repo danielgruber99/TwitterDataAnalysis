@@ -7,7 +7,7 @@ def main():
     # prefetch of topic computer
     default_topic = "computer"
     twitterclient_v2 = TwitterClient_v2()  
-    twitterclient_v2.get_tweets(default_topic)
+    twitterclient_v2.fetch_tweets(default_topic)
 
 
     ## TODO: how to get those classes in functionality separeted. (Separation of INterest/Concepts)
