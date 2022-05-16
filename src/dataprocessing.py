@@ -9,15 +9,22 @@ class DataProcessing:
     """
     def __init__(self, querystring):
         self.querystring = querystring
-        self.csv_file = f"fetched/{self.querystring}/{self.querystring}.csv"
+        self.csv_file_tweets = f"fetched/{self.querystring}/{self.querystring}.csv"
         self.csv_file_users = f"fetched/{self.querystring}/users.csv"
-        self.tweets_df = self.read_csv_file()
+        self.tweets_df = self.read_csv_file_tweets()
+        self.users_df = None#self.read_csv_file_users()
 
-    def read_csv_file(self)->pd.DataFrame:
+    def read_csv_file_tweets(self)->pd.DataFrame:
         """
         Read csv file into pandas dataframe and return dataframe.
         """
-        return pd.read_csv(self.csv_file, lineterminator='\n')
+        return pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+    
+    def read_csv_file_users(self)->pd.DataFrame:
+        """
+        Read csv file into pandas dataframe and return dataframe.
+        """
+        return pd.read_csv(self.csv_file_users, lineterminator='\n')
     
     def get_users(self) -> list:
         """

@@ -36,10 +36,10 @@ class Menu:
         # Client, qerystring and startmenu
         self.twitterclient_v2 = twitterclient_v2
         self.querystring = twitterclient_v2.querystring
-        self.tweets_df = None
-        self.tweets_users = None
         self.sentimentanalysis = SentimentAnalysis(self.querystring)
         self.dataprocessing = DataProcessing(self.querystring)
+        self.tweets_df = self.dataprocessing.read_csv_file_tweets()
+        self.tweets_users = None
 
         # setup main_menu and all submenus
         self._setup_submenu0()
@@ -163,7 +163,7 @@ class Menu:
             if main_sel == 0:
                 while not self.submenu_0_exit:
                     submenu_0_sel = self.submenu_0.show()
-                    # browse Tweets
+                    # Browse Tweets
                     if submenu_0_sel == 0:
                         start_browse_tweets = 0
                         browse_tweets_exit = False
@@ -184,7 +184,7 @@ class Menu:
                             else:
                                 print("Invalid input.")
                         browse_tweets_exit=False
-                    # browse Users
+                    # Browse Users
                     elif submenu_0_sel == 1:
                         pass
                     elif submenu_0_sel == 'b' or submenu_0_sel == 2:
@@ -198,17 +198,17 @@ class Menu:
                     submenu_1_sel = self.submenu_1.show()
                     if submenu_1_sel == 0:
                         self.sentimentanalysis.analyse_all_tweets()
-                        time.sleep(5)
+                        input("\nPress enter to continue...")
                     elif submenu_1_sel == 1:
                         print(self.tweets_df[[c.tweet_id, c.tweet_text]][0:c.NR_ENTRIES_PAGE])
                         index = self.get_TwitterID_to_analyse()
                         polarity_meaning = self.sentimentanalysis.analyse_single_tweet(index)
                         print("Your selected Tweet at index", index, "is", polarity_meaning)
-                        time.sleep(3)
+                        input("\nPress enter to continue...")
                     elif submenu_1_sel == 2:
                         self.sentimentanalysis.get_most_used_words()
                         print("file is in wordcloud/generated")
-                        time.sleep(3)
+                        input("\nPress enter to continue...")
                     elif submenu_1_sel == 'b' or submenu_1_sel == 3:
                         self.submenu_1_exit = True
                         #print("back selected")
@@ -334,14 +334,26 @@ class Menu:
                 print("You quit!")
 
     def get_TwitterID_to_analyse(self):
-        twitterid = int(input("Enter Tweet ID or Index of the Tweet to analyse: "))
+        while True:
+            try:
+                twitterid = int(input("Enter Tweet ID or Index of the Tweet to analyse: "))
+                break
+            except ValueError:
+                print('A ValueError occured. Please enter the Tweet ID or corresponding index.')
+
         if self.check_twitterid_exists(twitterid):
             return twitterid
         else:
             return -1
 
     def get_userid(self):
-        userid = int(input("Enter User ID: "))
+        while True:
+            try:
+                userid = int(input("Enter User ID: "))
+                break
+            except ValueError:
+                print('A ValueError occured. Please enter the user ID or corresponding index.')
+
         if self.check_userid_exists(userid):
             if userid in self.dataprocessing.get_users_without_duplicates():
                 return userid
