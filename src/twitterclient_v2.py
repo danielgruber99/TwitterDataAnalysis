@@ -163,8 +163,7 @@ class TwitterClient_v2:
                     data.append([followerid, follower_tweet.id, follower_tweet.text])
         
         follower_tweets_df = pd.DataFrame(data, columns=columns)
-        print(follower_tweets_df)
-        input("Press enter to continue...")
+        return follower_tweets_df
 
 
     def lookup_user(self, userid):

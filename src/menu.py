@@ -39,7 +39,9 @@ class Menu:
         self.sentimentanalysis = SentimentAnalysis(self.querystring)
         self.dataprocessing = DataProcessing(self.querystring)
         self.tweets_df = self.dataprocessing.read_csv_file_tweets()
-        self.tweets_users = None
+        self.users_df = None
+        self.followers_df = None
+        self.follower_tweets_df = None
 
         # setup main_menu and all submenus
         self._setup_submenu0()
@@ -250,13 +252,13 @@ class Menu:
                 userid = self.get_userid()
 
                 if userid != -1:
-                    followers_df = self.twitterclient_v2.fetch_followers(userid)
+                    self.followers_df = self.twitterclient_v2.fetch_followers(userid)
                 else:
                     print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                 start_browse_followers = 0
                 browse_followers_exit = False
                 while not browse_followers_exit:
-                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n",followers_df[start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
+                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n",self.followers_df[start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
                     browse_followers_input = input(f"\nPress n/p to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press b to go back to the main menu.\n")
                     if browse_followers_input == 'n':
                         start_browse_followers+=c.NR_ENTRIES_PAGE
@@ -271,7 +273,7 @@ class Menu:
 
             # [4] obtain tweets and profiles of followers of given twitter user
             elif main_sel == 4:
-                # submenu 2
+                # submenu 4
                 while not self.submenu_4_exit:
                     submenu_4_sel = self.submenu_4.show()
                     # Enter a user ID for fetching tweets and profiles and followers
@@ -280,7 +282,12 @@ class Menu:
                         print("Enter a twitter user: ")
                         userid = self.get_userid()
                         # TODO: check if userid valid
-                        followers_df = self.twitterclient_v2.fetch_followers(userid)
+                        if userid is None:
+                            print("Please enter a user id first under option '[0]' of this submenu4")
+                        elif userid == -1:
+                            print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
+                        else:
+                            self.followers_df = self.twitterclient_v2.fetch_followers(userid)
                     # Browse profiles of followers
                     elif submenu_4_sel == 1:
                         if userid is None:
@@ -291,7 +298,7 @@ class Menu:
                             start_browse_followers_profiles = 0
                             browse_followers_profiles_exit = False
                             while not browse_followers_profiles_exit:
-                                print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n",followers_df[start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
+                                print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.followers_df[start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
                                 browse_followers_profiles_input = input(f"\nPress n/p to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press b to go back to the main menu.\n")
                                 if browse_followers_profiles_input == 'n':
                                     start_browse_followers_profiles+=c.NR_ENTRIES_PAGE
@@ -307,9 +314,26 @@ class Menu:
                             print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                     # Browse tweets of followers
                     elif submenu_4_sel == 2:
-                        followerids = followers_df[c.user_id]
-                        self.twitterclient_v2.fetch_tweets_of_followers(followerids)
-                        time.sleep(3)
+                        if self.followers_df is not None:
+                            followerids = self.followers_df[c.user_id]
+                            self.follower_tweets_df = self.twitterclient_v2.fetch_tweets_of_followers(followerids)
+                            start_browse_followers_tweets = 0
+                            browse_followers_tweets_exit = False
+                            while not browse_followers_tweets_exit:
+                                print(f"Follower Tweets {start_browse_followers_tweets} to {start_browse_followers_tweets + c.NR_ENTRIES_PAGE}\n", self.follower_tweets_df[start_browse_followers_tweets : start_browse_followers_tweets + c.NR_ENTRIES_PAGE])
+                                browse_followers_tweets_input = input(f"\nPress n/p to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press b to go back to the main menu.\n")
+                                if browse_followers_tweets_input == 'n':
+                                    start_browse_followers_tweets+=c.NR_ENTRIES_PAGE
+                                elif browse_followers_tweets_input == 'p':
+                                    if start_browse_followers_tweets-c.NR_ENTRIES_PAGE >= 0:
+                                        start_browse_followers_tweets-=c.NR_ENTRIES_PAGE
+                                elif browse_followers_tweets_input == 'b':
+                                    browse_followers_tweets_exit = True
+                                else:
+                                    print("Input not valid.")
+                            browse_followers_tweets_exit = False
+                        else:
+                            print("Please provide first a user to fetch followers for under option '[0]'")
                     # back
                     elif submenu_4_sel == 'b' or submenu_4_sel == 3:
                         self.submenu_4_exit = True
