@@ -316,7 +316,8 @@ class Menu:
                     elif submenu_4_sel == 2:
                         if self.followers_df is not None:
                             followerids = self.followers_df[c.user_id]
-                            self.follower_tweets_df = self.twitterclient_v2.fetch_tweets_of_followers(followerids)
+                            # fetch only tweets for the 50 first followers, otherwise it takes so long
+                            self.follower_tweets_df = self.twitterclient_v2.fetch_tweets_of_followers(followerids[0:50])
                             start_browse_followers_tweets = 0
                             browse_followers_tweets_exit = False
                             while not browse_followers_tweets_exit:
