@@ -112,12 +112,12 @@ class TwitterClient:
         """
         #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
         self.create_folder(f"fetched/{self.querystring}/followers")
-        response_followers = self.client.get_users_followers(userid, user_fields=['description'], max_results=500)
+        response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
         followers = response_followers.data
-        columns = [const.user_id, 'name', 'username', 'bio']        # description in user is better known as bio (profile of user)
+        columns = [const.follower_id, const.follower_name, const.follower_username, const.follower_bio, const.follower_bio, const.follower_created_at, const.follower_public_metrics, const.follower_profile_image_url]        # description in user is better known as bio (profile of user)
         data = []
         for follower in followers:
-            data.append([follower.id, follower.name, follower.username, follower.description])
+            data.append([follower.id, follower.name, follower.username, follower.description, follower.location, follower.created_at, follower.public_metrics, follower.profile_image_url])
         followers_df = pd.DataFrame(data, columns=columns)
         followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df

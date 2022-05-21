@@ -8,7 +8,7 @@ import keyboard as kb
 from src.sentimentanalysis import SentimentAnalysis
 from src.dataprocessing import DataProcessing
 import src.constants as c
-
+from tabulate import tabulate
 
 
 class Menu:
@@ -260,7 +260,7 @@ class Menu:
                 start_browse_followers = 0
                 browse_followers_exit = False
                 while not browse_followers_exit:
-                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n",self.followers_df[start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
+                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n",self.followers_df[[c.follower_id, c.follower_name, c.follower_username]][start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
                     browse_followers_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
                     if browse_followers_input == 'n':
                         start_browse_followers+=c.NR_ENTRIES_PAGE
