@@ -1,6 +1,6 @@
 import pandas as pd
-import src.constants as const
 from collections import Counter, Iterable
+import src.constants as const
 
 
 class DataProcessing:
@@ -64,7 +64,6 @@ class DataProcessing:
         top_10_hashtags = c.most_common(10)
         return top_10_hashtags
     
-
     def get_top_10_users(self)->list:
         """
         Determine top 10 Users based on their number of Tweets.
@@ -78,5 +77,3 @@ class DataProcessing:
         c = Counter(users)
         top_10_users = c.most_common(10)
         return top_10_users
-
-

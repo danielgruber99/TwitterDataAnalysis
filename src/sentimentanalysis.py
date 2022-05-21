@@ -2,14 +2,13 @@ import textblob
 import pandas as pd
 import numpy as np
 import re
-import wordcloud
 import numpy as np
 from PIL import Image
 import os
-
-import src.constants as const
-import matplotlib
 import matplotlib.pyplot as plt
+import wordcloud
+import src.constants as const
+
 
 class SentimentAnalysis:
     """
@@ -19,44 +18,43 @@ class SentimentAnalysis:
     def __init__(self, tweets):
         # list of tweets_text
         self.tweets = tweets
-        # boolean to decide whether to analyse or not
-        self.tweets_analyzed = False
+        # polarity list of analysed tweets
+        self.polarity_list = []
         # store avg_sentiment
-        self.avg_sentiment = None
+        self.avg_polarity = None
+        self.avg_polarity_meaning = None
 
-    def clean_tweet(self, tweet):
+    def clean_tweet(self, tweet)->str:
         """
         Utility function to clean tweet text by removing links, special characters using regex statements.
         """
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
-    def analyse_all_tweets(self):
+    def analyse_all_tweets(self)->list:
         """
         analysing all tweets and get average polarity as output.
         """
-        polarity_list = []
         for eachtweet in self.tweets:
             cleaned_tweet = self.clean_tweet(eachtweet)
             analysis = textblob.TextBlob(cleaned_tweet)
-            polarity_list.append(analysis.sentiment.polarity)
-        
-        self.get_avg_polarity(polarity_list)
-        self.tweets_analyzed = True
-        return polarity_list
+            self.polarity_list.append(analysis.sentiment.polarity)
+        return self.polarity_list
     
-    def get_avg_polarity(self, polarity_list):
+    def get_avg_polarity(self)->dict:
         """
         After analysing all tweets and writing a polarity row to the dataframe (and to the csv) calculate the avg_polarity and get its textual output
         """
-        avg_polarity = np.mean(polarity_list)
-        avg_polarity_meaning = self.get_polarity_meaning(avg_polarity)
-        self.get_avg_polarity = avg_polarity_meaning  # or should i put avg_polarity as number from -1 to 1 in here and change output in menu
-        print("The average polarity of your topic is: ", f"'{avg_polarity_meaning}'")
+        if len(self.polarity_list) == 0:
+            self.analyse_all_tweets()
+        if self.avg_polarity is None or self.avg_polarity_meaning is None:
+            self.avg_polarity = np.mean(self.polarity_list)
+            self.avg_polarity_meaning = self.get_polarity_meaning(self.avg_polarity)
 
+        return {"avg_polarity": self.avg_polarity, "avg_polarity_meaning": self.avg_polarity_meaning}
 
-    def analyse_single_tweet(self, index):
+    def analyse_single_tweet(self, index)->str:
         """
-        analyse Polarity of single tweet.
+        analyse polarity of single tweet.
         """
         tweet_text = self.tweets[index]
         cleaned_tweet_text = self.clean_tweet(tweet_text)
@@ -89,8 +87,7 @@ class SentimentAnalysis:
         Get the most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
         """
         # combine all tweets text to one string
-        tweets_text = self.tweets[const.tweet_text]
-        all_tweets_text = self.clean_tweet(' '.join(tweets_text))
+        all_tweets_text = self.clean_tweet(' '.join(self.tweets))
         # get current working directory
         d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
         # take official twitter logo as mask
@@ -106,22 +103,5 @@ class SentimentAnalysis:
         plt.imshow(twitter_mask, cmap=plt.cm.gray, interpolation='bilinear')
         plt.axis('off')
         plt.show()
-        
         #img = Image.open("wordcloud/generated/twitterlogo_wc.png")
         #img.show()
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-    

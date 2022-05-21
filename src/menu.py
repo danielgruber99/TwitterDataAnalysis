@@ -56,7 +56,6 @@ class Menu:
         # start menu loop
         self._menu_selection_loop()
 
-
     def _setup_main_menu(self):
         """
         Main Menu.
@@ -150,7 +149,6 @@ class Menu:
             clear_screen=True,
         )
 
-
     def _menu_selection_loop(self):
         # for default case
         self.tweets_df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv', lineterminator='\n', )
@@ -200,7 +198,8 @@ class Menu:
                 while not self.submenu_1_exit:
                     submenu_1_sel = self.submenu_1.show()
                     if submenu_1_sel == 0:
-                        self.sentimentanalysis.analyse_all_tweets()
+                        avg_polarity_dict = self.sentimentanalysis.get_avg_polarity()
+                        print(f"The average polarity of your topic '{self.querystring}' is: '{avg_polarity_dict['avg_polarity']}' -> '{avg_polarity_dict['avg_polarity_meaning']}'")
                         input("\nPress enter to continue...")
                     elif submenu_1_sel == 1:
                         print(self.tweets_df[[c.tweet_id, c.tweet_text]][0:c.NR_ENTRIES_PAGE])
@@ -343,7 +342,6 @@ class Menu:
                         time.sleep(1)
                 self.submenu_4_exit = False
                 
-            
             # [c] change Topic
             elif main_sel == 5 or main_sel == 'c':
                 print("Current Topic is:", self.querystring)
@@ -400,9 +398,7 @@ class Menu:
             return True
         return False
     
-
     def get_querystring_from_user(self):
         #Input from the User
         choice = input("Enter your querystring: ")
         return choice
-
