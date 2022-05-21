@@ -92,14 +92,12 @@ class Menu:
             clear_screen=True,
         )
 
-    #TODO: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
-    # neben avg polarity, auch durch apgen drurch jeden tweet und die Polarity davon
     def _setup_submenu1(self):
         """
         Submenu 01 for Sentiment Analysis.
         """
         title="========================Submenu 01: sentimentanalysis====================="
-        choices = ["[0] Analyse all tweets and get avg Polarity", "[1] Analyse single tweet", "[2] Get most used words.", "[b] Back."]
+        choices = ["[0] Analyse all tweets", "[1] Get average polarity","[2] Analyse single tweet", "[3] Get most used words.", "[b] Back."]
         cursor = "> "
         cursor_style = ("fg_red", "bold")
         self.submenu_1 = TerminalMenu(
@@ -216,25 +214,50 @@ class Menu:
                 # submenu 1
                 while not self.submenu_1_exit:
                     submenu_1_sel = self.submenu_1.show()
-                    # get avg polarity
+                    # analyse all tweets
                     if submenu_1_sel == 0:
+                        if 'polarity' not in self.tweets_df:
+                            polarity_list = self.sentimentanalysis.analyse_all_tweets()
+                            self.tweets_df['polarity'] = polarity_list
+                            # optional TODO: inline Bar of polarity: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
+                        start_browse_tweets_polarity = 0
+                        browse_tweets_polarity_exit = False
+                        while not browse_tweets_polarity_exit:
+                            print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
+                            other_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if other_input == 'n':
+                                start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
+                            elif other_input == 'p':
+                                if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
+                                    start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
+                            elif other_input == 'm':
+                                self.tweets_df.to_markdown(f"fetched/{self.querystring}/tweets_polarity_markdown.md")
+                                print(f"Files are stored at fetched/{self.querystring}/")
+                                input("Press enter to continue...")
+                            elif other_input == 'b':
+                                browse_tweets_polarity_exit = True
+                            else:
+                                print("Invalid input.")
+                        browse_tweets_polarity_exit = False
+                    # get average polarity
+                    if submenu_1_sel == 1:
                         avg_polarity_dict = self.sentimentanalysis.get_avg_polarity()
                         print(f"The average polarity of your topic '{self.querystring}' is: '{avg_polarity_dict['avg_polarity']}' -> '{avg_polarity_dict['avg_polarity_meaning']}'")
                         input("\nPress enter to continue...")
                     # analyse single tweet
-                    elif submenu_1_sel == 1:
+                    elif submenu_1_sel == 2:
                         print(self.tweets_df[[c.tweet_id, c.tweet_text]][0:c.NR_ENTRIES_PAGE])
                         index = self.input_twitterid()
                         polarity_meaning = self.sentimentanalysis.analyse_single_tweet(index)
                         print("Your selected Tweet at index", index, "is", polarity_meaning)
                         input("\nPress enter to continue...")
                     # get most used words (outputs wordcloud with official twitterlogo as mask)
-                    elif submenu_1_sel == 2:
+                    elif submenu_1_sel == 3:
                         self.sentimentanalysis.get_most_used_words()
                         print("file is in wordcloud/generated")
                         input("\nPress enter to continue...")
                     # back
-                    elif submenu_1_sel == 'b' or submenu_1_sel == 3:
+                    elif submenu_1_sel == 'b' or submenu_1_sel == 4:
                         self.submenu_1_exit = True
                 self.submenu_1_exit = False
 

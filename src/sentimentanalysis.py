@@ -12,8 +12,8 @@ import src.constants as const
 
 class SentimentAnalysis:
     """
-    This class is responsible for the Sentiment Analysis part with textblob. It will take the existing
-    csv (or dataframe, tbd), analyse each tweet and write polarity and subjectivity back.
+    This class is responsible for the Sentiment Analysis part with textblob. By initialization it will get a list of
+    tweets (only tweet_text) handed over.
     """
     def __init__(self, tweets):
         # list of tweets_text
