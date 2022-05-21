@@ -36,8 +36,8 @@ class Menu:
         # Client, qerystring and startmenu
         self.twitterclient_v2 = twitterclient_v2
         self.querystring = twitterclient_v2.querystring
-        self.sentimentanalysis = SentimentAnalysis(self.querystring)
         self.dataprocessing = DataProcessing(self.querystring)
+        self.sentimentanalysis = SentimentAnalysis(self.dataprocessing.get_tweets_text())
         self.tweets_df = self.dataprocessing.read_csv_file_tweets()
         self.users_df = None
         self.followers_df = None
@@ -130,6 +130,7 @@ class Menu:
             clear_screen=True,
         )
     
+    # Submenu 03 for getting followers of given twitter user
     # for submenu3 there is no submenu of simple-term-menu needed, as it is implemented by just demanding a user id to enter and then getting the result.
 
     def _setup_submenu4(self):
@@ -276,7 +277,7 @@ class Menu:
                 # submenu 4
                 while not self.submenu_4_exit:
                     submenu_4_sel = self.submenu_4.show()
-                    # Enter a user ID for fetching tweets and profiles and followers
+                    # [0] Enter a user ID for fetching tweets and profiles and followers
                     if submenu_4_sel == 0:
                         print(self.tweets_df[0:c.NR_ENTRIES_PAGE])
                         print("Enter a twitter user: ")
@@ -288,7 +289,7 @@ class Menu:
                             print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                         else:
                             self.followers_df = self.twitterclient_v2.fetch_followers(userid)
-                    # Browse profiles of followers
+                    # [1] Browse profiles of followers
                     elif submenu_4_sel == 1:
                         if userid is None:
                             print("Please enter a user id first under option '[0]' of this submenu4")
@@ -312,7 +313,7 @@ class Menu:
                             browse_followers_profiles_exit = False
                         else:
                             print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
-                    # Browse tweets of followers
+                    # [2] Browse tweets of followers
                     elif submenu_4_sel == 2:
                         if self.followers_df is not None:
                             followerids = self.followers_df[c.user_id]
@@ -350,7 +351,7 @@ class Menu:
                 self._setup_main_menu() # setup main menu new, so that topic refreshes
                 self.twitterclient_v2.fetch_tweets(self.querystring)
                 self.dataprocessing = DataProcessing(self.querystring)
-                self.sentimentanalysis = SentimentAnalysis(self.querystring)
+                self.sentimentanalysis = SentimentAnalysis(self.dataprocessing.get_tweets_text())
                 self.tweets_df = pd.read_csv(f'fetched/{self.querystring}/{self.querystring}.csv', lineterminator='\n')
                 
             # [q] Quit

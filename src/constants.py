@@ -12,5 +12,5 @@ tweet_hashtags = "Hashtags"
 NR_ENTRIES_PAGE=20
 
 # Number of tweets to fetch
-NR_TWEETS=100
+NR_TWEETS=20
 

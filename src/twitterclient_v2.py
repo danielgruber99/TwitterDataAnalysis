@@ -9,6 +9,22 @@ import src.constants as const
 class TwitterClient_v2:
 
     def __init__(self):
+        # authentication to Twitter Endpoint API v2
+        self.client = None
+        self.authenticate()
+        self.tweets = None
+        self.users = None
+        # set default querystring to computer
+        self.querystring = 'computer'
+        self.csv_file_tweets = None
+        self.csv_file_users = None
+        self.csv_folder_path = None
+        self.update_csv_file_paths()
+    
+    def authenticate(self):
+        """
+        authenticate to twitter endpoint API v2 with client
+        """
         self.access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
         self.access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
         self.consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
@@ -19,14 +35,6 @@ class TwitterClient_v2:
             self.client = tweepy.Client(bearer_token=self.bearer_token)
         except:
             print("Error: Authentication Failed!")
-        self.tweets = None
-        self.users = None
-        # set default querystring to computer
-        self.querystring = 'computer'
-        self.csv_file_tweets = None
-        self.csv_file_users = None
-        self.csv_folder_path = None
-        self.update_csv_file_paths()
     
     def create_folder(self, folder):
         """
@@ -127,6 +135,13 @@ class TwitterClient_v2:
         csvFile.close()
 
     def extract_hashtags(self, tweet) -> list:
+        """
+        extract hashtag von retrieved response.data dictionary
+
+        Returns:
+        --------
+        hashtags_string:    string of all hashtags separated by a comma (for later splitting again)
+        """
         entity_hashtag = tweet.entities["hashtags"]
         hashtags = []
         for hashtag in entity_hashtag:

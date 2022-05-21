@@ -39,7 +39,10 @@ class DataProcessing:
         return list(set(self.get_users()))
     
     def get_tweets(self) -> list:
-        return self.tweets_df[const.tweet_id]
+        return list(self.tweets_df[const.tweet_id])
+    
+    def get_tweets_text(self) -> list:
+        return list(self.tweets_df[const.tweet_text])
     
     def get_hashtags(self) -> list:
         return self.tweets_df['hashtags']
