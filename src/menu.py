@@ -187,7 +187,26 @@ class Menu:
                         browse_tweets_exit = False
                     # Browse Users
                     elif submenu_0_sel == 1:
-                        pass
+                        self.users_df = self.twitterclient.fetch_users(self.dataprocessing.get_users_without_duplicates())
+                        start_browse_users = 0
+                        browse_users_exit = False
+                        while not browse_users_exit:
+                            print(f"Tweets {start_browse_users} to {start_browse_users+c.NR_ENTRIES_PAGE}\n", self.users_df[[c.user_id, c.user_name, c.user_username]][start_browse_users:start_browse_users+c.NR_ENTRIES_PAGE])
+                            other_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if other_input == 'n':
+                                start_browse_users+=c.NR_ENTRIES_PAGE
+                            elif other_input == 'p':
+                                if start_browse_users-c.NR_ENTRIES_PAGE >=0:
+                                    start_browse_users-=c.NR_ENTRIES_PAGE
+                            elif other_input == 'm':
+                                self.tweets_df.to_markdown(f"fetched/{self.querystring}/users_markdown.md")
+                                print(f"Files are stored at fetched/{self.querystring}/")
+                                input("Press enter to continue...")
+                            elif other_input == 'b':
+                                browse_users_exit = True
+                            else:
+                                print("Invalid input.")
+                        browse_users_exit = False
                     elif submenu_0_sel == 'b' or submenu_0_sel == 2:
                         self.submenu_0_exit = True
                 self.submenu_0_exit = False

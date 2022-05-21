@@ -49,11 +49,17 @@ class TwitterClient:
             pass
 
     def update_csv_file_paths(self):
+        """
+        set file paths accordingly to given querystring
+        """
         self.csv_file_tweets = f'fetched/{self.querystring}/{self.querystring}.csv'
         self.csv_file_users = f'fetched/{self.querystring}/{self.querystring}_users.csv'
         self.csv_folder_path = f'fetched/{self.querystring}/'
 
     def fetch_tweets(self, querystring):
+        """
+        fetch tweets for given querystring. Only tweets in language english, with at least one hashtag are searched. Retweets are excluded.
+        """
         self.querystring = querystring
         self.update_csv_file_paths()
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
@@ -69,27 +75,22 @@ class TwitterClient:
         tweets_df = pd.DataFrame(data, columns=columns)
         tweets_df.to_csv(self.csv_file_tweets)
     
-    def fetch_users(self):
-        if self.tweets is None:
-            self.get_tweets(self.querystring)
-        
-        users_with_duplicates = self.tweets[const.user_id]
-        users = list(set(users_with_duplicates))
-        start = 0
-        length_users = len(users)
-        columns = []
+    def fetch_users(self, users):
+        """
+        fetch username and name of given userids in previously fetched set of tweets.
+        For providing the user the possibility to browse through users.
+        """
+        #users_with_duplicates = self.tweets[const.user_id]
+        #users = list(set(users_with_duplicates))
+        columns = [const.user_id, const.user_name, const.user_username]
         data = []
-        #response_list = []
-        #for hundred_user_list in users:
-        #    if start+100 =< len(users_wo_duplicates): 
-        #        response =  self.client.get_users(hundred_user_list[start:start+100])
-        #        response
-        #        start+=100
-        #    else:
-        #        response += self.client.get_users(hundred_user_list[start:length_users])
-        response_list = []
         for user in users:
-            self.client.get_user(user)
+            response = self.client.get_user(id=user)
+            user = response.data
+            data.append([user.id, user.name, user.username])
+        users_df = pd.DataFrame(data, columns=columns)
+        users_df.to_csv(self.csv_file_users)
+        return users_df
 
     def extract_hashtags(self, tweet) -> list:
         """
