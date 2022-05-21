@@ -6,7 +6,7 @@ import csv
 import pandas as pd
 import src.constants as const
 
-class TwitterClient_v2:
+class TwitterClient:
 
     def __init__(self):
         # authentication to Twitter Endpoint API v2
@@ -58,39 +58,16 @@ class TwitterClient_v2:
         self.update_csv_file_paths()
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
         response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
-        # write fetched data to member variable tweets
-        self.tweets = response.data
         # store tweets to csv
-        self.store_tweets_to_csv()
-    
-    def store_tweets_to_csv(self, override_csv_file=None):
         self.create_folder(f"fetched/{self.querystring}")
-        if override_csv_file is None:
-            csvFile = open(self.csv_file_tweets, 'w')
-        else:
-            csvFile = open(override_csv_file, 'w')
-
-        csvWriter = csv.writer(csvFile)
-
-        columns = [const.tweet_id, const.tweet_text, const.tweet_entities, const.tweet_createdAt, const.user_id, 'hashtags' ]
+        # create tweets dataframe and store it to csv file
+        columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
         data = []
-
-        for tweet in self.tweets:
+        for tweet in response.data:
             hashtags = self.extract_hashtags(tweet)
-            data.append([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id, hashtags])
-        
+            data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id])    
         tweets_df = pd.DataFrame(data, columns=columns)
         tweets_df.to_csv(self.csv_file_tweets)
-
-
-        #csvWriter.writerow(columns)
-              
-        # maybee convert it first to pandas.Dataframe and then use DataFrame.to_csv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        #for tweet in self.tweets:
-            # Write a row to the CSV file. I use encode UTF-8
-        #    csvWriter.writerow([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id])
-            #print tweet.created_at, tweet.text
-        csvFile.close()
     
     def fetch_users(self):
         if self.tweets is None:
@@ -113,26 +90,6 @@ class TwitterClient_v2:
         response_list = []
         for user in users:
             self.client.get_user(user)
-            
-    def store_users_to_csv(self, override_csv_file=None):
-        self.create_folder()
-        if override_csv_file is None:
-            csvFile = open(self.csv_file_users, 'w')
-        else:
-            csvFile = open(override_csv_file, 'w')
-
-        csvWriter = csv.writer(csvFile)
-
-        columns = [const.user_id]
-        data = []
-
-        for user in self.users:
-            hashtags = self.extract_hashtags(tweet)
-            data.append([tweet.id, tweet.text, tweet.entities, tweet.created_at, tweet.author_id, hashtags])
-        
-        tweets_df = pd.DataFrame(data, columns=columns)
-        tweets_df.to_csv(self.csv_file_users)
-        csvFile.close()
 
     def extract_hashtags(self, tweet) -> list:
         """
@@ -150,6 +107,9 @@ class TwitterClient_v2:
         return hashtags_string
 
     def fetch_followers(self, userid):
+        """
+        fetch followers for a given user ID.
+        """
         #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
         self.create_folder(f"fetched/{self.querystring}/followers")
         response_followers = self.client.get_users_followers(userid, user_fields=['description'], max_results=500)
@@ -166,22 +126,22 @@ class TwitterClient_v2:
         """
         fetches tweets of specified user. Especially used for fulfilling Task4.
         """
-        
-        columns = ['Follower ID', 'Tweet ID', 'Tweet Text']
+        columns = [const.follower_id, const.tweet_id, const.tweet_text]
         data = []
-
         for followerid in followerids:
             response = self.client.get_users_tweets(followerid, max_results=20)
             tweets_of_follower = response.data
             if tweets_of_follower is not None:
                 for follower_tweet in tweets_of_follower:
                     data.append([followerid, follower_tweet.id, follower_tweet.text])
-        
         follower_tweets_df = pd.DataFrame(data, columns=columns)
         return follower_tweets_df
 
 
     def lookup_user(self, userid):
+        """
+        lookup username for given user ID.
+        """
         response = self.client.get_user(id=userid, user_fields=["name","username"])
         #print(response.data)
         return response.data.username

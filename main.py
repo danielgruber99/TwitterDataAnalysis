@@ -1,13 +1,13 @@
 from src.sentimentanalysis import SentimentAnalysis
-from src.twitterclient_v2 import TwitterClient_v2
+from src.twitterclient import TwitterClient
 from src.menu import Menu
 from src.dataprocessing import DataProcessing
 
 def main():
     # prefetch of topic computer
     default_topic = "computer"
-    twitterclient_v2 = TwitterClient_v2()  
-    twitterclient_v2.fetch_tweets(default_topic)
+    twitterclient = TwitterClient()  
+    twitterclient.fetch_tweets(default_topic)
 
 
     ## TODO: how to get those classes in functionality separeted. (Separation of INterest/Concepts)
@@ -19,7 +19,7 @@ def main():
 
     #-----------------------------------------------------------------------
     # START MENU
-    myMenu = Menu(twitterclient_v2)        
+    myMenu = Menu(twitterclient)        
 
 
 if __name__ == "__main__":

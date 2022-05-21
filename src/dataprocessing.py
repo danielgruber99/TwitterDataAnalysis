@@ -16,13 +16,13 @@ class DataProcessing:
 
     def read_csv_file_tweets(self)->pd.DataFrame:
         """
-        Read csv file into pandas dataframe and return dataframe.
+        Read csv file for tweets into pandas dataframe and return it.
         """
         return pd.read_csv(self.csv_file_tweets, lineterminator='\n')
     
     def read_csv_file_users(self)->pd.DataFrame:
         """
-        Read csv file into pandas dataframe and return dataframe.
+        Read csv file for users into pandas dataframe and return it.
         """
         return pd.read_csv(self.csv_file_users, lineterminator='\n')
     
@@ -30,7 +30,7 @@ class DataProcessing:
         """
         Get all users (can contain duplicates).
         """
-        return self.tweets_df[const.user_id]
+        return list(self.tweets_df[const.user_id])
     
     def get_users_without_duplicates(self)->list:
         """
@@ -38,14 +38,23 @@ class DataProcessing:
         """
         return list(set(self.get_users()))
     
-    def get_tweets(self) -> list:
+    def get_tweets_id(self) -> list:
+        """
+        Get tweet IDs.
+        """
         return list(self.tweets_df[const.tweet_id])
     
     def get_tweets_text(self) -> list:
+        """
+        Get tweet texts.
+        """
         return list(self.tweets_df[const.tweet_text])
     
     def get_hashtags(self) -> list:
-        return self.tweets_df['hashtags']
+        """
+        Get hashtags.
+        """
+        return list(self.tweets_df[const.tweet_hashtags])
 
     def get_top_10_hashtags(self)->list:
         """
@@ -55,11 +64,10 @@ class DataProcessing:
         -------
         top_10_hashtags:    a list of tuples (hashtag, occurences), which contains the 10 most used hashtags
         """
-        hashtags = list(self.get_hashtags())
-        all_hashtags = ','.join(hashtags)
-        #print(all_hashtags)
+        # join every element of the list with ',', as also the hashtags in one element are stored as , separated list
+        all_hashtags = ','.join(self.get_hashtags())
+        # get all hashtags as list by splitting those by ','
         hashtag_list = all_hashtags.split(',')
-        #print(hashtag_list)
         c = Counter(hashtag_list)
         top_10_hashtags = c.most_common(10)
         return top_10_hashtags
@@ -72,8 +80,7 @@ class DataProcessing:
         -------
         top_10_users:    a list of tuples (userid, occurences), which contains the 10 users with most Tweets
         """
-        users = list(self.get_users())
-        #print(users)
+        users = self.get_users()
         c = Counter(users)
         top_10_users = c.most_common(10)
         return top_10_users
