@@ -1,7 +1,10 @@
 import pandas as pd
 from collections import Counter, Iterable
 import src.constants as const
+from src.twitterclient import TwitterClient
 import os.path
+import sys
+import shutil
 
 
 class DataProcessing:
@@ -10,73 +13,150 @@ class DataProcessing:
     """
     def __init__(self, querystring):
         self.querystring = querystring
+        # file paths
         self.csv_file_tweets = f"fetched/{self.querystring}/{self.querystring}.csv"
         self.csv_file_users = f"fetched/{self.querystring}/{self.querystring}_users.csv"
-        self.csv_file_followers_path = f"fetched/{self.querystring}/followers/"
-        self.tweets_df = self.read_csv_file_tweets()
-        self.users_df = None#self.read_csv_file_users()
+        self.csv_file_followers_path = f"fetched/{self.querystring}/followers"
+        # create querystring, followers and markdown folder
+        self.create_folder(f"fetched/{self.querystring}")
+        self.create_folder(f"fetched/{self.querystring}/followers")
+        self.markdown_folder = f"fetched/{self.querystring}/markdown"
+        self.create_folder(self.markdown_folder)
+        #f"{self.csv_folder_path}followers/{userid}_followers.csv")
+        # followers_tweets_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers_tweets.csv")
+        # twitterclient
+        self.twitterclient = TwitterClient()
+        # dataframes
+        self.tweets_df = None
+        self.users_df = None
+        self.followers_df = None
+        self.followers_tweets_df = None
+        # fill dataframe tweets
+        self.get_tweets_df()
 
-    def read_csv_file_tweets(self)->pd.DataFrame:
+    def remove_eventually_old_data(self):
         """
-        Read csv file for tweets into pandas dataframe and return it.
+        this function is needed to clean up eventually existing old data of topic if it is entered again.
         """
-        return pd.read_csv(self.csv_file_tweets, lineterminator='\n')
-    
-    def read_csv_file_users(self)->pd.DataFrame:
-        """
-        Read csv file for users into pandas dataframe and return it.
-        """
-        users_df = None
-        if os.path.exists(self.csv_file_users):
-            users_df = pd.read_csv(self.csv_file_users, lineterminator='\n')
-        return users_df
-    
-    def read_csv_file_followers(self, userid)->pd.DataFrame:
-        """
-        Read csv file for followers of given userid into pandas dataframe and return it.
-        """
-        followers_df = None
-        if os.path.exists(f"{self.csv_file_followers_path}{userid}_followers.csv"):
-            followers_df = pd.read_csv(f"{self.csv_file_followers_path}{userid}_followers.csv", lineterminator='\n')
-        return followers_df
+        folder_to_delete = f"fetched/{self.querystring}"
+        if os.path.exists(folder_to_delete):
+            shutil.rmtree(folder_to_delete)
+        # create folders again
+        self.create_folder(f"fetched/{self.querystring}")
+        self.create_folder(f"fetched/{self.querystring}/followers")
+        self.markdown_folder = f"fetched/{self.querystring}/markdown"
+        self.create_folder(self.markdown_folder)
 
-    def read_csv_file_followers_tweets(self, userid)->pd.DataFrame:
+    def create_folder(self, folder):
         """
-        Read csv file for followers tweets of given userid into pandas dataframe and return it.
+        For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
         """
-        followers_tweets_df = None
-        if os.path.exists(f"{self.csv_file_followers_path}{userid}_followers_tweets.csv"):
-            followers_df = pd.read_csv(f"{self.csv_file_followers_path}{userid}_followers_tweets.csv", lineterminator='\n')
-        return followers_df
+        folder = (folder)
+        CHECK_FOLDER = os.path.isdir(folder)
+
+        if not CHECK_FOLDER:
+            os.makedirs(folder)
+        else:
+            pass
+    
+    def generate_tweets_df_md_file(self):
+        tweets_df_md_path = f"{self.markdown_folder}/tweets_markdown.md"
+        if not os.path.exists(tweets_df_md_path):
+            self.tweets_df.to_markdown(tweets_df_md_path)
+        print(f"Markdown file is stored at {tweets_df_md_path}.")
+    
+    def generate_users_df_md_file(self):
+        users_df_md_path = f"{self.markdown_folder}/users_markdown.md"
+        if not os.path.exists(users_df_md_path):
+            self.users_df.to_markdown(users_df_md_path)
+        print(f"Markdown file is stored at {users_df_md_path}.")
+    
+    def generate_followers_df_md_file(self):
+        followers_df_md_path = f"{self.markdown_folder}/followers_markdown.md"
+        if not os.path.exists(followers_df_md_path):
+            self.followers_df.to_markdown(followers_df_md_path)
+        print(f"Markdown file is stored at {followers_df_md_path}.")
+    
+    def generate_followers_tweets_df_md_file(self):
+        followers_tweets_df_md_path = f"{self.markdown_folder}/followers_tweets_markdown.md"
+        if not os.path.exists(followers_tweets_df_md_path):
+            self.followers_tweets_df.to_markdown(followers_tweets_df_md_path)
+        print(f"Markdown file is stored at {followers_tweets_df_md_path}.")
+
+    def get_tweets_df(self)->pd.DataFrame:
+        if self.tweets_df is None:
+            if os.path.exists(self.csv_file_tweets):
+                self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+            else:
+                self.tweets_df = self.twitterclient.fetch_tweets()
+                self.tweets_df.to_csv(self.csv_file_tweets)
+        return self.tweets_df
+    
+    def get_users_df(self)->pd.DataFrame:
+        if self.users_df is None:
+            if os.path.exists(self.csv_file_users):
+                self.users_df = pd.read_csv(self.csv_file_users, lineterminator='\n')
+            else:
+                users_without_duplicates = self.get_users_without_duplicates()
+                self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
+                self.users_df.to_csv(self.csv_file_users)
+        return self.users_df
+    
+    def get_followers_df(self, userid)->pd.DataFrame:
+        if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers.csv"):
+            self.followers_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+        else:
+            self.followers_df = self.twitterclient.fetch_followers(userid)
+            self.followers_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv")
+        return self.followers_df
+
+    def get_follower_tweets_df(self, userid)->pd.DataFrame:
+        if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv"):
+            self.followers_tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+        else:
+            followerids = self.get_followers_df(userid)[const.follower_id]
+            self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:20])
+            self.followers_tweets_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv")
+        return self.followers_tweets_df
 
     def get_users(self) -> list:
         """
         Get all users (can contain duplicates).
         """
+        if self.users_df is None:
+            self.get_users_df()
         return list(self.tweets_df[const.user_id])
     
     def get_users_without_duplicates(self)->list:
         """
         Get users without duplicates.
         """
+        if self.users_df is None:
+            self.get_users_df()
         return list(set(self.get_users()))
     
     def get_tweets_id(self) -> list:
         """
         Get tweet IDs.
         """
+        if self.tweet_df is None:
+            self.get_tweets_df()
         return list(self.tweets_df[const.tweet_id])
     
     def get_tweets_text(self) -> list:
         """
         Get tweet texts.
         """
+        if self.tweet_df is None:
+            self.get_tweets_df()
         return list(self.tweets_df[const.tweet_text])
     
     def get_hashtags(self) -> list:
         """
         Get hashtags.
         """
+        if self.tweet_df is None:
+            self.get_tweets_df()
         return list(self.tweets_df[const.tweet_hashtags])
 
     def get_top_10_hashtags(self)->list:

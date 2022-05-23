@@ -7,7 +7,7 @@ import pandas as pd
 import src.constants as const
 
 class TwitterClient:
-
+    
     def __init__(self):
         # authentication to Twitter Endpoint API v2
         self.client = None
@@ -19,7 +19,6 @@ class TwitterClient:
         self.csv_file_tweets = None
         self.csv_file_users = None
         self.csv_folder_path = None
-        self.update_csv_file_paths()
     
     def authenticate(self):
         """
@@ -34,29 +33,8 @@ class TwitterClient:
         try:
             self.client = tweepy.Client(bearer_token=self.bearer_token)
         except:
-            self.client = None
             print("Error: Authentication Failed!")
     
-    def create_folder(self, folder):
-        """
-        For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
-        """
-        folder = (folder)
-        CHECK_FOLDER = os.path.isdir(folder)
-
-        if not CHECK_FOLDER:
-            os.makedirs(folder)
-        else:
-            pass
-
-    def update_csv_file_paths(self):
-        """
-        set file paths accordingly to given querystring for storing fetched tweets/users/etc.
-        """
-        self.csv_file_tweets = f'fetched/{self.querystring}/{self.querystring}.csv'
-        self.csv_file_users = f'fetched/{self.querystring}/{self.querystring}_users.csv'
-        self.csv_folder_path = f'fetched/{self.querystring}/'
-
     def fetch_tweets(self, querystring):
         """
         fetch tweets for given querystring. Only tweets in language english, with at least one hashtag are searched. Retweets are excluded.
@@ -74,7 +52,7 @@ class TwitterClient:
             hashtags = self.extract_hashtags(tweet)
             data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id])    
         tweets_df = pd.DataFrame(data, columns=columns)
-        tweets_df.to_csv(self.csv_file_tweets)
+        return tweets_df
     
     def fetch_users(self, users):
         """
@@ -90,7 +68,6 @@ class TwitterClient:
             user = response.data
             data.append([user.id, user.name, user.username])
         users_df = pd.DataFrame(data, columns=columns)
-        users_df.to_csv(self.csv_file_users)
         return users_df
 
     def extract_hashtags(self, tweet) -> list:
@@ -121,7 +98,6 @@ class TwitterClient:
         for follower in followers:
             data.append([follower.id, follower.name, follower.username, follower.description, follower.location, follower.created_at, follower.public_metrics, follower.profile_image_url])
         followers_df = pd.DataFrame(data, columns=columns)
-        followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df
 
     def fetch_tweets_of_followers(self, followerids, userid):
@@ -138,7 +114,6 @@ class TwitterClient:
                 for follower_tweet in tweets_of_followers:
                     data.append([followerid, follower_tweet.id, follower_tweet.text])
         followers_tweets_df = pd.DataFrame(data, columns=columns)
-        followers_tweets_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers_tweets.csv")
         return followers_tweets_df
 
     def lookup_user(self, userid):
