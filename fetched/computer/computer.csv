@@ -1,24 +1,93 @@
-,Unnamed: 0,Tweet ID,Tweet Text,Tweet Entities,Tweet created at,User ID,sentiment
-0,0,1522880026550673411,"Programming errors doesn't make you a bad programmer. It's just the computer telling you it doesn't understand. This has to be the most comforting statement
-#programming #coding #BlackTechTwitter","{'hashtags': [{'start': 157, 'end': 169, 'tag': 'programming'}, {'start': 170, 'end': 177, 'tag': 'coding'}, {'start': 178, 'end': 195, 'tag': 'BlackTechTwitter'}]}",2022-05-07 10:04:26+00:00,2331206577,-0.09999999999999992
-1,1,1522879900327325697,"#AMC $AMC
-I can't even use my computer anymore ever since this horrible ""Microsoft Edge Thing"" came along... like it's terrible; I go online i can't tell where my favorites are, I don't even know if i'm on google or MS Edge, or what the hell even happened,","{'cashtags': [{'start': 5, 'end': 9, 'tag': 'AMC'}], 'hashtags': [{'start': 0, 'end': 4, 'tag': 'AMC'}], 'annotations': [{'start': 73, 'end': 86, 'probability': 0.6465, 'type': 'Product', 'normalized_text': 'Microsoft Edge'}]}",2022-05-07 10:03:56+00:00,1365475173139419143,-1.0
-2,2,1522879835193987072,"#AI #InternetOfThings #python #tech #CodeNewbie #backend #developer #linux #datascientist #100DaysOfCloud #computer #networkmarketing #html #pythoncode #100DaysOfMLCode #computerscience #ArtificialIntelligence 
+,Tweet ID,Tweet text,hashtags,Tweet created at,User ID
+0,1528716592380510211,"him, sheldonjr, the computer bot
 
-Become a web developer
+#robotoc #digitalart https://t.co/Ph6YAdljVZ","robotoc,digitalart",2022-05-23 12:36:52+00:00,1357006429476040704
+1,1528716249513046019,Computer-Aided Detection of Quantitative Signatures for Breast Fibroepithelial Tumors Using Label-Free Multi-Photon Imaging #machinelearning https://t.co/dikF5UU0ap,machinelearning,2022-05-23 12:35:30+00:00,1423805384259784718
+2,1528716159599579136,05-23-2022 #ICYMI Work on Your Computer from ANYWHERE for Businesses and Individuals https://t.co/Peu7OdSxoR,ICYMI,2022-05-23 12:35:09+00:00,601151719
+3,1528716153547157504,"#hashtag1 Filter Anti-glare screen protective film , For Notebook 16:9 Laptop Computer https://t.co/9OJSo2V0l5 https://t.co/nZupeV3ev7",hashtag1,2022-05-23 12:35:07+00:00,1133089470792773632
+4,1528715999209525249,The latest IT News! https://t.co/iJ0zO4q7N7 Thanks to @srfbern @G3_Computer #computer #clscomputer,"computer,clscomputer",2022-05-23 12:34:31+00:00,1062763200
+5,1528715997774958592,"@Kansola____ I face similar problems,and the support team never responded,until I finally got help from #Hackerslist.co on Google, He is a computer professional. Registration this site for help. I am pretty sure he will help you out regarding the issue.Quickly contact him on his site.",Hackerslist,2022-05-23 12:34:30+00:00,1499282771818463233
+6,1528715703724933122,"@Classic105Kenya Year 1990.
+It's a new week and we have awesome deals for y'all, check https://t.co/7I4llZkbvS for a detailed catalog on laptops , printers , desktops and computer accessories.
+#MondayMotivation  #ManchesterCity #Liverpool  #MainaAndKingangi https://t.co/5Qiyogdll8","MondayMotivation,ManchesterCity,Liverpool,MainaAndKingangi",2022-05-23 12:33:20+00:00,2983322771
+7,1528715597273497600,"The opening of our new Digital Innovation Facility (DIF) went amazingly well today. It will support #collaborations and #partnerships between academics, industry and organisations in #computer #datascience #robotics and #engineering research https://t.co/lFR1xPhZWn https://t.co/Ag26JxFpQB","collaborations,partnerships,computer,datascience,robotics,engineering",2022-05-23 12:32:55+00:00,1002200342858227712
+8,1528715576805187585,"@OctaneAI Promotes Two Executives to C-Suite as #Company Bets on Artificial Intelligence to Fuel its Zero-Party Data Platform.
 
-Class reference =&gt; https://t.co/ous1UEIJin","{'urls': [{'start': 258, 'end': 281, 'url': 'https://t.co/ous1UEIJin', 'expanded_url': 'https://skl.sh/2PAsioL', 'display_url': 'skl.sh/2PAsioL'}], 'hashtags': [{'start': 0, 'end': 3, 'tag': 'AI'}, {'start': 4, 'end': 21, 'tag': 'InternetOfThings'}, {'start': 22, 'end': 29, 'tag': 'python'}, {'start': 30, 'end': 35, 'tag': 'tech'}, {'start': 36, 'end': 47, 'tag': 'CodeNewbie'}, {'start': 48, 'end': 56, 'tag': 'backend'}, {'start': 57, 'end': 67, 'tag': 'developer'}, {'start': 68, 'end': 74, 'tag': 'linux'}, {'start': 75, 'end': 89, 'tag': 'datascientist'}, {'start': 90, 'end': 105, 'tag': '100DaysOfCloud'}, {'start': 106, 'end': 115, 'tag': 'computer'}, {'start': 116, 'end': 133, 'tag': 'networkmarketing'}, {'start': 134, 'end': 139, 'tag': 'html'}, {'start': 140, 'end': 151, 'tag': 'pythoncode'}, {'start': 152, 'end': 168, 'tag': '100DaysOfMLCode'}, {'start': 169, 'end': 185, 'tag': 'computerscience'}, {'start': 186, 'end': 209, 'tag': 'ArtificialIntelligence'}]}",2022-05-07 10:03:41+00:00,1248615252201066510,0.0
-3,3,1522879435162087425,Need Fast Computer? Dell $Dell Precision T3650 #Desktop Intel $INTC i9 Nvidia $NVDA RTX A5000 1TB SSD 32GB RAM W10P https://t.co/AxbsCFTBDi - Buy on eBay #Computer #ad https://t.co/lsitm5eBYS,"{'cashtags': [{'start': 25, 'end': 30, 'tag': 'Dell'}, {'start': 62, 'end': 67, 'tag': 'INTC'}, {'start': 78, 'end': 83, 'tag': 'NVDA'}], 'urls': [{'start': 116, 'end': 139, 'url': 'https://t.co/AxbsCFTBDi', 'expanded_url': 'https://www.ebay.com/itm/304478075438?hash=item46e44eba2e%3Ag%3AML8AAOSwW0didkAp&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5338747434&customid=&toolid=10049&utm_source=dlvr.it&utm_medium=twitter', 'display_url': 'ebay.com/itm/3044780754…'}, {'start': 168, 'end': 191, 'url': 'https://t.co/lsitm5eBYS', 'expanded_url': 'https://twitter.com/Stock_Market_Pr/status/1522879435162087425/photo/1', 'display_url': 'pic.twitter.com/lsitm5eBYS', 'media_key': '3_1522879433916379136'}], 'hashtags': [{'start': 47, 'end': 55, 'tag': 'Desktop'}, {'start': 154, 'end': 163, 'tag': 'Computer'}, {'start': 164, 'end': 167, 'tag': 'ad'}], 'annotations': [{'start': 20, 'end': 114, 'probability': 0.4175, 'type': 'Product', 'normalized_text': 'Dell $Dell Precision T3650 #Desktop Intel $INTC i9 Nvidia $NVDA RTX A5000 1TB SSD 32GB RAM W10P'}]}",2022-05-07 10:02:05+00:00,1089978712685273090,0.2
-4,4,1522879427054489600,Need Fast Computer? Adamant Custom #Computer Intel $INTC i9 12900K 3.2Ghz 32Gb 64Gb 128G DDR4 Quadro A4000 https://t.co/ujWcy3HZk8 - Buy on eBay #Computer #ad https://t.co/IHJH4zTGYL,"{'cashtags': [{'start': 51, 'end': 56, 'tag': 'INTC'}], 'urls': [{'start': 107, 'end': 130, 'url': 'https://t.co/ujWcy3HZk8', 'expanded_url': 'https://www.ebay.com/itm/373900868732?hash=item570e3a7c7c%3Ag%3A0h0AAOSwYLNh7uJ-&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5338747434&customid=&toolid=10049&utm_source=dlvr.it&utm_medium=twitter', 'display_url': 'ebay.com/itm/3739008687…'}, {'start': 159, 'end': 182, 'url': 'https://t.co/IHJH4zTGYL', 'expanded_url': 'https://twitter.com/Stock_Market_Pr/status/1522879427054489600/photo/1', 'display_url': 'pic.twitter.com/IHJH4zTGYL', 'media_key': '3_1522879425733218306'}], 'hashtags': [{'start': 35, 'end': 44, 'tag': 'Computer'}, {'start': 145, 'end': 154, 'tag': 'Computer'}, {'start': 155, 'end': 158, 'tag': 'ad'}]}",2022-05-07 10:02:03+00:00,1089978712685273090,0.15000000000000002
-5,5,1522879371274604547,"#RT MAA_Charity: 💷 A £1 entry to our Lifesaving Lottery scheme entitles you to a unique number. Winning numbers are randomly selected by computer each week.
+@benparr
+#informationtechnology #newsmedia #itdigest #news #digitaladvertising #digitalmarketing 
 
-🚁 Not only will you be supporting our lifesaving cause, you will also have a weekly chance o… https://t.co/5uygXdxCcq","{'urls': [{'start': 252, 'end': 275, 'url': 'https://t.co/5uygXdxCcq', 'expanded_url': 'https://twitter.com/MAA_Charity/status/1522878965077192704/photo/1', 'display_url': 'pic.twitter.com/5uygXdxCcq', 'media_key': '3_1522878963474960384'}], 'hashtags': [{'start': 0, 'end': 3, 'tag': 'RT'}]}",2022-05-07 10:01:50+00:00,192853812,0.125
-6,6,1522879252181434369,"Do you prefer hand-drawn #NFTs or computer-designed? 😳
-#NFTdrops","{'hashtags': [{'start': 25, 'end': 30, 'tag': 'NFTs'}, {'start': 55, 'end': 64, 'tag': 'NFTdrops'}]}",2022-05-07 10:01:22+00:00,1516218269639880708,0.0
-7,7,1522879212616654849,"#nowplaying on All Blues Radio: Too Broke to Spend the Night by Buddy Guy Listen anytime on your computer, tablet or mobile https://t.co/qtmb2SHibX #blues https://t.co/bxIG8si4I1","{'urls': [{'start': 124, 'end': 147, 'url': 'https://t.co/qtmb2SHibX', 'expanded_url': 'http://www.wblu.rocks', 'display_url': 'wblu.rocks', 'status': 200, 'title': 'All Blues Radio', 'description': 'A streaming internet only radio station playing nothing but The Blues', 'unwound_url': 'http://www.wblu.rocks'}, {'start': 155, 'end': 178, 'url': 'https://t.co/bxIG8si4I1', 'expanded_url': 'https://twitter.com/All_Blues_Radio/status/1522879212616654849/photo/1', 'display_url': 'pic.twitter.com/bxIG8si4I1', 'media_key': '3_1522879211173818369'}], 'hashtags': [{'start': 0, 'end': 11, 'tag': 'nowplaying'}, {'start': 148, 'end': 154, 'tag': 'blues'}], 'annotations': [{'start': 15, 'end': 29, 'probability': 0.4925, 'type': 'Organization', 'normalized_text': 'All Blues Radio'}, {'start': 32, 'end': 59, 'probability': 0.8501, 'type': 'Other', 'normalized_text': 'Too Broke to Spend the Night'}]}",2022-05-07 10:01:12+00:00,1029389652950765569,0.0
-8,8,1522879201589792768,"Best remote learning MacBook for 2021: MacBook Air vs. MacBook Pro
+https://t.co/QtY9Un5dJS","Company,informationtechnology,newsmedia,itdigest,news,digitaladvertising,digitalmarketing",2022-05-23 12:32:50+00:00,1481237608063979522
+9,1528715551282827265,"She called the USB a computer tampon. 😸😸😸
+#SeniorYear",SeniorYear,2022-05-23 12:32:44+00:00,1341842531026231296
+10,1528715514759249921,Check out High Back PU Leather Office Chair Executive Task Ergonomic Computer Desk Black  https://t.co/RvKgpVCLwr #eBay via @eBay,eBay,2022-05-23 12:32:35+00:00,1462459170926391305
+11,1528715494542524417,"DOJ: Good faith security research won’t be charged under Computer Fraud and Abuse Act https://t.co/MjEoArgIX0 #cybersecurity #securitynews Thanks to CSOonline for this story
 
-More Details Here: https://t.co/d0z6HdoMCV
+The U.S. Department of Justice (DOJ) has revised its policy regarding charging violations of the Comput…","cybersecurity,securitynews",2022-05-23 12:32:30+00:00,1152783467236790272
+12,1528715478147166208,Check out High Back PU Leather Office Chair Executive Task Ergonomic Computer Desk Black  https://t.co/ZSNORBLWYu #eBay via @eBay,eBay,2022-05-23 12:32:26+00:00,1459987722240544768
+13,1528715384538337280,"International Day of Art of Giving was celebrated by the School of Computer Applications, @KIITUniversity on 17 May. #AOG2022 https://t.co/kkyUzQQuCM",AOG2022,2022-05-23 12:32:04+00:00,2254869132
+14,1528715268863795200,"“My children, they’re really proud of me... and, someone has given me a laptop so I’m able to teach them the basics… simple steps on how to operate a computer. I’m able to teach my children that.” – Sanny Fakude, #GWF Bridging Year Academy student (2021)
 
-#AMD #Apple #AT #BIGGER #Computer #Intel #IRIS #Laptop #School https://t.co/CUD2XqPrcx","{'urls': [{'start': 87, 'end': 110, 'url': 'https://t.co/d0z6HdoMCV', 'expanded_url': 'https://couponmatrix.uk/l/4wp8', 'display_url': 'couponmatrix.uk/l/4wp8'}, {'start': 175, 'end': 198, 'url': 'https://t.co/CUD2XqPrcx', 'expanded_url': 'https://twitter.com/shopmatrixuk/status/1522879201589792768/photo/1', 'display_url': 'pic.twitter.com/CUD2XqPrcx', 'media_key': '3_1522879200063115266'}], 'hashtags': [{'start': 112, 'end': 116, 'tag': 'AMD'}, {'start': 117, 'end': 123, 'tag': 'Apple'}, {'start': 124, 'end': 127, 'tag': 'AT'}, {'start': 128, 'end': 135, 'tag': 'BIGGER'}, {'start': 136, 'end': 145, 'tag': 'Computer'}, {'start': 146, 'end': 152, 'tag': 'Intel'}, {'start': 153, 'end': 158, 'tag': 'IRIS'}, {'start': 159, 'end': 166, 'tag': 'Laptop'}, {'start': 167, 'end': 174, 'tag': 'School'}], 'annotations': [{'start': 21, 'end': 27, 'probability': 0.8539, 'type': 'Product', 'normalized_text': 'MacBook'}, {'start': 39, 'end': 49, 'probability': 0.9147, 'type': 'Product', 'normalized_text': 'MacBook Air'}, {'start': 55, 'end': 65, 'probability': 0.8454, 'type': 'Product', 'normalized_text': 'MacBook Pro'}]}",2022-05-07 10:01:10+00:00,356034482,0.35
-9,9,1522879184749662209,"#nowplaying on AllJazzRadio: A Fine Romance by Louis Armstrong ? Ella Fitzgerald Listen anytime on your computer, tablet or mobile https://t.co/iSzByDCaYH","{'urls': [{'start': 131, 'end': 154, 'url': 'https://t.co/iSzByDCaYH', 'expanded_url': 'http://www.wjzz.rocks', 'display_url': 'wjzz.rocks'}], 'hashtags': [{'start': 0, 'end': 11, 'tag': 'nowplaying'}], 'annotations': [{'start': 15, 'end': 42, 'probability': 0.1902, 'type': 'Other', 'normalized_text': 'AllJazzRadio: A Fine Romance'}, {'start': 47, 'end': 61, 'probability': 0.9805, 'type': 'Person', 'normalized_text': 'Louis Armstrong'}, {'start': 65, 'end': 79, 'probability': 0.8849, 'type': 'Person', 'normalized_text': 'Ella Fitzgerald'}]}",2022-05-07 10:01:06+00:00,1026490600349229058,0.4166666666666667
+#GoodWorkFoundation https://t.co/gIz0lwz021","GWF,GoodWorkFoundation",2022-05-23 12:31:36+00:00,2827928852
+15,1528715254108237827,"@Goretti_Joan It's a new week and we have awesome deals for y'all, check https://t.co/7I4llZkbvS for a detailed catalog on laptops , printers , desktops and computer accessories.
+#MondayMotivation  #ManchesterCity #Liverpool  #MainaAndKingangi https://t.co/wKVvDEzEIV","MondayMotivation,ManchesterCity,Liverpool,MainaAndKingangi",2022-05-23 12:31:33+00:00,2983322771
+16,1528715175016206344,Foldable Wireless Keyboard for Computer &amp; Tablet #tech #smarthomes https://t.co/1zn0GTQwqv https://t.co/Ia7n4JSXc0,"tech,smarthomes",2022-05-23 12:31:14+00:00,1336943561665863685
+17,1528715129549991939,"Hire us to do your;
+Essays due
+#Thesis
+Math
+Engineering
+Exams
+✓Ecology
+English
+Programming
+Poetry
+Accounting
+History
+Projects
+Homework
+Economics
+Business
+Statistics
+Calculus
+Quizzes
+✓Discussions
+Psychology
+Computer
+Powerpoint
+Test
+#Finance
+SPSS
+Quizzes
+DM us at AccurateWriting","Thesis,Finance",2022-05-23 12:31:03+00:00,1155426423437484032
+18,1528715049048629248,"Hire us to do your;
+Essays due
+Thesis
+Math
+✓Engineering
+Exams
+Ecology
+English
+Programming
+Poetry
+Accounting
+History
+Projects
+Homework
+Economics
+#Business
+Statistics
+Calculus
+Quizzes
+Discussions
+Psychology
+Computer
+Powerpoint
+Test
+#Finance
+SPSS
+Quizzes
+DM us at AccurateWriting.","Business,Finance",2022-05-23 12:30:44+00:00,1155426423437484032
+19,1528715036964839425,"Full-Stack Software Developer 1 at Intuit
+Overview Come join Intuit as a Software Engineer 1 What youll bring BS Computer scienceengineering or equivalent with strong a...
+#Python #Hiring 
+https://t.co/2paWWXrFP7","Python,Hiring",2022-05-23 12:30:41+00:00,1364600943292088321
