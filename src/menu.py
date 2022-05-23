@@ -9,7 +9,7 @@ from src.sentimentanalysis import SentimentAnalysis
 from src.dataprocessing import DataProcessing
 import src.constants as c
 from tabulate import tabulate
-
+import os
 
 class Menu:
     """
@@ -43,6 +43,9 @@ class Menu:
         self.users_df = None
         self.followers_df = None
         self.follower_tweets_df = None
+        # create markdown folder
+        self.markdown_folder = f"fetched/{self.querystring}/markdown/"
+        self.create_folder(self.markdown_folder)
         # setup main_menu and all submenus
         self._setup_submenu0()
         self._setup_submenu1()
@@ -146,6 +149,18 @@ class Menu:
             clear_screen=True,
         )
 
+    def create_folder(self, folder):
+        """
+        For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
+        """
+        folder = (folder)
+        CHECK_FOLDER = os.path.isdir(folder)
+
+        if not CHECK_FOLDER:
+            os.makedirs(folder)
+        else:
+            pass
+
     def _menu_selection_loop(self):
         """
         menu selection loop handles every user request. Main menu and all submenus are controlled within this loop.
@@ -168,17 +183,17 @@ class Menu:
                         browse_tweets_exit = False
                         while not browse_tweets_exit:
                             print(f"Tweets {start_browse_tweets} to {start_browse_tweets+c.NR_ENTRIES_PAGE}\n", self.tweets_df[[c.tweet_id, c.tweet_text]][start_browse_tweets:start_browse_tweets+c.NR_ENTRIES_PAGE])
-                            other_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if other_input == 'n':
+                            browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if browse_tweets_input == 'n':
                                 start_browse_tweets+=c.NR_ENTRIES_PAGE
-                            elif other_input == 'p':
+                            elif browse_tweets_input == 'p':
                                 if start_browse_tweets-c.NR_ENTRIES_PAGE >=0:
                                     start_browse_tweets-=c.NR_ENTRIES_PAGE
-                            elif other_input == 'm':
-                                self.tweets_df.to_markdown(f"fetched/{self.querystring}/tweets_markdown.md")
-                                print(f"Files are stored at fetched/{self.querystring}/")
+                            elif browse_tweets_input == 'm':
+                                self.tweets_df.to_markdown(f"{self.markdown_folder}tweets_markdown.md")
+                                print(f"Files are stored at {self.markdown_folder}tweets_markdown.md")
                                 input("Press enter to continue...")
-                            elif other_input == 'b':
+                            elif browse_tweets_input == 'b':
                                 browse_tweets_exit = True
                             else:
                                 print("Invalid input.")
@@ -190,17 +205,17 @@ class Menu:
                         browse_users_exit = False
                         while not browse_users_exit:
                             print(f"Tweets {start_browse_users} to {start_browse_users+c.NR_ENTRIES_PAGE}\n", self.users_df[[c.user_id, c.user_name, c.user_username]][start_browse_users:start_browse_users+c.NR_ENTRIES_PAGE])
-                            other_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if other_input == 'n':
+                            browse_users_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if browse_users_input == 'n':
                                 start_browse_users+=c.NR_ENTRIES_PAGE
-                            elif other_input == 'p':
+                            elif browse_users_input == 'p':
                                 if start_browse_users-c.NR_ENTRIES_PAGE >=0:
                                     start_browse_users-=c.NR_ENTRIES_PAGE
-                            elif other_input == 'm':
-                                self.tweets_df.to_markdown(f"fetched/{self.querystring}/users_markdown.md")
-                                print(f"Files are stored at fetched/{self.querystring}/")
+                            elif browse_users_input == 'm':
+                                self.users_df.to_markdown(f"{self.markdown_folder}users_markdown.md")
+                                print(f"Files are stored at {self.markdown_folder}users_markdown.md")
                                 input("Press enter to continue...")
-                            elif other_input == 'b':
+                            elif browse_users_input == 'b':
                                 browse_users_exit = True
                             else:
                                 print("Invalid input.")
@@ -224,17 +239,17 @@ class Menu:
                         browse_tweets_polarity_exit = False
                         while not browse_tweets_polarity_exit:
                             print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
-                            other_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if other_input == 'n':
+                            browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if browse_tweets_input == 'n':
                                 start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
-                            elif other_input == 'p':
+                            elif browse_tweets_input == 'p':
                                 if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
                                     start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
-                            elif other_input == 'm':
-                                self.tweets_df.to_markdown(f"fetched/{self.querystring}/tweets_polarity_markdown.md")
-                                print(f"Files are stored at fetched/{self.querystring}/")
+                            elif browse_tweets_input == 'm':
+                                self.tweets_df.to_markdown(f"{self.markdown_folder}tweets_markdown.md")
+                                print(f"Files are stored at {self.markdown_folder}tweets_markdown.md")
                                 input("Press enter to continue...")
-                            elif other_input == 'b':
+                            elif browse_tweets_input == 'b':
                                 browse_tweets_polarity_exit = True
                             else:
                                 print("Invalid input.")
@@ -309,6 +324,10 @@ class Menu:
                     elif browse_followers_input == 'p':
                         if start_browse_followers-c.NR_ENTRIES_PAGE >=0:
                             start_browse_followers-=c.NR_ENTRIES_PAGE
+                    elif browse_followers_input == 'm':
+                        self.followers_df.to_markdown(f"{self.markdown_folder}followers_markdown.md")
+                        print(f"Files are stored at {self.markdown_folder}followers_markdown.md")
+                        input("Press enter to continue...")
                     elif browse_followers_input == 'b':
                         browse_followers_exit = True
                     else:
@@ -349,6 +368,10 @@ class Menu:
                                 elif browse_followers_profiles_input == 'p':
                                     if start_browse_followers_profiles-c.NR_ENTRIES_PAGE >= 0:
                                         start_browse_followers_profiles-=c.NR_ENTRIES_PAGE
+                                elif browse_followers_input == 'm':
+                                    self.followers_df.to_markdown(f"{self.markdown_folder}followers_markdown.md")
+                                    print(f"Files are stored at {self.markdown_folder}followers_markdown.md")
+                                    input("Press enter to continue...")
                                 elif browse_followers_profiles_input == 'b':
                                     browse_followers_profiles_exit = True
                                 else:
@@ -372,6 +395,10 @@ class Menu:
                                 elif browse_followers_tweets_input == 'p':
                                     if start_browse_followers_tweets-c.NR_ENTRIES_PAGE >= 0:
                                         start_browse_followers_tweets-=c.NR_ENTRIES_PAGE
+                                elif browse_followers_tweets_input == 'm':
+                                    self.follower_tweets_df.to_markdown(f"{self.markdown_folder}follower_tweets_markdown.md")
+                                    print(f"Files are stored at {self.markdown_folder}follower_tweets_markdown.md")
+                                    input("Press enter to continue...")
                                 elif browse_followers_tweets_input == 'b':
                                     browse_followers_tweets_exit = True
                                 else:
@@ -395,6 +422,8 @@ class Menu:
                 self.dataprocessing = DataProcessing(self.querystring)
                 self.sentimentanalysis = SentimentAnalysis(self.dataprocessing.get_tweets_text())
                 self.tweets_df = self.dataprocessing.read_csv_file_tweets()
+                self.markdown_folder = f"fetched/{self.querystring}/markdown/"
+                self.create_folder(self.markdown_folder)
                 
             # [q] Quit
             elif main_sel == 6 or main_sel == 'q':
