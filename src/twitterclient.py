@@ -124,10 +124,11 @@ class TwitterClient:
         followers_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers.csv")
         return followers_df
 
-    def fetch_tweets_of_followers(self, followerids):
+    def fetch_tweets_of_followers(self, followerids, userid):
         """
         fetches tweets of specified user. Especially used for fulfilling Task4.
         """
+        self.create_folder(f"fetched/{self.querystring}/followers")
         columns = [const.follower_id, const.tweet_id, const.tweet_text]
         data = []
         for followerid in followerids:
@@ -140,14 +141,12 @@ class TwitterClient:
         followers_tweets_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers_tweets.csv")
         return followers_tweets_df
 
-
     def lookup_user(self, userid):
         """
         lookup username for given user ID.
         """
         response = self.client.get_user(id=userid, user_fields=["name","username"])
-        #print(response.data)
-        return response.data.username
-
-
-
+        if response.data is not None:
+            return response.data.username
+        else:
+            return 'anonym'
