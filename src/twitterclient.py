@@ -34,6 +34,7 @@ class TwitterClient:
         try:
             self.client = tweepy.Client(bearer_token=self.bearer_token)
         except:
+            self.client = None
             print("Error: Authentication Failed!")
     
     def create_folder(self, folder):
@@ -50,7 +51,7 @@ class TwitterClient:
 
     def update_csv_file_paths(self):
         """
-        set file paths accordingly to given querystring
+        set file paths accordingly to given querystring for storing fetched tweets/users/etc.
         """
         self.csv_file_tweets = f'fetched/{self.querystring}/{self.querystring}.csv'
         self.csv_file_users = f'fetched/{self.querystring}/{self.querystring}_users.csv'
@@ -131,12 +132,13 @@ class TwitterClient:
         data = []
         for followerid in followerids:
             response = self.client.get_users_tweets(followerid, max_results=20)
-            tweets_of_follower = response.data
-            if tweets_of_follower is not None:
-                for follower_tweet in tweets_of_follower:
+            tweets_of_followers = response.data
+            if tweets_of_followers is not None:
+                for follower_tweet in tweets_of_followers:
                     data.append([followerid, follower_tweet.id, follower_tweet.text])
-        follower_tweets_df = pd.DataFrame(data, columns=columns)
-        return follower_tweets_df
+        followers_tweets_df = pd.DataFrame(data, columns=columns)
+        followers_tweets_df.to_csv(f"{self.csv_folder_path}followers/{userid}_followers_tweets.csv")
+        return followers_tweets_df
 
 
     def lookup_user(self, userid):

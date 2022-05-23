@@ -1,6 +1,7 @@
 import pandas as pd
 from collections import Counter, Iterable
 import src.constants as const
+import os.path
 
 
 class DataProcessing:
@@ -10,7 +11,8 @@ class DataProcessing:
     def __init__(self, querystring):
         self.querystring = querystring
         self.csv_file_tweets = f"fetched/{self.querystring}/{self.querystring}.csv"
-        self.csv_file_users = f"fetched/{self.querystring}/users.csv"
+        self.csv_file_users = f"fetched/{self.querystring}/{self.querystring}_users.csv"
+        self.csv_file_followers_path = f"fetched/{self.querystring}/followers/"
         self.tweets_df = self.read_csv_file_tweets()
         self.users_df = None#self.read_csv_file_users()
 
@@ -24,8 +26,29 @@ class DataProcessing:
         """
         Read csv file for users into pandas dataframe and return it.
         """
-        return pd.read_csv(self.csv_file_users, lineterminator='\n')
+        users_df = None
+        if os.path.exists(self.csv_file_users):
+            users_df = pd.read_csv(self.csv_file_users, lineterminator='\n')
+        return users_df
     
+    def read_csv_file_followers(self, userid)->pd.DataFrame:
+        """
+        Read csv file for followers of given userid into pandas dataframe and return it.
+        """
+        followers_df = None
+        if os.path.exists(f"{self.csv_file_followers_path}{userid}_followers.csv"):
+            followers_df = pd.read_csv(f"{self.csv_file_followers_path}{userid}_followers.csv", lineterminator='\n')
+        return followers_df
+
+    def read_csv_file_followers_tweets(self, userid)->pd.DataFrame:
+        """
+        Read csv file for followers tweets of given userid into pandas dataframe and return it.
+        """
+        followers_tweets_df = None
+        if os.path.exists(f"{self.csv_file_followers_path}{userid}_followers_tweets.csv"):
+            followers_df = pd.read_csv(f"{self.csv_file_followers_path}{userid}_followers_tweets.csv", lineterminator='\n')
+        return followers_df
+
     def get_users(self) -> list:
         """
         Get all users (can contain duplicates).
