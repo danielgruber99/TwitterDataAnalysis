@@ -40,11 +40,8 @@ class TwitterClient:
         fetch tweets for given querystring. Only tweets in language english, with at least one hashtag are searched. Retweets are excluded.
         """
         self.querystring = querystring
-        self.update_csv_file_paths()
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
         response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
-        # store tweets to csv
-        self.create_folder(f"fetched/{self.querystring}")
         # create tweets dataframe and store it to csv file
         columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
         data = []
@@ -90,7 +87,6 @@ class TwitterClient:
         fetch followers for a given user ID.
         """
         #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
-        self.create_folder(f"fetched/{self.querystring}/followers")
         response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
         followers = response_followers.data
         columns = [const.follower_id, const.follower_name, const.follower_username, const.follower_bio, const.follower_bio, const.follower_created_at, const.follower_public_metrics, const.follower_profile_image_url]        # description in user is better known as bio (profile of user)
@@ -100,11 +96,10 @@ class TwitterClient:
         followers_df = pd.DataFrame(data, columns=columns)
         return followers_df
 
-    def fetch_tweets_of_followers(self, followerids, userid):
+    def fetch_tweets_of_followers(self, followerids):
         """
         fetches tweets of specified user. Especially used for fulfilling Task4.
         """
-        self.create_folder(f"fetched/{self.querystring}/followers")
         columns = [const.follower_id, const.tweet_id, const.tweet_text]
         data = []
         for followerid in followerids:

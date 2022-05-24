@@ -31,14 +31,12 @@ class DataProcessing:
         self.users_df = None
         self.followers_df = None
         self.followers_tweets_df = None
-        # fill dataframe tweets
-        self.get_tweets_df()
 
     def remove_eventually_old_data(self):
         """
         this function is needed to clean up eventually existing old data of topic if it is entered again.
         """
-        folder_to_delete = f"fetched/{self.querystring}"
+        folder_to_delete = f"fetched/{self.querystring}/"
         if os.path.exists(folder_to_delete):
             shutil.rmtree(folder_to_delete)
         # create folders again
@@ -88,7 +86,7 @@ class DataProcessing:
             if os.path.exists(self.csv_file_tweets):
                 self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
             else:
-                self.tweets_df = self.twitterclient.fetch_tweets()
+                self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
                 self.tweets_df.to_csv(self.csv_file_tweets)
         return self.tweets_df
     
@@ -104,7 +102,7 @@ class DataProcessing:
     
     def get_followers_df(self, userid)->pd.DataFrame:
         if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers.csv"):
-            self.followers_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+            self.followers_df = pd.read_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv", lineterminator='\n')
         else:
             self.followers_df = self.twitterclient.fetch_followers(userid)
             self.followers_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv")
@@ -112,9 +110,11 @@ class DataProcessing:
 
     def get_follower_tweets_df(self, userid)->pd.DataFrame:
         if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv"):
-            self.followers_tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
+            self.followers_tweets_df = pd.read_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv", lineterminator='\n')
         else:
-            followerids = self.get_followers_df(userid)[const.follower_id]
+            if self.followers_df is None:
+                self.get_followers_df(userid)
+            followerids = self.followers_df[const.follower_id]
             self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:20])
             self.followers_tweets_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv")
         return self.followers_tweets_df
@@ -123,31 +123,31 @@ class DataProcessing:
         """
         Get all users (can contain duplicates).
         """
-        if self.users_df is None:
-            self.get_users_df()
+        if self.tweets_df is None:
+            self.get_tweets_df()
         return list(self.tweets_df[const.user_id])
     
     def get_users_without_duplicates(self)->list:
         """
         Get users without duplicates.
         """
-        if self.users_df is None:
-            self.get_users_df()
-        return list(set(self.get_users()))
-    
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        return list(set(self.tweets_df[const.user_id]))
+
     def get_tweets_id(self) -> list:
         """
-        Get tweet IDs.
+        Get tweet ids.
         """
-        if self.tweet_df is None:
+        if self.tweets_df is None:
             self.get_tweets_df()
         return list(self.tweets_df[const.tweet_id])
-    
+
     def get_tweets_text(self) -> list:
         """
         Get tweet texts.
         """
-        if self.tweet_df is None:
+        if self.tweets_df is None:
             self.get_tweets_df()
         return list(self.tweets_df[const.tweet_text])
     
@@ -155,7 +155,7 @@ class DataProcessing:
         """
         Get hashtags.
         """
-        if self.tweet_df is None:
+        if self.tweets_df is None:
             self.get_tweets_df()
         return list(self.tweets_df[const.tweet_hashtags])
 

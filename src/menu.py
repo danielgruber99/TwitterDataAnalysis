@@ -15,7 +15,7 @@ class Menu:
     """
     This class handles the menu and provides to user a simple user interface in the command line. (Implemented with simple_term_menu)
     """
-    def __init__(self):
+    def __init__(self, default_querystring):
         # main menu
         self.main_menu_exit = False
         self.main_menu = None
@@ -33,16 +33,16 @@ class Menu:
         # submenu4
         self.submenu_4_exit = False
         self.submenu_4 = None
+        # Client, qerystring and startmenu
+        self.querystring = default_querystring   # default querystring
+        self.data = DataProcessing(self.querystring)
+        self.sentimentanalysis = SentimentAnalysis(self.data.get_tweets_text())
         # setup main_menu and all submenus
         self._setup_submenu0()
         self._setup_submenu1()
         self._setup_submenu2()
         self._setup_submenu4()
         self._setup_main_menu()
-        # Client, qerystring and startmenu
-        self.querystring = "computer"   # default querystring
-        self.data = DataProcessing(self.querystring)
-        self.sentimentanalysis = SentimentAnalysis(self.data.get_tweets_text())
         # setup width of command line for pd dataframes
         pd.set_option('display.max_colwidth', 130)
         pd.set_option("display.html.table_schema", True)
@@ -284,18 +284,18 @@ class Menu:
             
             # [3] Get followers of given twitter user
             elif main_sel == 3:
-                print(self.tweets_df[0:c.NR_ENTRIES_PAGE])
+                print(self.data.tweets_df[0:c.NR_ENTRIES_PAGE])
                 print("Enter a twitter user: ")
                 userid = self.input_userid()
 
                 if userid != -1:
-                    followers_df = self.data.get_followers_df()
+                    followers_df = self.data.get_followers_df(userid)
                 else:
                     print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                 start_browse_followers = 0
                 browse_followers_exit = False
                 while not browse_followers_exit:
-                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n", followers_df[[c.follower_id, c.follower_name, c.follower_username]][start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
+                    print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username]][start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
                     browse_followers_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
                     if browse_followers_input == 'n':
                         start_browse_followers+=c.NR_ENTRIES_PAGE
@@ -327,7 +327,7 @@ class Menu:
                         elif userid == -1:
                             print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                         else:
-                            followers_df = self.data.get_followers_df()
+                            followers_df = self.data.get_followers_df(userid)
                     # Browse profiles of followers
                     elif submenu_4_sel == 1:
                         if userid is None:
@@ -345,7 +345,7 @@ class Menu:
                                 elif browse_followers_profiles_input == 'p':
                                     if start_browse_followers_profiles-c.NR_ENTRIES_PAGE >= 0:
                                         start_browse_followers_profiles-=c.NR_ENTRIES_PAGE
-                                elif browse_followers_input == 'm':
+                                elif browse_followers_profiles_input == 'm':
                                     self.data.generate_followers_df_md_file()
                                     input("Press enter to continue...")
                                 elif browse_followers_profiles_input == 'b':
@@ -391,14 +391,17 @@ class Menu:
             # [c] change Topic
             elif main_sel == 5 or main_sel == 'c':
                 print("Current Topic is:", self.querystring)
-                self.querystring = self.input_querystring_from_user()
-                
-                self._setup_main_menu() # setup main menu new, so that topic refreshes
-                hold_existing_data = input("This topic exists already. Do you want fetch again most recent tweets for this topic [y]/[n]: ")
-                self.data = DataProcessing(self.querystring)
-                if hold_existing_data == 'n':
-                    self.data.remove_eventually_old_data()
-                self.sentimentanalysis = SentimentAnalysis(self.data.get_tweets_text())
+                querystring = self.input_querystring_from_user()
+                if querystring is not None:
+                    self.querystring = querystring
+                    hold_existing_data = input("This topic exists already. Do you want fetch again most recent tweets for this topic [y]/[n]: ")
+                    self.data = DataProcessing(self.querystring)
+                    if hold_existing_data == 'y':
+                        self.data.remove_eventually_old_data()
+                    self.sentimentanalysis = SentimentAnalysis(self.data.get_tweets_text())
+                    self._setup_main_menu() # setup main menu new, so that topic refreshes
+                else:
+                    print("no new topic entered, old topic is used.")
 
                 
             # [q] Quit
@@ -437,7 +440,7 @@ class Menu:
             if userid in self.data.get_users_without_duplicates():
                 return userid
             else:
-                return self.tweets_df[c.user_id][userid]
+                return self.data.tweets_df[c.user_id][userid]
         else:
             return -1
 
@@ -446,7 +449,7 @@ class Menu:
         check if entered twitterid exists either as the twitter id or the corresponding index.
         """
         tweets = self.data.get_tweets_id()
-        if twitterid in tweets or twitterid < self.tweets_df.shape[0]:
+        if twitterid in tweets or twitterid < self.data.tweets_df.shape[0]:
             return True
         return False
 
@@ -455,7 +458,7 @@ class Menu:
         check if entered userid exists either as the twitter id or the corresponding index.
         """
         users = self.data.get_users_without_duplicates()
-        if userid in users or userid < self.tweets_df.shape[0]:
+        if userid in users or userid < self.data.tweets_df.shape[0]:
             return True
         return False
     
