@@ -303,7 +303,7 @@ class Menu:
                         if start_browse_followers-c.NR_ENTRIES_PAGE >=0:
                             start_browse_followers-=c.NR_ENTRIES_PAGE
                     elif browse_followers_input == 'm':
-                        self.data.generate_followers_df_md_file()
+                        self.data.generate_followers_df_md_file(userid)
                         input("Press enter to continue...")
                     elif browse_followers_input == 'b':
                         browse_followers_exit = True
@@ -346,7 +346,7 @@ class Menu:
                                     if start_browse_followers_profiles-c.NR_ENTRIES_PAGE >= 0:
                                         start_browse_followers_profiles-=c.NR_ENTRIES_PAGE
                                 elif browse_followers_profiles_input == 'm':
-                                    self.data.generate_followers_df_md_file()
+                                    self.data.generate_followers_df_md_file(userid)
                                     input("Press enter to continue...")
                                 elif browse_followers_profiles_input == 'b':
                                     browse_followers_profiles_exit = True
@@ -372,7 +372,7 @@ class Menu:
                                     if start_browse_followers_tweets-c.NR_ENTRIES_PAGE >= 0:
                                         start_browse_followers_tweets-=c.NR_ENTRIES_PAGE
                                 elif browse_followers_tweets_input == 'm':
-                                    self.data.generate_followers_tweets_df_md_file()
+                                    self.data.generate_followers_tweets_df_md_file(userid)
                                     input("Press enter to continue...")
                                 elif browse_followers_tweets_input == 'b':
                                     browse_followers_tweets_exit = True

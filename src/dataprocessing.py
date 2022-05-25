@@ -9,7 +9,10 @@ import shutil
 
 class DataProcessing:
     """
-    Class for processing data, getting hashtags on so forth, also fetching followers/profiles of given users
+    This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users, 
+    followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
+    If it is stored in fetched the class will only read those csv into pandas dataframes.
+    Moreover getting only one column of certain dataframes is possible.
     """
     def __init__(self, querystring):
         self.querystring = querystring
@@ -58,6 +61,9 @@ class DataProcessing:
             pass
     
     def generate_tweets_df_md_file(self):
+        """
+        generate tweets_df markdown file if not already generated and show the user the file path.
+        """
         tweets_df_md_path = f"{self.markdown_folder}/tweets_markdown.md"
         if not os.path.exists(tweets_df_md_path):
             self.tweets_df.to_markdown(tweets_df_md_path)
@@ -69,14 +75,14 @@ class DataProcessing:
             self.users_df.to_markdown(users_df_md_path)
         print(f"Markdown file is stored at {users_df_md_path}.")
     
-    def generate_followers_df_md_file(self):
-        followers_df_md_path = f"{self.markdown_folder}/followers_markdown.md"
+    def generate_followers_df_md_file(self, userid):
+        followers_df_md_path = f"{self.markdown_folder}/{userid}_followers_markdown.md"
         if not os.path.exists(followers_df_md_path):
             self.followers_df.to_markdown(followers_df_md_path)
         print(f"Markdown file is stored at {followers_df_md_path}.")
     
-    def generate_followers_tweets_df_md_file(self):
-        followers_tweets_df_md_path = f"{self.markdown_folder}/followers_tweets_markdown.md"
+    def generate_followers_tweets_df_md_file(self, userid):
+        followers_tweets_df_md_path = f"{self.markdown_folder}/{userid}_followers_tweets_markdown.md"
         if not os.path.exists(followers_tweets_df_md_path):
             self.followers_tweets_df.to_markdown(followers_tweets_df_md_path)
         print(f"Markdown file is stored at {followers_tweets_df_md_path}.")
