@@ -37,7 +37,7 @@ class TwitterClient:
         tweets_df = None
         if self.client:
             try:
-                response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
+                response = self.client.search_recent_tweets(query=f'{querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
                 columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
                 data = []
                 for tweet in response.data:
