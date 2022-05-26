@@ -93,7 +93,7 @@ class DataProcessing:
                 self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
             else:
                 self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
-                if self.tweets_df:
+                if self.tweets_df is not None:
                     self.tweets_df.to_csv(self.csv_file_tweets)
         return self.tweets_df
     
@@ -104,7 +104,7 @@ class DataProcessing:
             else:
                 users_without_duplicates = self.get_users_without_duplicates()
                 self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
-                if self.users_df:
+                if self.users_df is not None:
                     self.users_df.to_csv(self.csv_file_users)
         return self.users_df
     
@@ -113,7 +113,8 @@ class DataProcessing:
             self.followers_df = pd.read_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv", lineterminator='\n')
         else:
             self.followers_df = self.twitterclient.fetch_followers(userid)
-            self.followers_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv")
+            if self.followers_df is not None:
+                self.followers_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv")
         return self.followers_df
 
     def get_follower_tweets_df(self, userid)->pd.DataFrame:

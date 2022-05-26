@@ -30,6 +30,8 @@ follower_profile_image_url = 'profile image url'
 NR_ENTRIES_PAGE = 20
 # Number of tweets to fetch
 NR_TWEETS = 100
+# Number of followers of given userid to fetch
+NR_FOLLOWERS = 500
 # Number of followers tweets to fetch
 NR_FOLLOWERS_TWEETS = 20
 

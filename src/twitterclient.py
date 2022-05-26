@@ -26,6 +26,7 @@ class TwitterClient:
         try:
             self.client = tweepy.Client(bearer_token=self.bearer_token)
         except:
+            self.client = None
             print("Error: Authentication Failed!")
     
     def fetch_tweets(self, querystring):
@@ -34,23 +35,23 @@ class TwitterClient:
         """
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
         tweets_df = None
-        try:
-            response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
-            columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
-            data = []
-            for tweet in response.data:
-                hashtags = self.extract_hashtags(tweet)
-                data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id]) 
-                tweets_df = pd.DataFrame(data, columns=columns)
-        except AttributeError as attributeerror:
-            print("The twitterclient couldn't be set up due to an AtrributeError:", attributeerror)
-            print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
-        except tweepy.errors.Unauthorized as unauthorized:
-            print("Unauthorized:", unauthorized)
-            print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
-        except tweepy.errors.TooManyRequests as toomanyrequests:
-            print("TooManyRequests:", toomanyrequests)
-            print("You have done too many requests. Try again in approximately 15 minutes.")
+        if self.client:
+            try:
+                response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
+                columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
+                data = []
+                for tweet in response.data:
+                    hashtags = self.extract_hashtags(tweet)
+                    data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id]) 
+                    tweets_df = pd.DataFrame(data, columns=columns)
+            except tweepy.errors.Unauthorized as unauthorized:
+                print("Unauthorized:", unauthorized)
+                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+            except tweepy.errors.TooManyRequests as toomanyrequests:
+                print("TooManyRequests:", toomanyrequests)
+                print("You have done too many requests. Try again in approximately 15 minutes.")
+        else:
+            print("The twitterclient couldn't be set up.\nEnsure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
         return tweets_df
     
     def fetch_users(self, userids):
@@ -60,25 +61,25 @@ class TwitterClient:
         """
         columns = [const.user_id, const.user_name, const.user_username]
         data = []
-        for userid in userids:
-            try:
-                response = self.client.get_user(id=userid, user_fields=['id','name','username'])
-                user = response.data
-                # handle if for user no data could be fetched but also no error was trown by the Twitter API
-                if user:
-                    data.append([user.id, user.name, user.username])
-            except AttributeError as attributeerror:
-                print("The twitterclient couldn't be set up due to an AtrributeError:", attributeerror)
-                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
-                return None
-            except tweepy.errors.Unauthorized as unauthorized:
-                print("Unauthorized:", unauthorized)
-                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
-                return None
-            except tweepy.errors.TooManyRequests as toomanyrequests:
-                print("TooManyRequests:", toomanyrequests)
-                print("You have done too many requests. Try again in approximately 15 minutes.")
-                return None
+        if self.client:
+            for userid in userids:
+                try:
+                    response = self.client.get_user(id=userid, user_fields=['id','name','username'])
+                    user = response.data
+                    # handle if for user no data could be fetched but also no error was trown by the Twitter API
+                    if user:
+                        data.append([user.id, user.name, user.username])
+                except tweepy.errors.Unauthorized as unauthorized:
+                    print("Unauthorized:", unauthorized)
+                    print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+                    return None
+                except tweepy.errors.TooManyRequests as toomanyrequests:
+                    print("TooManyRequests:", toomanyrequests)
+                    print("You have done too many requests. Try again in approximately 15 minutes.")
+                    return None
+        else:
+            print("The twitterclient couldn't be set up.\nEnsure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+            return None
         users_df = pd.DataFrame(data, columns=columns)
         return users_df
 
@@ -101,13 +102,26 @@ class TwitterClient:
         """
         fetch followers for a given user ID.
         """
-        response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
-        followers = response_followers.data
-        columns = [const.follower_id, const.follower_name, const.follower_username, const.follower_bio, const.follower_bio, const.follower_created_at, const.follower_public_metrics, const.follower_profile_image_url]        # description in user is better known as bio (profile of user)
-        data = []
-        for follower in followers:
-            data.append([follower.id, follower.name, follower.username, follower.description, follower.location, follower.created_at, follower.public_metrics, follower.profile_image_url])
-        followers_df = pd.DataFrame(data, columns=columns)
+        followers_df = None
+        if self.client:
+            try:
+                response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
+            except tweepy.errors.Unauthorized as unauthorized:
+                print("Unauthorized:", unauthorized)
+                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+            except tweepy.errors.TooManyRequests as toomanyrequests:
+                print("TooManyRequests:", toomanyrequests)
+                print("You have done too many requests. Try again in approximately 15 minutes.")
+            else:
+                followers = response_followers.data
+                columns = [const.follower_id, const.follower_name, const.follower_username, const.follower_bio, const.follower_bio, const.follower_created_at, const.follower_public_metrics, const.follower_profile_image_url]        # description in user is better known as bio (profile of user)
+                data = []
+                if followers:
+                    for follower in followers:
+                        data.append([follower.id, follower.name, follower.username, follower.description, follower.location, follower.created_at, follower.public_metrics, follower.profile_image_url])
+                    followers_df = pd.DataFrame(data, columns=columns)
+        else:
+            print("The twitterclient couldn't be set up.\nEnsure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
         return followers_df
 
     def fetch_tweets_of_followers(self, followerids):
@@ -129,8 +143,18 @@ class TwitterClient:
         """
         lookup username for given user ID.
         """
-        response = self.client.get_user(id=userid, user_fields=["name","username"])
-        if response.data is not None:
-            return response.data.username
+        if self.client:
+            try:
+                response = self.client.get_user(id=userid, user_fields=["name","username"])
+            except tweepy.errors.Unauthorized as unauthorized:
+                print("Unauthorized:", unauthorized)
+                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+            except tweepy.errors.TooManyRequests as toomanyrequests:
+                print("TooManyRequests:", toomanyrequests)
+                print("You have done too many requests. Try again in approximately 15 minutes.")
+            else:
+                user = response.data
+                if user:
+                    return user.username
         else:
-            return 'anonym'
+            return None
