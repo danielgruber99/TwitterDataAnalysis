@@ -12,13 +12,6 @@ class TwitterClient:
         # authentication to Twitter Endpoint API v2
         self.client = None
         self.authenticate()
-        self.tweets = None
-        self.users = None
-        # set default querystring to computer
-        self.querystring = 'computer'
-        self.csv_file_tweets = None
-        self.csv_file_users = None
-        self.csv_folder_path = None
     
     def authenticate(self):
         """
@@ -39,42 +32,63 @@ class TwitterClient:
         """
         fetch tweets for given querystring. Only tweets in language english, with at least one hashtag are searched. Retweets are excluded.
         """
-        self.querystring = querystring
         # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
-        response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
-        # create tweets dataframe and store it to csv file
-        columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
-        data = []
-        for tweet in response.data:
-            hashtags = self.extract_hashtags(tweet)
-            data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id])    
-        tweets_df = pd.DataFrame(data, columns=columns)
+        tweets_df = None
+        try:
+            response = self.client.search_recent_tweets(query=f'{self.querystring} lang:en -is:retweet has:hashtags', tweet_fields=["created_at", "lang", "entities"], expansions=["author_id"], max_results=const.NR_TWEETS)
+            columns = [const.tweet_id, const.tweet_text, const.tweet_hashtags, const.tweet_createdAt, const.user_id]
+            data = []
+            for tweet in response.data:
+                hashtags = self.extract_hashtags(tweet)
+                data.append([tweet.id, tweet.text, hashtags, tweet.created_at, tweet.author_id]) 
+                tweets_df = pd.DataFrame(data, columns=columns)
+        except AttributeError as attributeerror:
+            print("The twitterclient couldn't be set up due to an AtrributeError:", attributeerror)
+            print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+        except tweepy.errors.Unauthorized as unauthorized:
+            print("Unauthorized:", unauthorized)
+            print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+        except tweepy.errors.TooManyRequests as toomanyrequests:
+            print("TooManyRequests:", toomanyrequests)
+            print("You have done too many requests. Try again in approximately 15 minutes.")
         return tweets_df
     
-    def fetch_users(self, users):
+    def fetch_users(self, userids):
         """
-        fetch username and name of given userids in previously fetched set of tweets.
-        For providing the user the possibility to browse through users.
+        fetch IDs, names and usernames of given userids in previously fetched set of tweets.
+        Required for providing the user the possibility to browse through all users.
         """
-        #users_with_duplicates = self.tweets[const.user_id]
-        #users = list(set(users_with_duplicates))
         columns = [const.user_id, const.user_name, const.user_username]
         data = []
-        for user in users:
-            response = self.client.get_user(id=user, user_fields=['id','name','username'])
-            userdata = response.data
-            if userdata is not None:
-                data.append([userdata.id, userdata.name, userdata.username])
+        for userid in userids:
+            try:
+                response = self.client.get_user(id=userid, user_fields=['id','name','username'])
+                user = response.data
+                # handle if for user no data could be fetched but also no error was trown by the Twitter API
+                if user:
+                    data.append([user.id, user.name, user.username])
+            except AttributeError as attributeerror:
+                print("The twitterclient couldn't be set up due to an AtrributeError:", attributeerror)
+                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+                return None
+            except tweepy.errors.Unauthorized as unauthorized:
+                print("Unauthorized:", unauthorized)
+                print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+                return None
+            except tweepy.errors.TooManyRequests as toomanyrequests:
+                print("TooManyRequests:", toomanyrequests)
+                print("You have done too many requests. Try again in approximately 15 minutes.")
+                return None
         users_df = pd.DataFrame(data, columns=columns)
         return users_df
 
     def extract_hashtags(self, tweet) -> list:
         """
-        extract hashtag von retrieved response.data dictionary
+        extract hashtags von retrieved response.data dictionary
 
         Returns:
         --------
-        hashtags_string:    string of all hashtags separated by a comma (for later splitting again)
+        hashtags_string:    string of all hashtags separated by commas (for later splitting again)
         """
         entity_hashtag = tweet.entities["hashtags"]
         hashtags = []
@@ -87,7 +101,6 @@ class TwitterClient:
         """
         fetch followers for a given user ID.
         """
-        #TODO: check if followers csv file already exists... if not do below, else just load csv file and return as dataframe
         response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
         followers = response_followers.data
         columns = [const.follower_id, const.follower_name, const.follower_username, const.follower_bio, const.follower_bio, const.follower_created_at, const.follower_public_metrics, const.follower_profile_image_url]        # description in user is better known as bio (profile of user)

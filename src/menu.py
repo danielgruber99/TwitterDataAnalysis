@@ -147,7 +147,6 @@ class Menu:
         # needed to make it possible to switch from option 3 to option 4 and get without typing again an user id profiles of followers and tweets of followers
         userid = None
 
-
         while not self.main_menu_exit:
             # main menu
             main_sel = self.main_menu.show()
@@ -159,46 +158,54 @@ class Menu:
                     submenu_0_sel = self.submenu_0.show()
                     # Browse Tweets
                     if submenu_0_sel == 0:
-                        start_browse_tweets = 0
-                        browse_tweets_exit = False
-                        while not browse_tweets_exit:
-                            tweets_df = self.data.get_tweets_df()
-                            print(f"Tweets {start_browse_tweets} to {start_browse_tweets+c.NR_ENTRIES_PAGE}\n", tweets_df[[c.tweet_id, c.tweet_text]][start_browse_tweets:start_browse_tweets+c.NR_ENTRIES_PAGE])
-                            browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if browse_tweets_input == 'n':
-                                start_browse_tweets+=c.NR_ENTRIES_PAGE
-                            elif browse_tweets_input == 'p':
-                                if start_browse_tweets-c.NR_ENTRIES_PAGE >=0:
-                                    start_browse_tweets-=c.NR_ENTRIES_PAGE
-                            elif browse_tweets_input == 'm':
-                                self.data.generate_tweets_df_md_file()
-                                input("Press enter to continue...")
-                            elif browse_tweets_input == 'b':
-                                browse_tweets_exit = True
-                            else:
-                                print("Invalid input.")
-                        browse_tweets_exit = False
+                        self.data.get_tweets_df()
+                        if self.data.tweets_df:
+                            start_browse_tweets = 0
+                            browse_tweets_exit = False
+                            while not browse_tweets_exit:
+                                print(f"Tweets {start_browse_tweets} to {start_browse_tweets+c.NR_ENTRIES_PAGE}\n", tweets_df[[c.tweet_id, c.tweet_text]][start_browse_tweets:start_browse_tweets+c.NR_ENTRIES_PAGE])
+                                browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                if browse_tweets_input == 'n':
+                                    start_browse_tweets+=c.NR_ENTRIES_PAGE
+                                elif browse_tweets_input == 'p':
+                                    if start_browse_tweets-c.NR_ENTRIES_PAGE >=0:
+                                        start_browse_tweets-=c.NR_ENTRIES_PAGE
+                                elif browse_tweets_input == 'm':
+                                    self.data.generate_tweets_df_md_file()
+                                    input("Press enter to continue...")
+                                elif browse_tweets_input == 'b':
+                                    browse_tweets_exit = True
+                                else:
+                                    print("Invalid input.")
+                            browse_tweets_exit = False
+                        else:
+                            print("No data could be fetched.")
+                            input("Press enter to continue...")
                     # Browse Users
                     elif submenu_0_sel == 1:
-                        users_df = self.data.get_users_df()
-                        start_browse_users = 0
-                        browse_users_exit = False
-                        while not browse_users_exit:
-                            print(f"Tweets {start_browse_users} to {start_browse_users+c.NR_ENTRIES_PAGE}\n", users_df[[c.user_id, c.user_name, c.user_username]][start_browse_users:start_browse_users+c.NR_ENTRIES_PAGE])
-                            browse_users_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if browse_users_input == 'n':
-                                start_browse_users+=c.NR_ENTRIES_PAGE
-                            elif browse_users_input == 'p':
-                                if start_browse_users-c.NR_ENTRIES_PAGE >=0:
-                                    start_browse_users-=c.NR_ENTRIES_PAGE
-                            elif browse_users_input == 'm':
-                                self.data.generate_users_df_md_file()
-                                input("Press enter to continue...")
-                            elif browse_users_input == 'b':
-                                browse_users_exit = True
-                            else:
-                                print("Invalid input.")
-                        browse_users_exit = False
+                        self.data.get_users_df()
+                        if self.data.users_df:
+                            start_browse_users = 0
+                            browse_users_exit = False
+                            while not browse_users_exit:
+                                print(f"Tweets {start_browse_users} to {start_browse_users+c.NR_ENTRIES_PAGE}\n", self.data.users_df[[c.user_id, c.user_name, c.user_username]][start_browse_users:start_browse_users+c.NR_ENTRIES_PAGE])
+                                browse_users_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                if browse_users_input == 'n':
+                                    start_browse_users+=c.NR_ENTRIES_PAGE
+                                elif browse_users_input == 'p':
+                                    if start_browse_users-c.NR_ENTRIES_PAGE >=0:
+                                        start_browse_users-=c.NR_ENTRIES_PAGE
+                                elif browse_users_input == 'm':
+                                    self.data.generate_users_df_md_file()
+                                    input("Press enter to continue...")
+                                elif browse_users_input == 'b':
+                                    browse_users_exit = True
+                                else:
+                                    print("Invalid input.")
+                            browse_users_exit = False
+                        else:
+                            print("No data could be fetched.")
+                            input("Press enter to continue...")
                     elif submenu_0_sel == 'b' or submenu_0_sel == 2:
                         self.submenu_0_exit = True
                 self.submenu_0_exit = False
@@ -210,28 +217,33 @@ class Menu:
                     submenu_1_sel = self.submenu_1.show()
                     # analyse all tweets
                     if submenu_1_sel == 0:
-                        if 'polarity' not in self.data.tweets_df:
-                            polarity_list = self.sentimentanalysis.analyse_all_tweets()
-                            self.data.tweets_df['polarity'] = polarity_list
-                            # optional TODO: inline Bar of polarity: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
-                        start_browse_tweets_polarity = 0
-                        browse_tweets_polarity_exit = False
-                        while not browse_tweets_polarity_exit:
-                            print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.data.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
-                            browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                            if browse_tweets_input == 'n':
-                                start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
-                            elif browse_tweets_input == 'p':
-                                if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
-                                    start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
-                            elif browse_tweets_input == 'm':
-                                self.data.generate_tweets_df_md_file()
-                                input("Press enter to continue...")
-                            elif browse_tweets_input == 'b':
-                                browse_tweets_polarity_exit = True
-                            else:
-                                print("Invalid input.")
-                        browse_tweets_polarity_exit = False
+                        self.get_tweets_df()
+                        if self.data.tweets_df:
+                            if 'polarity' not in self.data.tweets_df:
+                                polarity_list = self.sentimentanalysis.analyse_all_tweets()
+                                self.data.tweets_df['polarity'] = polarity_list
+                                # optional TODO: inline Bar of polarity: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
+                            start_browse_tweets_polarity = 0
+                            browse_tweets_polarity_exit = False
+                            while not browse_tweets_polarity_exit:
+                                print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.data.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
+                                browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                if browse_tweets_input == 'n':
+                                    start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
+                                elif browse_tweets_input == 'p':
+                                    if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
+                                        start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
+                                elif browse_tweets_input == 'm':
+                                    self.data.generate_tweets_df_md_file()
+                                    input("Press enter to continue...")
+                                elif browse_tweets_input == 'b':
+                                    browse_tweets_polarity_exit = True
+                                else:
+                                    print("Invalid input.")
+                            browse_tweets_polarity_exit = False
+                        else:
+                            print("No data could be fetched.")
+                            input("Press enter to continue...")
                     # get average polarity
                     if submenu_1_sel == 1:
                         avg_polarity_dict = self.sentimentanalysis.get_avg_polarity()

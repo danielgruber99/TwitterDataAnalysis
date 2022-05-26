@@ -93,7 +93,8 @@ class DataProcessing:
                 self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator='\n')
             else:
                 self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
-                self.tweets_df.to_csv(self.csv_file_tweets)
+                if self.tweets_df:
+                    self.tweets_df.to_csv(self.csv_file_tweets)
         return self.tweets_df
     
     def get_users_df(self)->pd.DataFrame:
@@ -103,7 +104,8 @@ class DataProcessing:
             else:
                 users_without_duplicates = self.get_users_without_duplicates()
                 self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
-                self.users_df.to_csv(self.csv_file_users)
+                if self.users_df:
+                    self.users_df.to_csv(self.csv_file_users)
         return self.users_df
     
     def get_followers_df(self, userid)->pd.DataFrame:
@@ -147,6 +149,9 @@ class DataProcessing:
         """
         if self.tweets_df is None:
             self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
         return list(self.tweets_df[const.tweet_id])
 
     def get_tweets_text(self) -> list:
@@ -155,6 +160,9 @@ class DataProcessing:
         """
         if self.tweets_df is None:
             self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
         return list(self.tweets_df[const.tweet_text])
     
     def get_hashtags(self) -> list:
@@ -163,6 +171,9 @@ class DataProcessing:
         """
         if self.tweets_df is None:
             self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
         return list(self.tweets_df[const.tweet_hashtags])
 
     def get_top_10_hashtags(self)->list:
