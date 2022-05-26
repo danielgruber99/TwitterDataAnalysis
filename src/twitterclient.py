@@ -61,9 +61,10 @@ class TwitterClient:
         columns = [const.user_id, const.user_name, const.user_username]
         data = []
         for user in users:
-            response = self.client.get_user(id=user)
-            user = response.data
-            data.append([user.id, user.name, user.username])
+            response = self.client.get_user(id=user, user_fields=['id','name','username'])
+            userdata = response.data
+            if userdata is not None:
+                data.append([userdata.id, userdata.name, userdata.username])
         users_df = pd.DataFrame(data, columns=columns)
         return users_df
 
