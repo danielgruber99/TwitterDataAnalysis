@@ -452,7 +452,7 @@ class Menu:
                 print('A ValueError occured. Please enter the user ID or corresponding index.')
 
         if self.check_userid_exists(userid):
-            if userid in self.data.get_users_without_duplicates():
+            if userid in self.data.get_user_ids_without_duplicates():
                 return userid
             else:
                 return self.data.tweets_df[c.user_id][userid]
@@ -472,7 +472,7 @@ class Menu:
         """
         check if entered userid exists either as the twitter id or the corresponding index.
         """
-        users = self.data.get_users_without_duplicates()
+        users = self.data.get_user_ids_without_duplicates()
         if userid in users or userid < self.data.tweets_df.shape[0]:
             return True
         return False

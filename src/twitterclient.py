@@ -105,7 +105,7 @@ class TwitterClient:
         followers_df = None
         if self.client:
             try:
-                response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=500)
+                response_followers = self.client.get_users_followers(userid, user_fields=['created_at','description','entities','id','location','name','profile_image_url', 'public_metrics'], max_results=const.NR_FOLLOWERS)
             except tweepy.errors.Unauthorized as unauthorized:
                 print("Unauthorized:", unauthorized)
                 print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
@@ -130,12 +130,25 @@ class TwitterClient:
         """
         columns = [const.follower_id, const.tweet_id, const.tweet_text]
         data = []
-        for followerid in followerids:
-            response = self.client.get_users_tweets(followerid, max_results=20)
-            tweets_of_followers = response.data
-            if tweets_of_followers is not None:
-                for follower_tweet in tweets_of_followers:
-                    data.append([followerid, follower_tweet.id, follower_tweet.text])
+        if self.client:
+            for followerid in followerids:
+                try:
+                    response = self.client.get_users_tweets(followerid, max_results=20)
+                except tweepy.errors.Unauthorized as unauthorized:
+                    print("Unauthorized:", unauthorized)
+                    print("Authorization failed. Ensure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
+                    return None
+                except tweepy.errors.TooManyRequests as toomanyrequests:
+                    print("TooManyRequests:", toomanyrequests)
+                    print("You have done too many requests. Try again in approximately 15 minutes.")
+                    return None
+                else:
+                    tweets_of_followers = response.data
+                    if tweets_of_followers is not None:
+                        for follower_tweet in tweets_of_followers:
+                            data.append([followerid, follower_tweet.id, follower_tweet.text])
+        else:
+            print("The twitterclient couldn't be set up.\nEnsure you have provided valid Access/Consumer/Bearer Tokens and Secrets.")
         followers_tweets_df = pd.DataFrame(data, columns=columns)
         return followers_tweets_df
 
