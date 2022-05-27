@@ -211,58 +211,63 @@ class Menu:
                 self.submenu_0_exit = False
             # [1] Analyse Sentiment of Tweets
             elif main_sel == 1:
-                # submenu 1
-                while not self.submenu_1_exit:
-                    submenu_1_sel = self.submenu_1.show()
-                    # analyse all tweets
-                    if submenu_1_sel == 0:
-                        self.data.get_tweets_df()
-                        if self.data.tweets_df is not None:
-                            if 'polarity' not in self.data.tweets_df:
-                                polarity_list = self.sentimentanalysis.analyse_all_tweets()
-                                self.data.tweets_df['polarity'] = polarity_list
-                                # optional TODO: inline Bar of polarity: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
-                            start_browse_tweets_polarity = 0
-                            browse_tweets_polarity_exit = False
-                            while not browse_tweets_polarity_exit:
-                                print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.data.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
-                                browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                                if browse_tweets_input == 'n':
-                                    start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
-                                elif browse_tweets_input == 'p':
-                                    if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
-                                        start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
-                                elif browse_tweets_input == 'm':
-                                    self.data.generate_tweets_df_md_file()
-                                    input("Press enter to continue...")
-                                elif browse_tweets_input == 'b':
-                                    browse_tweets_polarity_exit = True
-                                else:
-                                    print("Invalid input.")
-                            browse_tweets_polarity_exit = False
-                        else:
-                            print("No data could be fetched.")
-                            input("Press enter to continue...")
-                    # get average polarity
-                    if submenu_1_sel == 1:
-                        avg_polarity_dict = self.sentimentanalysis.get_avg_polarity()
-                        print(f"The average polarity of your topic '{self.data.querystring}' is: '{avg_polarity_dict['avg_polarity']}' -> '{avg_polarity_dict['avg_polarity_meaning']}'")
-                        input("\nPress enter to continue...")
-                    # analyse single tweet
-                    elif submenu_1_sel == 2:
-                        print(self.data.tweets_df[[c.tweet_id, c.tweet_text]][0:c.NR_ENTRIES_PAGE])
-                        index = self.input_twitterid()
-                        polarity_meaning = self.sentimentanalysis.analyse_single_tweet(index)
-                        print("Your selected Tweet at index", index, "is", polarity_meaning)
-                        input("\nPress enter to continue...")
-                    # get most used words (outputs wordcloud with official twitterlogo as mask)
-                    elif submenu_1_sel == 3:
-                        self.sentimentanalysis.get_most_used_words()
-                        print("file is in wordcloud/generated")
-                        input("\nPress enter to continue...")
-                    # back
-                    elif submenu_1_sel == 'b' or submenu_1_sel == 4:
-                        self.submenu_1_exit = True
+                if self.sentimentanalysis is not None:
+                    # submenu 1
+                    while not self.submenu_1_exit:
+                        submenu_1_sel = self.submenu_1.show()
+                        # analyse all tweets
+                        if submenu_1_sel == 0:
+                            self.data.get_tweets_df()
+                            if self.data.tweets_df is not None:
+                                if 'polarity' not in self.data.tweets_df:
+                                    polarity_list = self.sentimentanalysis.analyse_all_tweets()
+                                    self.data.tweets_df['polarity'] = polarity_list
+                                    # optional TODO: inline Bar of polarity: https://towardsdatascience.com/make-your-pandas-dataframe-output-report-ready-a9440f6045c6#:~:text=matplotlib.org-,In%2Dline%20Bar%20Chart,-This%20is%20another
+                                start_browse_tweets_polarity = 0
+                                browse_tweets_polarity_exit = False
+                                while not browse_tweets_polarity_exit:
+                                    print(f"Tweets {start_browse_tweets_polarity} to {start_browse_tweets_polarity+c.NR_ENTRIES_PAGE}\n", self.data.tweets_df[[c.tweet_id, c.tweet_text, 'polarity']][start_browse_tweets_polarity:start_browse_tweets_polarity+c.NR_ENTRIES_PAGE])
+                                    browse_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} tweets. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                    if browse_tweets_input == 'n':
+                                        start_browse_tweets_polarity+=c.NR_ENTRIES_PAGE
+                                    elif browse_tweets_input == 'p':
+                                        if start_browse_tweets_polarity-c.NR_ENTRIES_PAGE >=0:
+                                            start_browse_tweets_polarity-=c.NR_ENTRIES_PAGE
+                                    elif browse_tweets_input == 'm':
+                                        self.data.generate_tweets_df_md_file()
+                                        input("Press enter to continue...")
+                                    elif browse_tweets_input == 'b':
+                                        browse_tweets_polarity_exit = True
+                                    else:
+                                        print("Invalid input.")
+                                browse_tweets_polarity_exit = False
+                            else:
+                                print("No data could be fetched.")
+                                input("Press enter to continue...")
+                        # get average polarity
+                        if submenu_1_sel == 1:
+                            avg_polarity_dict = self.sentimentanalysis.get_avg_polarity()
+                            print(f"The average polarity of your topic '{self.data.querystring}' is: '{avg_polarity_dict['avg_polarity']}' -> '{avg_polarity_dict['avg_polarity_meaning']}'")
+                            input("\nPress enter to continue...")
+                        # analyse single tweet
+                        elif submenu_1_sel == 2:
+                            print(self.data.tweets_df[[c.tweet_id, c.tweet_text]][0:c.NR_ENTRIES_PAGE])
+                            index = self.input_twitterid()
+                            polarity_meaning = self.sentimentanalysis.analyse_single_tweet(index)
+                            print("Your selected Tweet at index", index, "is", polarity_meaning)
+                            input("\nPress enter to continue...")
+                        # get most used words (outputs wordcloud with official twitterlogo as mask)
+                        elif submenu_1_sel == 3:
+                            self.sentimentanalysis.get_most_used_words()
+                            print("file is in wordcloud/generated")
+                            input("\nPress enter to continue...")
+                        # back
+                        elif submenu_1_sel == 'b' or submenu_1_sel == 4:
+                            self.submenu_1_exit = True
+                else:
+                    print("Sentimentanalysis couldn't be done because no tweets could be provided.")
+                    input("Press enter to continue...")
+                    self.submenu_1_exit = True
                 self.submenu_1_exit = False
             # [2] Get Top 10 Hashtags/Users
             elif main_sel == 2:
