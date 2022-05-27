@@ -1,5 +1,7 @@
+"""
+Sentimentanalysis module for deriving the Sentiment - particularly the Polarity - of each tweet.
+"""
 import textblob
-import pandas as pd
 import numpy as np
 import re
 import numpy as np

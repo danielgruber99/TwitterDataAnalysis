@@ -1,10 +1,11 @@
-import pandas as pd
-from collections import Counter, Iterable
-import src.constants as const
-from src.twitterclient import TwitterClient
+"""
+Dataprocessing module for getting dataframes, generating markdowns, loading only certain columns of dataframes.
+"""
 import os.path
-import sys
-import shutil
+import pandas as pd
+import src.constants as const
+from collections import Counter, Iterable
+from src.twitterclient import TwitterClient
 
 
 class DataProcessing:

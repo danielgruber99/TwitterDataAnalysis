@@ -4,7 +4,6 @@ Client is used for fetching tweets, users, followers and tweets of followers.
 """
 import os
 import tweepy
-import csv
 import pandas as pd
 import src.constants as const
 

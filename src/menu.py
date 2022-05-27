@@ -1,17 +1,16 @@
-from matplotlib.colors import TwoSlopeNorm
+"""
+Menu module for handling the entire user menu including main menu and all submenus.
+"""
 from simple_term_menu import TerminalMenu
 import pandas as pd
 import time
-import threading
-import keyboard as kb
-
 from src.sentimentanalysis import SentimentAnalysis
 from src.dataprocessing import DataProcessing
 import src.constants as c
-from tabulate import tabulate
 import os
 import sys
 import shutil
+
 
 class Menu:
     """
