@@ -39,7 +39,7 @@ class SentimentAnalysis:
             analysis = textblob.TextBlob(cleaned_tweet)
             self.polarity_list.append(analysis.sentiment.polarity)
         return self.polarity_list
-    
+
     def get_avg_polarity(self)->dict:
         """
         After analysing all tweets and writing a polarity row to the dataframe (and to the csv) calculate the avg_polarity and get its textual output
@@ -82,7 +82,7 @@ class SentimentAnalysis:
         else:
             return "error!"
 
-    def get_most_used_words(self):
+    def get_most_used_words(self, querystring):
         """
         Get the most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
         """
@@ -95,7 +95,8 @@ class SentimentAnalysis:
         # generate wordcloud
         wc = wordcloud.WordCloud(background_color="white", max_words=30, mask=twitter_mask, contour_width=3).generate(all_tweets_text)
         # store to file
-        wc.to_file(os.path.join(d, "wordcloud/generated/twitterlogo_wc.png"))
+        wc.to_file(os.path.join(d, f"fetched/{querystring}/10MostUsedWords_wc.png"))
+        print(f"10MostUsedWords Wordcloud is stored at 'fetched/{querystring}/10MostUsedWords_wc.png'.")
         # show
         plt.imshow(wc, interpolation='bilinear')
         plt.axis('off')

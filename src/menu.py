@@ -258,8 +258,7 @@ class Menu:
                             input("\nPress enter to continue...")
                         # get most used words (outputs wordcloud with official twitterlogo as mask)
                         elif submenu_1_sel == 3:
-                            self.sentimentanalysis.get_most_used_words()
-                            print("file is in wordcloud/generated")
+                            self.sentimentanalysis.get_most_used_words(self.querystring)
                             input("\nPress enter to continue...")
                         # back
                         elif submenu_1_sel == 'b' or submenu_1_sel == 4:
