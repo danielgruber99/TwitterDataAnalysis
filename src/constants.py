@@ -26,7 +26,7 @@ follower_public_metrics = "Public Metrics"
 follower_following = "Following"
 follower_followers = "Followers"
 follower_url = "URL"
-follower_profile_image_url = 'profile image url'
+follower_profile_image_url = "profile image url"
 
 # dataframe followers_tweets
 # follower_id as in dataframe followers
@@ -42,7 +42,6 @@ NR_TWEETS = 100
 NR_FOLLOWERS = 500
 
 # Number of followers to fetch tweets for (only those first followers are considered and tweets are fetched only for those)
-NR_FOLLOWERS_FOR_TWEETS = 50 - 1        # as indexing begins from zero, 0 - 49 are 50 elements
+NR_FOLLOWERS_FOR_TWEETS = 50 - 1  # as indexing begins from zero, 0 - 49 are 50 elements
 # Number of followers tweets to fetch
 NR_FOLLOWERS_TWEETS = 20
-

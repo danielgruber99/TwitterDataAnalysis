@@ -191,8 +191,8 @@ class TwitterClient:
                                 follower.location,
                                 follower.url,
                                 follower.created_at,
-                                follower.public_metrics.get('following_count'),
-                                follower.public_metrics.get('followers_count'),
+                                follower.public_metrics.get("following_count"),
+                                follower.public_metrics.get("followers_count"),
                                 follower.profile_image_url,
                             ]
                         )
