@@ -343,16 +343,16 @@ class Menu:
                         print(self.data.tweets_df[0:c.NR_ENTRIES_PAGE])
                         print("Enter a twitter user: ")
                         userid = self.input_userid()
-                        if userid is None:
-                            print("Please enter a user id first under option '[0]' of this submenu4")
-                        elif userid == -1:
+                        if userid == -1:
                             print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
+                            input("Press enter to continue...")
                         else:
                             self.data.get_followers_df(userid)
                     # Browse profiles of followers
                     elif submenu_4_sel == 1:
                         if userid is None:
                             print("Please enter a user id first under option '[0]' of this submenu4")
+                            input("Press enter to continue...")
                         elif userid != -1:
                             # following line done alread after entering user id under option 0 in this submenu 4
                             #followers_df = self.twitterclient.fetch_followers(userid)
@@ -386,6 +386,7 @@ class Menu:
                     elif submenu_4_sel == 2:
                         if userid is None:
                             print("Please enter a user id first under option '[0]' of this submenu4")
+                            input("Press enter to continue...")
                         elif userid != -1:
                             self.data.get_follower_tweets_df(userid)
                             if self.data.followers_tweets_df is not None:
