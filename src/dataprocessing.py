@@ -9,7 +9,7 @@ import shutil
 
 class DataProcessing:
     """
-    This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users, 
+    This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users,
     followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
     If it is stored in fetched the class will only read those csv into pandas dataframes.
     Moreover getting only one column of certain dataframes is possible.
@@ -35,19 +35,6 @@ class DataProcessing:
         self.followers_df = None
         self.followers_tweets_df = None
 
-    def remove_eventually_old_data(self):
-        """
-        this function is needed to clean up eventually existing old data of topic if it is entered again.
-        """
-        folder_to_delete = f"fetched/{self.querystring}/"
-        if os.path.exists(folder_to_delete):
-            shutil.rmtree(folder_to_delete)
-        # create folders again
-        self.create_folder(f"fetched/{self.querystring}")
-        self.create_folder(f"fetched/{self.querystring}/followers")
-        self.markdown_folder = f"fetched/{self.querystring}/markdown"
-        self.create_folder(self.markdown_folder)
-
     def create_folder(self, folder):
         """
         For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
@@ -59,7 +46,7 @@ class DataProcessing:
             os.makedirs(folder)
         else:
             pass
-    
+
     def generate_tweets_df_md_file(self):
         """
         generate tweets_df markdown file if not already generated and show the user the file path.
@@ -68,7 +55,7 @@ class DataProcessing:
         if not os.path.exists(tweets_df_md_path):
             self.tweets_df.to_markdown(tweets_df_md_path)
         print(f"Markdown file is stored at {tweets_df_md_path}.")
-    
+
     def generate_users_df_md_file(self):
         """
         generate users_df markdown file if not already generated and show the user the file path.
@@ -77,7 +64,7 @@ class DataProcessing:
         if not os.path.exists(users_df_md_path):
             self.users_df.to_markdown(users_df_md_path)
         print(f"Markdown file is stored at {users_df_md_path}.")
-    
+
     def generate_followers_df_md_file(self, userid):
         """
         generate followers_df markdown file if not already generated and show the user the file path.
@@ -86,7 +73,7 @@ class DataProcessing:
         if not os.path.exists(followers_df_md_path):
             self.followers_df.to_markdown(followers_df_md_path)
         print(f"Markdown file is stored at {followers_df_md_path}.")
-    
+
     def generate_followers_tweets_df_md_file(self, userid):
         """
         generate followers_tweets_df markdown file if not already generated and show the user the file path.
@@ -108,7 +95,7 @@ class DataProcessing:
                 if self.tweets_df is not None:
                     self.tweets_df.to_csv(self.csv_file_tweets)
         return self.tweets_df
-    
+
     def get_users_df(self)->pd.DataFrame:
         """
         get users dataframe either by reading csv file if it exists or fetch with twitterclient.
@@ -122,7 +109,7 @@ class DataProcessing:
                 if self.users_df is not None:
                     self.users_df.to_csv(self.csv_file_users)
         return self.users_df
-    
+
     def get_followers_df(self, userid)->pd.DataFrame:
         """
         get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
@@ -147,7 +134,9 @@ class DataProcessing:
             # ensure that followers_df is not None, because get_followers_df(userid) could return None
             if self.followers_df is not None:
                 followerids = self.followers_df[const.follower_id]
-                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:const.NR_FOLLOWERS_FOR_TWEETS])
+                # only fetch for first 50 followers tweets (but if less than 50 followers only less can be fetched, check this)
+                nr_followers_to_fetch_tweets_for = const.NR_FOLLOWERS_FOR_TWEETS if len(followerids) > const.NR_FOLLOWERS_FOR_TWEETS else len(followerids) - 1
+                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:nr_followers_to_fetch_tweets_for])
                 if self.followers_tweets_df is not None:
                     self.followers_tweets_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv")
         return self.followers_tweets_df
@@ -159,7 +148,7 @@ class DataProcessing:
         if self.tweets_df is None:
             self.get_tweets_df()
         return list(self.tweets_df[const.user_id])
-    
+
     def get_user_ids_without_duplicates(self)->list:
         """
         Get users without duplicates.
@@ -189,7 +178,7 @@ class DataProcessing:
         if self.tweets_df is None:
             return None
         return list(self.tweets_df[const.tweet_text])
-    
+
     def get_hashtags(self) -> list:
         """
         Get hashtags.
@@ -216,7 +205,7 @@ class DataProcessing:
         c = Counter(hashtag_list)
         top_10_hashtags = c.most_common(10)
         return top_10_hashtags
-    
+
     def get_top_10_users(self)->list:
         """
         Determine top 10 Users based on their number of Tweets.

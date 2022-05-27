@@ -39,7 +39,7 @@ NR_TWEETS = 100
 NR_FOLLOWERS = 500
 
 # Number of followers to fetch tweets for (only those first followers are considered and tweets are fetched only for those)
-NR_FOLLOWERS_FOR_TWEETS = 50
+NR_FOLLOWERS_FOR_TWEETS = 50 - 1        # as indexing begins from zero, 0 - 49 are 50 elements
 # Number of followers tweets to fetch
 NR_FOLLOWERS_TWEETS = 20
 

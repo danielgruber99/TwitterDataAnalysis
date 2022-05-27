@@ -171,7 +171,7 @@ class TwitterClient:
                     const.follower_name,
                     const.follower_username,
                     const.follower_bio,
-                    const.follower_bio,
+                    const.follower_location,
                     const.follower_created_at,
                     const.follower_public_metrics,
                     const.follower_profile_image_url,
