@@ -303,120 +303,130 @@ class Menu:
                 self.submenu_2_exit = False
             # [3] Get followers of given twitter user
             elif main_sel == 3:
-                print(self.data.tweets_df[0:c.NR_ENTRIES_PAGE])
-                print("Enter a twitter user: ")
-                userid = self.input_userid()
+                self.data.get_users_df()
+                if self.data.users_df is not None:
+                    print(self.data.users_df[0:c.NR_ENTRIES_PAGE])
+                    print("Enter a twitter user: ")
+                    userid = self.input_userid()
 
-                if userid != -1:
-                    self.data.get_followers_df(userid)
-                else:
-                    print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
-                if self.data.followers_df is not None:
-                    start_browse_followers = 0
-                    browse_followers_exit = False
-                    while not browse_followers_exit:
-                        print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username]][start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
-                        browse_followers_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                        if browse_followers_input == 'n':
-                            start_browse_followers+=c.NR_ENTRIES_PAGE
-                        elif browse_followers_input == 'p':
-                            if start_browse_followers-c.NR_ENTRIES_PAGE >=0:
-                                start_browse_followers-=c.NR_ENTRIES_PAGE
-                        elif browse_followers_input == 'm':
-                            self.data.generate_followers_df_md_file(userid)
-                            input("Press enter to continue...")
-                        elif browse_followers_input == 'b':
-                            browse_followers_exit = True
-                        else:
-                            print("Input not valid.")
-                    browse_followers_exit = False
+                    if userid != -1:
+                        self.data.get_followers_df(userid)
+                    else:
+                        print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
+                    if self.data.followers_df is not None:
+                        start_browse_followers = 0
+                        browse_followers_exit = False
+                        while not browse_followers_exit:
+                            print(f"Followers {start_browse_followers} to {start_browse_followers+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username]][start_browse_followers:start_browse_followers+c.NR_ENTRIES_PAGE])
+                            browse_followers_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                            if browse_followers_input == 'n':
+                                start_browse_followers+=c.NR_ENTRIES_PAGE
+                            elif browse_followers_input == 'p':
+                                if start_browse_followers-c.NR_ENTRIES_PAGE >=0:
+                                    start_browse_followers-=c.NR_ENTRIES_PAGE
+                            elif browse_followers_input == 'm':
+                                self.data.generate_followers_df_md_file(userid)
+                                input("Press enter to continue...")
+                            elif browse_followers_input == 'b':
+                                browse_followers_exit = True
+                            else:
+                                print("Input not valid.")
+                        browse_followers_exit = False
+                    else:
+                        print("No data could be fetched.")
+                        input("Press enter to continue...")
                 else:
                     print("No data could be fetched.")
                     input("Press enter to continue...")
             # [4] obtain tweets and profiles of followers of given twitter user
             elif main_sel == 4:
-                # submenu 4
-                while not self.submenu_4_exit:
-                    submenu_4_sel = self.submenu_4.show()
-                    # Enter a user ID for fetching tweets and profiles and followers
-                    if submenu_4_sel == 0:
-                        print(self.data.tweets_df[0:c.NR_ENTRIES_PAGE])
-                        print("Enter a twitter user: ")
-                        userid = self.input_userid()
-                        if userid == -1:
-                            print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
-                            input("Press enter to continue...")
-                        else:
-                            self.data.get_followers_df(userid)
-                    # Browse profiles of followers
-                    elif submenu_4_sel == 1:
-                        if userid is None:
-                            print("Please enter a user id first under option '[0]' of this submenu4")
-                            input("Press enter to continue...")
-                        elif userid != -1:
-                            # following line done alread after entering user id under option 0 in this submenu 4
-                            #followers_df = self.twitterclient.fetch_followers(userid)
-                            if self.data.followers_df is not None:
-                                start_browse_followers_profiles = 0
-                                browse_followers_profiles_exit = False
-                                pd.set_option('display.max_colwidth', 35)
-                                while not browse_followers_profiles_exit:
-                                    print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username, c.follower_bio, c.follower_location, c.follower_url, c.follower_created_at, c.follower_following, c.follower_followers]][start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
-                                    browse_followers_profiles_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                                    if browse_followers_profiles_input == 'n':
-                                        start_browse_followers_profiles+=c.NR_ENTRIES_PAGE
-                                    elif browse_followers_profiles_input == 'p':
-                                        if start_browse_followers_profiles-c.NR_ENTRIES_PAGE >= 0:
-                                            start_browse_followers_profiles-=c.NR_ENTRIES_PAGE
-                                    elif browse_followers_profiles_input == 'm':
-                                        self.data.generate_followers_df_md_file(userid)
-                                        input("Press enter to continue...")
-                                    elif browse_followers_profiles_input == 'b':
-                                        browse_followers_profiles_exit = True
-                                    else:
-                                        print("Input not valid.")
-                                browse_followers_profiles_exit = False
-                                pd.set_option('display.max_colwidth', 130)
-                            else:
-                                print("No data could be fetched.")
+                self.data.get_users_df()
+                if self.data.users_df is not None:
+                    # submenu 4
+                    while not self.submenu_4_exit:
+                        submenu_4_sel = self.submenu_4.show()
+                        # Enter a user ID for fetching tweets and profiles and followers
+                        if submenu_4_sel == 0:
+                            print(self.data.users_df[0:c.NR_ENTRIES_PAGE])
+                            print("Enter a twitter user: ")
+                            userid = self.input_userid()
+                            if userid == -1:
+                                print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
                                 input("Press enter to continue...")
-                        else:
-                            print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
-                    # Browse tweets of followers
-                    elif submenu_4_sel == 2:
-                        if userid is None:
-                            print("Please enter a user id first under option '[0]' of this submenu4")
-                            input("Press enter to continue...")
-                        elif userid != -1:
-                            self.data.get_follower_tweets_df(userid)
-                            if self.data.followers_tweets_df is not None:
-                                start_browse_followers_tweets = 0
-                                browse_followers_tweets_exit = False
-                                while not browse_followers_tweets_exit:
-                                    print(f"Follower Tweets {start_browse_followers_tweets} to {start_browse_followers_tweets + c.NR_ENTRIES_PAGE}\n", self.data.followers_tweets_df[[c.follower_id, c.follower_tweet_id, c.follower_tweet_text]][start_browse_followers_tweets : start_browse_followers_tweets + c.NR_ENTRIES_PAGE])
-                                    browse_followers_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
-                                    if browse_followers_tweets_input == 'n':
-                                        start_browse_followers_tweets+=c.NR_ENTRIES_PAGE
-                                    elif browse_followers_tweets_input == 'p':
-                                        if start_browse_followers_tweets-c.NR_ENTRIES_PAGE >= 0:
-                                            start_browse_followers_tweets-=c.NR_ENTRIES_PAGE
-                                    elif browse_followers_tweets_input == 'm':
-                                        self.data.generate_followers_tweets_df_md_file(userid)
-                                        input("Press enter to continue...")
-                                    elif browse_followers_tweets_input == 'b':
-                                        browse_followers_tweets_exit = True
-                                    else:
-                                        print("Input not valid.")
-                                browse_followers_tweets_exit = False
                             else:
-                                print("No data could be fetched.")
+                                self.data.get_followers_df(userid)
+                        # Browse profiles of followers
+                        elif submenu_4_sel == 1:
+                            if userid is None:
+                                print("Please enter a user id first under option '[0]' of this submenu4")
                                 input("Press enter to continue...")
-                        else:
-                            print("Please provide first a user to fetch followers for under option '[0]'")
-                    # back
-                    elif submenu_4_sel == 'b' or submenu_4_sel == 3:
-                        self.submenu_4_exit = True
-                self.submenu_4_exit = False
+                            elif userid != -1:
+                                # following line done alread after entering user id under option 0 in this submenu 4
+                                #followers_df = self.twitterclient.fetch_followers(userid)
+                                if self.data.followers_df is not None:
+                                    start_browse_followers_profiles = 0
+                                    browse_followers_profiles_exit = False
+                                    pd.set_option('display.max_colwidth', 35)
+                                    while not browse_followers_profiles_exit:
+                                        print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username, c.follower_bio, c.follower_location, c.follower_url, c.follower_created_at, c.follower_following, c.follower_followers]][start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
+                                        browse_followers_profiles_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                        if browse_followers_profiles_input == 'n':
+                                            start_browse_followers_profiles+=c.NR_ENTRIES_PAGE
+                                        elif browse_followers_profiles_input == 'p':
+                                            if start_browse_followers_profiles-c.NR_ENTRIES_PAGE >= 0:
+                                                start_browse_followers_profiles-=c.NR_ENTRIES_PAGE
+                                        elif browse_followers_profiles_input == 'm':
+                                            self.data.generate_followers_df_md_file(userid)
+                                            input("Press enter to continue...")
+                                        elif browse_followers_profiles_input == 'b':
+                                            browse_followers_profiles_exit = True
+                                        else:
+                                            print("Input not valid.")
+                                    browse_followers_profiles_exit = False
+                                    pd.set_option('display.max_colwidth', 130)
+                                else:
+                                    print("No data could be fetched.")
+                                    input("Press enter to continue...")
+                            else:
+                                print("Your input does not match any user in this dataset. Please enter a user available in this data set.")
+                        # Browse tweets of followers
+                        elif submenu_4_sel == 2:
+                            if userid is None:
+                                print("Please enter a user id first under option '[0]' of this submenu4")
+                                input("Press enter to continue...")
+                            elif userid != -1:
+                                self.data.get_follower_tweets_df(userid)
+                                if self.data.followers_tweets_df is not None:
+                                    start_browse_followers_tweets = 0
+                                    browse_followers_tweets_exit = False
+                                    while not browse_followers_tweets_exit:
+                                        print(f"Follower Tweets {start_browse_followers_tweets} to {start_browse_followers_tweets + c.NR_ENTRIES_PAGE}\n", self.data.followers_tweets_df[[c.follower_id, c.follower_tweet_id, c.follower_tweet_text]][start_browse_followers_tweets : start_browse_followers_tweets + c.NR_ENTRIES_PAGE])
+                                        browse_followers_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
+                                        if browse_followers_tweets_input == 'n':
+                                            start_browse_followers_tweets+=c.NR_ENTRIES_PAGE
+                                        elif browse_followers_tweets_input == 'p':
+                                            if start_browse_followers_tweets-c.NR_ENTRIES_PAGE >= 0:
+                                                start_browse_followers_tweets-=c.NR_ENTRIES_PAGE
+                                        elif browse_followers_tweets_input == 'm':
+                                            self.data.generate_followers_tweets_df_md_file(userid)
+                                            input("Press enter to continue...")
+                                        elif browse_followers_tweets_input == 'b':
+                                            browse_followers_tweets_exit = True
+                                        else:
+                                            print("Input not valid.")
+                                    browse_followers_tweets_exit = False
+                                else:
+                                    print("No data could be fetched.")
+                                    input("Press enter to continue...")
+                            else:
+                                print("Please provide first a user to fetch followers for under option '[0]'")
+                        # back
+                        elif submenu_4_sel == 'b' or submenu_4_sel == 3:
+                            self.submenu_4_exit = True
+                    self.submenu_4_exit = False
+                else:
+                    print("No data could be fetched.")
+                    input("Press enter to continue...")
             # [c] change Topic
             elif main_sel == 5 or main_sel == 'c':
                 print("Current Topic is:", self.querystring)
@@ -472,7 +482,11 @@ class Menu:
                 print('A ValueError occured. Please enter the Tweet ID or corresponding index.')
 
         if self.check_twitterid_exists(twitterid):
-            return twitterid
+            twitterid_list = self.data.get_tweets_id()
+            if twitterid in twitterid_list:
+                return twitterid_list.index(twitterid)
+            else:
+                return twitterid
         else:
             return -1
 
@@ -491,7 +505,7 @@ class Menu:
             if userid in self.data.get_user_ids_without_duplicates():
                 return userid
             else:
-                return self.data.tweets_df[c.user_id][userid]
+                return self.data.users_df[c.user_id][userid]
         else:
             return -1
 
@@ -509,7 +523,7 @@ class Menu:
         check if entered userid exists either as the twitter id or the corresponding index.
         """
         users = self.data.get_user_ids_without_duplicates()
-        if userid in users or userid < self.data.tweets_df.shape[0]:
+        if userid in users or userid < self.data.users_df.shape[0]:
             return True
         return False
 
