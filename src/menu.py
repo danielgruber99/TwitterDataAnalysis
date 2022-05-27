@@ -359,8 +359,9 @@ class Menu:
                             if self.data.followers_df is not None:
                                 start_browse_followers_profiles = 0
                                 browse_followers_profiles_exit = False
+                                pd.set_option('display.max_colwidth', 35)
                                 while not browse_followers_profiles_exit:
-                                    print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username, c.follower_bio, c.follower_location]][start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
+                                    print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[[c.follower_id, c.follower_name, c.follower_username, c.follower_bio, c.follower_location, c.follower_url, c.follower_created_at, c.follower_following, c.follower_followers]][start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
                                     browse_followers_profiles_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
                                     if browse_followers_profiles_input == 'n':
                                         start_browse_followers_profiles+=c.NR_ENTRIES_PAGE
@@ -375,6 +376,7 @@ class Menu:
                                     else:
                                         print("Input not valid.")
                                 browse_followers_profiles_exit = False
+                                pd.set_option('display.max_colwidth', 130)
                             else:
                                 print("No data could be fetched.")
                                 input("Press enter to continue...")

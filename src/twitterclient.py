@@ -150,6 +150,8 @@ class TwitterClient:
                         "name",
                         "profile_image_url",
                         "public_metrics",
+                        "url",
+                        "username",
                     ],
                     max_results=const.NR_FOLLOWERS,
                 )
@@ -171,8 +173,10 @@ class TwitterClient:
                     const.follower_username,
                     const.follower_bio,
                     const.follower_location,
+                    const.follower_url,
                     const.follower_created_at,
-                    const.follower_public_metrics,
+                    const.follower_following,
+                    const.follower_followers,
                     const.follower_profile_image_url,
                 ]  # description in user is better known as bio (profile of user)
                 data = []
@@ -185,8 +189,10 @@ class TwitterClient:
                                 follower.username,
                                 follower.description,
                                 follower.location,
+                                follower.url,
                                 follower.created_at,
-                                follower.public_metrics,
+                                follower.public_metrics.get('following_count'),
+                                follower.public_metrics.get('followers_count'),
                                 follower.profile_image_url,
                             ]
                         )

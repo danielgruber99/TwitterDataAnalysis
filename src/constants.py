@@ -23,6 +23,9 @@ follower_bio = "bio"
 follower_location = "location"
 follower_created_at = "created_at"
 follower_public_metrics = "Public Metrics"
+follower_following = "Following"
+follower_followers = "Followers"
+follower_url = "URL"
 follower_profile_image_url = 'profile image url'
 
 # dataframe followers_tweets
