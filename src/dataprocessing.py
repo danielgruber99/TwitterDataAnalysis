@@ -147,7 +147,7 @@ class DataProcessing:
             # ensure that followers_df is not None, because get_followers_df(userid) could return None
             if self.followers_df is not None:
                 followerids = self.followers_df[const.follower_id]
-                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:20])
+                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(followerids[0:const.NR_FOLLOWERS_FOR_TWEETS])
                 if self.followers_tweets_df is not None:
                     self.followers_tweets_df.to_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv")
         return self.followers_tweets_df

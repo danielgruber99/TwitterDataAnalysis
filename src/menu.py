@@ -336,7 +336,6 @@ class Menu:
                         print(self.data.tweets_df[0:c.NR_ENTRIES_PAGE])
                         print("Enter a twitter user: ")
                         userid = self.input_userid()
-                        # TODO: check if userid valid
                         if userid is None:
                             print("Please enter a user id first under option '[0]' of this submenu4")
                         elif userid == -1:
@@ -353,7 +352,7 @@ class Menu:
                             start_browse_followers_profiles = 0
                             browse_followers_profiles_exit = False
                             while not browse_followers_profiles_exit:
-                                print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", followers_df[start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
+                                print(f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n", self.data.followers_df[c.follower_id, c.follower_name, c.follower_username, c.follower_bio, c.follower_location, c.follower_profile_image_url, c.follower_created_at][start_browse_followers_profiles:start_browse_followers_profiles+c.NR_ENTRIES_PAGE])
                                 browse_followers_profiles_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
                                 if browse_followers_profiles_input == 'n':
                                     start_browse_followers_profiles+=c.NR_ENTRIES_PAGE
@@ -375,11 +374,11 @@ class Menu:
                         if userid is None:
                             print("Please enter a user id first under option '[0]' of this submenu4")
                         elif userid != -1:
-                            follower_tweets_df = self.data.get_follower_tweets_df(userid)
+                            self.data.get_follower_tweets_df(userid)
                             start_browse_followers_tweets = 0
                             browse_followers_tweets_exit = False
                             while not browse_followers_tweets_exit:
-                                print(f"Follower Tweets {start_browse_followers_tweets} to {start_browse_followers_tweets + c.NR_ENTRIES_PAGE}\n", follower_tweets_df[start_browse_followers_tweets : start_browse_followers_tweets + c.NR_ENTRIES_PAGE])
+                                print(f"Follower Tweets {start_browse_followers_tweets} to {start_browse_followers_tweets + c.NR_ENTRIES_PAGE}\n", self.data.follower_tweets_df[c.follower_id, c.follower_tweet_id, c.follower_tweet_text][start_browse_followers_tweets : start_browse_followers_tweets + c.NR_ENTRIES_PAGE])
                                 browse_followers_tweets_input = input(f"\nPress 'n'/'p' to get next/previous {c.NR_ENTRIES_PAGE} followers. Press 'm' to generate a markdown file. Press 'b' to go back to the main menu.\n")
                                 if browse_followers_tweets_input == 'n':
                                     start_browse_followers_tweets+=c.NR_ENTRIES_PAGE
