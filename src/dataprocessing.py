@@ -198,12 +198,15 @@ class DataProcessing:
         -------
         top_10_hashtags:    a list of tuples (hashtag, occurences), which contains the 10 most used hashtags
         """
+        top_10_hashtags = None
         # join every element of the list with ',', as also the hashtags in one element are stored as , separated list
-        all_hashtags = ','.join(self.get_hashtags())
-        # get all hashtags as list by splitting those by ','
-        hashtag_list = all_hashtags.split(',')
-        c = Counter(hashtag_list)
-        top_10_hashtags = c.most_common(10)
+        hashtags = self.get_hashtags()
+        if hashtags:
+            all_hashtags = ','.join(hashtags)
+            # get all hashtags as list by splitting those by ','
+            hashtag_list = all_hashtags.split(',')
+            c = Counter(hashtag_list)
+            top_10_hashtags = c.most_common(10)
         return top_10_hashtags
 
     def get_top_10_users(self)->list:
@@ -214,7 +217,9 @@ class DataProcessing:
         -------
         top_10_users:    a list of tuples (userid, occurences), which contains the 10 users with most Tweets
         """
+        top_10_users = None
         users = self.get_user_ids()
-        c = Counter(users)
-        top_10_users = c.most_common(10)
+        if users:
+            c = Counter(users)
+            top_10_users = c.most_common(10)
         return top_10_users

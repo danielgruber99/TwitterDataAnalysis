@@ -277,19 +277,26 @@ class Menu:
                     # Get Top 10 Hashtags
                     if submenu_2_sel == 0:
                         top_10_hashtags = self.data.get_top_10_hashtags()
-                        print("Top 10 Hashtags based on frequency: ")
-                        for i in range(10):
-                            print(f"{i+1}.:", "#"+top_10_hashtags[i][0])
+                        if top_10_hashtags:
+                            print("Top 10 Hashtags based on frequency: ")
+                            for i in range(10):
+                                print(f"{i+1}.:", "#"+top_10_hashtags[i][0])
+                        else:
+                            print("Top 10 hashtags couldn't be found as tweets_df couldn't be loaded.")
                         input("\nPress enter to continue...")
                     # Get Top 10 Users
                     elif submenu_2_sel == 1:
                         top_10_users = self.data.get_top_10_users()
-                        top_10_users_usernames = []
-                        for user in top_10_users:
-                            top_10_users_usernames.append(self.data.twitterclient.lookup_user(user[0]))
-                        print("Top 10 Users based on their number of tweets: ")
-                        for i in range(10):
-                            print(f"{i+1}.: {top_10_users_usernames[i]} ({top_10_users[i][0]})", "with", top_10_users[i][1], "tweets.")
+                        if top_10_users:
+                            top_10_users_usernames = []
+                            for user in top_10_users:
+                                username = self.data.twitterclient.lookup_user(user[0])
+                                top_10_users_usernames.append(username)
+                            print("Top 10 Users based on their number of tweets: ")
+                            for i in range(10):
+                                print(f"{i+1}.: {top_10_users_usernames[i]} ({top_10_users[i][0]})", "with", top_10_users[i][1], "tweets.")
+                        else:
+                            print("Top 10 users couldn't be found as users_df couldn't be loaded.")
                         input("\nPress enter to continue...")
                     # back
                     elif submenu_2_sel == 'b' or submenu_2_sel == 2:
