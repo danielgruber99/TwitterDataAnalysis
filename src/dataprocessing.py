@@ -115,6 +115,7 @@ class DataProcessing:
         """
         get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
         """
+        self.followers_df = None
         if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers.csv"):
             self.followers_df = pd.read_csv(f"{self.csv_file_followers_path}/{userid}_followers.csv", lineterminator='\n')
         else:
@@ -127,6 +128,7 @@ class DataProcessing:
         """
         get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
         """
+        self.followers_tweets_df = None
         if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv"):
             self.followers_tweets_df = pd.read_csv(f"{self.csv_file_followers_path}/{userid}_followers_tweets.csv", lineterminator='\n')
         else:
