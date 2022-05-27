@@ -429,6 +429,9 @@ class Menu:
                     input("Press enter to continue...")
             # [c] change Topic
             elif main_sel == 5 or main_sel == 'c':
+                if self.data.twitterclient.client is None:
+                    print("Be aware that the twitterclient is not set up because authentication failed or no Bearer Token was provided.")
+                    print("Only already fetched data can be provided.")
                 print("Current Topic is:", self.querystring)
                 querystring = self.input_querystring_from_user()
                 if querystring:
@@ -531,5 +534,5 @@ class Menu:
         """
         Get the input for the querystring from the user.
         """
-        choice = input("Enter your querystring: ")
+        choice = input("Enter your querystring (or 'enter' to abort): ")
         return choice
