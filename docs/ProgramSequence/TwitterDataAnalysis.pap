@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="0982395E92B7B8EF">
-  <PROJECT FORMAT="1.00" NAME="TwitterDataAnalysis" AUTHOR="danie" CREATED="2022.05.07 11:17:00" MODIFIED="2022.05.17 17:32:17">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="8697DFCF1AB310A7">
+  <PROJECT FORMAT="1.00" NAME="TwitterDataAnalysis" AUTHOR="danie" CREATED="2022.05.07 11:17:00" MODIFIED="2022.05.29 21:26:52">
     <DIAGRAMS>
       <DIAGRAM FORMAT="1.00" ID="0" NAME="MainMenu" CREATED="2022.05.07 11:17:12" MODIFIED="2022.05.14 15:23:39">
         <LAYOUT FORMAT="1.00" COLUMNS="10" ROWS="17">
@@ -229,160 +229,261 @@
           <CONNECTION FORMAT="1.00" ID="120" FROM="119" TO="137" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="1" NAME="SentimentAnalysis" CREATED="2022.05.07 11:17:21" MODIFIED="2022.05.14 16:58:40">
-        <LAYOUT FORMAT="1.00" COLUMNS="7" ROWS="14">
+      <DIAGRAM FORMAT="1.00" ID="1" NAME="SentimentAnalysis" CREATED="2022.05.07 11:17:21" MODIFIED="2022.05.29 21:26:52">
+        <LAYOUT FORMAT="1.00" COLUMNS="11" ROWS="22">
           <ENTRIES>
-            <ENTRY COLUMN="0" ROW="5">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="59">
+            <ENTRY COLUMN="0" ROW="8">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="150">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="12">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="71">
+            <ENTRY COLUMN="0" ROW="20">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="158">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="6">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="48">
-                <TEXT><![CDATA[analyse average sentiment of all tweets in data set]]></TEXT>
+              <FIGURE SUBTYPE="PapLoopStart" FORMAT="1.00" ID="112" ASSOCIATE="119">
+                <TEXT><![CDATA[not browse_tweets_exit]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="7">
-              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="36">
-                <TEXT><![CDATA[Average Polarity]]></TEXT>
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="113">
+                <TEXT><![CDATA[show 20 tweets with analyzed polarity from startindex to startindex+20]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="8">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="114">
+                <TEXT><![CDATA['b' for back selected'?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="9">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="115">
+                <TEXT><![CDATA['n' for next 10 tweets selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="10">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="116">
+                <TEXT><![CDATA['p' for previous 20 tweets selected?]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="11">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="39">
-                <TEXT><![CDATA[]]></TEXT>
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="117">
+                <TEXT><![CDATA['m' for generating markdown file selected?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[SentimentAnalysis]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="2">
-              <FIGURE SUBTYPE="PapLoopStart" FORMAT="1.00" ID="4" ASSOCIATE="6">
-                <TEXT><![CDATA[not '[b] Back' selected]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="3">
-              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="9">
-                <TEXT><![CDATA[show submenu 1: (SentimentAnalysis)
-[0] Analyse all tweets and get avg Polarity
-[1] Analyse single tweet
-[2] Get most used words
-[b] Back]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="4">
-              <FIGURE SUBTYPE="PapInput" FORMAT="1.00" ID="11">
-                <TEXT><![CDATA[User Input/Selection]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="5">
-              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="17">
-                <TEXT><![CDATA['[b] Back' selected?]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="6">
-              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="19">
-                <TEXT><![CDATA['[0] Analyse all tweets and get avg Polarity' selected?]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="7">
-              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="21">
-                <TEXT><![CDATA['[1] Analyse single tweet' selected?]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="9">
-              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="23">
-                <TEXT><![CDATA['[2] Get most used Words' selected?]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="10">
-              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="13">
+            <ENTRY COLUMN="1" ROW="12">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="118">
                 <TEXT><![CDATA[any other key pressed?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="11">
-              <FIGURE SUBTYPE="PapLoopEnd" FORMAT="1.00" ID="6" ASSOCIATE="4">
+            <ENTRY COLUMN="1" ROW="13">
+              <FIGURE SUBTYPE="PapLoopEnd" FORMAT="1.00" ID="119" ASSOCIATE="112">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
+            <ENTRY COLUMN="2" ROW="5">
+              <FIGURE SUBTYPE="PapComment" FORMAT="1.00" ID="122">
+                <TEXT><![CDATA[startindex = 0]]></TEXT>
+              </FIGURE>
+            </ENTRY>
             <ENTRY COLUMN="2" ROW="12">
-              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="76">
-                <TEXT><![CDATA[MainMenu]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="2" ROW="13">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[End]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="3" ROW="10">
-              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="15">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="120">
                 <TEXT><![CDATA[nothing happens]]></TEXT>
               </FIGURE>
             </ENTRY>
+            <ENTRY COLUMN="2" ROW="13">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="121">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="10">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="123">
+                <TEXT><![CDATA[startindex-=20]]></TEXT>
+              </FIGURE>
+            </ENTRY>
             <ENTRY COLUMN="3" ROW="11">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="79">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="124">
+                <TEXT><![CDATA[generate markdown file]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="12">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="125">
+                <TEXT><![CDATA[markdown file]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="13">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="126">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="4" ROW="9">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="127">
+                <TEXT><![CDATA[startindex+=20]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="13">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="128">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="14">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="48">
+                <TEXT><![CDATA[analyse average sentiment of all tweets in data set]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="15">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="36">
+                <TEXT><![CDATA[Average Polarity]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="19">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="39">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[SentimentAnalysis]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="2">
+              <FIGURE SUBTYPE="PapLoopStart" FORMAT="1.00" ID="4" ASSOCIATE="6">
+                <TEXT><![CDATA[not '[b] Back' selected]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="3">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="9">
+                <TEXT><![CDATA[show submenu 1: (SentimentAnalysis)
+[0] Analyse all tweets
+[1] Get average polarity
+[2] Analyse single tweet
+[3] Get most used words
+[b] Back]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="4">
+              <FIGURE SUBTYPE="PapInput" FORMAT="1.00" ID="11">
+                <TEXT><![CDATA[User Input/Selection]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="5">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="17">
+                <TEXT><![CDATA['[b] Back' selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="6">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="95">
+                <TEXT><![CDATA['[0] Analyse all tweets' selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="14">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="19">
+                <TEXT><![CDATA['[1] Get average polarity' selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="15">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="21">
+                <TEXT><![CDATA['[2] Analyse single tweet' selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="17">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="23">
+                <TEXT><![CDATA['[3] Get most used Words' selected?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="18">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="13">
+                <TEXT><![CDATA[any other key pressed?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="19">
+              <FIGURE SUBTYPE="PapLoopEnd" FORMAT="1.00" ID="6" ASSOCIATE="4">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="20">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="76">
+                <TEXT><![CDATA[MainMenu]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="21">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[End]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="6" ROW="18">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="15">
+                <TEXT><![CDATA[nothing happens]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="6" ROW="19">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="79">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="7" ROW="17">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="47">
                 <TEXT><![CDATA[display Wordcloud of most used words]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="4" ROW="10">
+            <ENTRY COLUMN="7" ROW="18">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="43">
                 <TEXT><![CDATA[Wordcloud]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="4" ROW="11">
+            <ENTRY COLUMN="7" ROW="19">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="49">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="7">
+            <ENTRY COLUMN="8" ROW="15">
               <FIGURE SUBTYPE="PapInput" FORMAT="1.00" ID="44">
                 <TEXT><![CDATA[User selects Tweet via Twitter ID and/or Index]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="8">
+            <ENTRY COLUMN="8" ROW="16">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="82">
                 <TEXT><![CDATA[User input valid and userid/index exists in dataset?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="9">
+            <ENTRY COLUMN="8" ROW="17">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="52">
                 <TEXT><![CDATA[analyse selected tweet]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="10">
+            <ENTRY COLUMN="8" ROW="18">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="53">
                 <TEXT><![CDATA[sentiment of entered tweet]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="11">
+            <ENTRY COLUMN="8" ROW="19">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="54">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="6" ROW="8">
+            <ENTRY COLUMN="9" ROW="16">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="91">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="6" ROW="12">
+            <ENTRY COLUMN="9" ROW="20">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="85">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="10" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="105">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="10" ROW="20">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="109">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
@@ -396,7 +497,7 @@
           <CONNECTION FORMAT="1.00" ID="78" FROM="13" TO="15" TEXT="yes" />
           <CONNECTION FORMAT="1.00" ID="77" FROM="13" TO="6" TEXT="no" />
           <CONNECTION FORMAT="1.00" ID="24" FROM="23" TO="13" TEXT="no" />
-          <CONNECTION FORMAT="1.00" ID="18" FROM="17" TO="19" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="18" FROM="17" TO="95" TEXT="no" />
           <CONNECTION FORMAT="1.00" ID="20" FROM="19" TO="21" TEXT="no" />
           <CONNECTION FORMAT="1.00" ID="22" FROM="21" TO="23" TEXT="no" />
           <CONNECTION FORMAT="1.00" ID="12" FROM="11" TO="17" TEXT="" />
@@ -413,9 +514,9 @@
           <CONNECTION FORMAT="1.00" ID="55" FROM="53" TO="54" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="56" FROM="54" TO="49" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="74" FROM="76" TO="2" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="58" FROM="17" TO="59" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="62" FROM="59" TO="71" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="75" FROM="71" TO="76" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="108" FROM="105" TO="109" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="111" FROM="109" TO="85" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="98" FROM="17" TO="105" TEXT="yes" />
           <CONNECTION FORMAT="1.00" ID="51" FROM="49" TO="79" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="81" FROM="15" TO="79" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="83" FROM="82" TO="52" TEXT="yes" />
@@ -423,6 +524,29 @@
           <CONNECTION FORMAT="1.00" ID="92" FROM="91" TO="85" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="90" FROM="85" TO="76" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="93" FROM="82" TO="91" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="96" FROM="95" TO="19" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="130" FROM="112" TO="113" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="131" FROM="113" TO="114" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="149" FROM="95" TO="112" TEXT="yes" />
+          <CONNECTION FORMAT="1.00" ID="133" FROM="114" TO="115" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="134" FROM="115" TO="116" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="135" FROM="115" TO="127" TEXT="yes" />
+          <CONNECTION FORMAT="1.00" ID="136" FROM="127" TO="128" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="137" FROM="116" TO="117" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="138" FROM="116" TO="123" TEXT="yes" />
+          <CONNECTION FORMAT="1.00" ID="139" FROM="117" TO="118" TEXT="no" />
+          <CONNECTION FORMAT="1.00" ID="140" FROM="117" TO="124" TEXT="yes" />
+          <CONNECTION FORMAT="1.00" ID="141" FROM="124" TO="125" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="142" FROM="118" TO="119" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="143" FROM="118" TO="120" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="144" FROM="120" TO="121" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="145" FROM="125" TO="126" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="146" FROM="121" TO="119" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="147" FROM="126" TO="121" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="148" FROM="128" TO="126" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="151" FROM="114" TO="150" TEXT="yes" />
+          <CONNECTION FORMAT="1.00" ID="160" FROM="158" TO="76" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="153" FROM="150" TO="158" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
       <DIAGRAM FORMAT="1.00" ID="3" NAME="Get Top 10 Users/Hashtags" CREATED="2022.05.07 15:43:53" MODIFIED="2022.05.08 19:13:31">
@@ -570,7 +694,7 @@
           <CONNECTION FORMAT="1.00" ID="60" FROM="10" TO="58" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="4" NAME="Obtain Tweets and Profiles of followers" CREATED="2022.05.07 15:45:18" MODIFIED="2022.05.14 15:31:44">
+      <DIAGRAM FORMAT="1.00" ID="4" NAME="Obtain Tweets and Profiles of followers" CREATED="2022.05.07 15:45:18" MODIFIED="2022.05.29 21:25:16">
         <LAYOUT FORMAT="1.00" COLUMNS="11" ROWS="18">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="11">
@@ -679,7 +803,7 @@
             </ENTRY>
             <ENTRY COLUMN="5" ROW="5">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="111">
-                <TEXT><![CDATA[User has alread entered user to fetch followers profiles and tweets for?]]></TEXT>
+                <TEXT><![CDATA[User has already entered user to fetch followers profiles and tweets for?]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="5" ROW="6">
