@@ -216,7 +216,9 @@ class TwitterClient:
         if self.client:
             for followerid in followerids:
                 try:
-                    response = self.client.get_users_tweets(followerid, max_results=20)
+                    response = self.client.get_users_tweets(
+                        followerid, max_results=const.NR_FOLLOWERS_TWEETS
+                    )
                 except tweepy.errors.Unauthorized as unauthorized:
                     print("Unauthorized:", unauthorized)
                     print(
