@@ -531,7 +531,7 @@ class Menu:
                                 )
                                 input("Press enter to continue...")
                             elif userid != -1:
-                                self.data.get_follower_tweets_df(userid)
+                                self.data.get_followers_tweets_df(userid)
                                 if self.data.followers_tweets_df is not None:
                                     start_browse_followers_tweets = 0
                                     browse_followers_tweets_exit = False

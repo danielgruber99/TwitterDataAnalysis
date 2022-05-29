@@ -132,7 +132,7 @@ class DataProcessing:
                 )
         return self.followers_df
 
-    def get_follower_tweets_df(self, userid) -> pd.DataFrame:
+    def get_followers_tweets_df(self, userid) -> pd.DataFrame:
         """
         get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
         """
