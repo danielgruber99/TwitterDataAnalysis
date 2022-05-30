@@ -24,7 +24,6 @@
 </td><td width="25%" valign=top><a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
 <a href="re.html">re</a><br>
 </td><td width="25%" valign=top><a href="textblob.html">textblob</a><br>
-<a href="wordcloud.html">wordcloud</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -50,22 +49,65 @@
 <td colspan=2><tt><a href="#SentimentAnalysis">SentimentAnalysis</a>(tweets)<br>
 &nbsp;<br>
 This&nbsp;class&nbsp;is&nbsp;responsible&nbsp;for&nbsp;the&nbsp;Sentiment&nbsp;Analysis&nbsp;part&nbsp;with&nbsp;textblob.&nbsp;By&nbsp;initialization&nbsp;it&nbsp;will&nbsp;get&nbsp;a&nbsp;list&nbsp;of<br>
-tweets&nbsp;(only&nbsp;tweet_text)&nbsp;handed&nbsp;over.<br>&nbsp;</tt></td></tr>
+tweets&nbsp;(only&nbsp;tweet_text)&nbsp;handed&nbsp;over.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+tweets&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;tweets<br>
+&nbsp;<br>
+Attributes<br>
+----------<br>
+tweets&nbsp;:&nbsp;list<br>
+polarity_list&nbsp;:&nbsp;list<br>
+avg_polarity&nbsp;:&nbsp;double<br>
+avg_polarity_meaning&nbsp;:&nbsp;str<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="SentimentAnalysis-__init__"><strong>__init__</strong></a>(self, tweets)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-__init__"><strong>__init__</strong></a>(self, tweets)</dt><dd><tt>Constructor&nbsp;of&nbsp;<a href="#SentimentAnalysis">SentimentAnalysis</a>.</tt></dd></dl>
 
-<dl><dt><a name="SentimentAnalysis-analyse_all_tweets"><strong>analyse_all_tweets</strong></a>(self) -&gt; list</dt><dd><tt>analysing&nbsp;all&nbsp;tweets&nbsp;and&nbsp;get&nbsp;average&nbsp;polarity&nbsp;as&nbsp;output.</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-analyse_all_tweets"><strong>analyse_all_tweets</strong></a>(self) -&gt; list</dt><dd><tt>analysing&nbsp;all&nbsp;tweets&nbsp;and&nbsp;get&nbsp;average&nbsp;polarity&nbsp;as&nbsp;output.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+polarity_list&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;list&nbsp;of&nbsp;the&nbsp;polarity&nbsp;of&nbsp;each&nbsp;tweet.</tt></dd></dl>
 
-<dl><dt><a name="SentimentAnalysis-analyse_single_tweet"><strong>analyse_single_tweet</strong></a>(self, index) -&gt; str</dt><dd><tt>analyse&nbsp;polarity&nbsp;of&nbsp;single&nbsp;tweet.</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-analyse_single_tweet"><strong>analyse_single_tweet</strong></a>(self, index) -&gt; str</dt><dd><tt>Analyse&nbsp;polarity&nbsp;of&nbsp;single&nbsp;tweet.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+index&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;of&nbsp;the&nbsp;entry&nbsp;in&nbsp;the&nbsp;DataFrame&nbsp;tweets_df.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str:&nbsp;polarity&nbsp;meaning&nbsp;of&nbsp;the&nbsp;analyzed&nbsp;tweet.</tt></dd></dl>
 
-<dl><dt><a name="SentimentAnalysis-clean_tweet"><strong>clean_tweet</strong></a>(self, tweet) -&gt; str</dt><dd><tt>Utility&nbsp;function&nbsp;to&nbsp;clean&nbsp;tweet&nbsp;text&nbsp;by&nbsp;removing&nbsp;links,&nbsp;special&nbsp;characters&nbsp;using&nbsp;regex&nbsp;statements.</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-get_avg_polarity"><strong>get_avg_polarity</strong></a>(self) -&gt; dict</dt><dd><tt>After&nbsp;analysing&nbsp;all&nbsp;tweets&nbsp;and&nbsp;writing&nbsp;a&nbsp;polarity&nbsp;row&nbsp;to&nbsp;the&nbsp;dataframe&nbsp;(and&nbsp;to&nbsp;the&nbsp;csv)&nbsp;calculate&nbsp;the&nbsp;avg_polarity&nbsp;and&nbsp;get&nbsp;its&nbsp;textual&nbsp;meaning.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+tuple:&nbsp;Returns&nbsp;tuple&nbsp;of&nbsp;avg_polarity&nbsp;and&nbsp;avg_polarity_meaning.</tt></dd></dl>
 
-<dl><dt><a name="SentimentAnalysis-get_avg_polarity"><strong>get_avg_polarity</strong></a>(self) -&gt; dict</dt><dd><tt>After&nbsp;analysing&nbsp;all&nbsp;tweets&nbsp;and&nbsp;writing&nbsp;a&nbsp;polarity&nbsp;row&nbsp;to&nbsp;the&nbsp;dataframe&nbsp;(and&nbsp;to&nbsp;the&nbsp;csv)&nbsp;calculate&nbsp;the&nbsp;avg_polarity&nbsp;and&nbsp;get&nbsp;its&nbsp;textual&nbsp;output</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-get_most_used_words"><strong>get_most_used_words</strong></a>(self, querystring)</dt><dd><tt>Get&nbsp;most&nbsp;used&nbsp;words&nbsp;of&nbsp;all&nbsp;tweets&nbsp;and&nbsp;make&nbsp;a&nbsp;wordcloud&nbsp;with&nbsp;the&nbsp;mask&nbsp;of&nbsp;the&nbsp;official&nbsp;twitterlogo.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+querystring&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;saving&nbsp;the&nbsp;generated&nbsp;wordcloud&nbsp;png&nbsp;file&nbsp;to&nbsp;the&nbsp;correct&nbsp;directory&nbsp;path.</tt></dd></dl>
 
-<dl><dt><a name="SentimentAnalysis-get_most_used_words"><strong>get_most_used_words</strong></a>(self, querystring)</dt><dd><tt>Get&nbsp;the&nbsp;most&nbsp;used&nbsp;words&nbsp;of&nbsp;all&nbsp;tweets&nbsp;and&nbsp;make&nbsp;a&nbsp;wordcloud&nbsp;with&nbsp;the&nbsp;mask&nbsp;of&nbsp;the&nbsp;official&nbsp;twitterlogo.</tt></dd></dl>
-
-<dl><dt><a name="SentimentAnalysis-get_polarity_meaning"><strong>get_polarity_meaning</strong></a>(self, polarity) -&gt; str</dt><dd><tt>Translate&nbsp;polarity&nbsp;values&nbsp;from&nbsp;-1&nbsp;to&nbsp;1&nbsp;in&nbsp;textual&nbsp;output.</tt></dd></dl>
+<dl><dt><a name="SentimentAnalysis-get_polarity_meaning"><strong>get_polarity_meaning</strong></a>(self, polarity) -&gt; str</dt><dd><tt>Translate&nbsp;polarity&nbsp;values&nbsp;from&nbsp;-1&nbsp;to&nbsp;1&nbsp;in&nbsp;textual&nbsp;output/meaning.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+polarity&nbsp;:&nbsp;double<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;from&nbsp;-1&nbsp;to&nbsp;1&nbsp;representing&nbsp;the&nbsp;polarity.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+polarity_list&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;list&nbsp;of&nbsp;the&nbsp;polarity&nbsp;of&nbsp;each&nbsp;tweet.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -75,5 +117,12 @@ Data descriptors defined here:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
-</td></tr></table></td></tr></table>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>STOPWORDS</strong> = {'a', 'about', 'above', 'after', 'again', 'against', ...}</td></tr></table>
 </body></html>

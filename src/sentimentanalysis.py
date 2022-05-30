@@ -16,9 +16,24 @@ class SentimentAnalysis:
     """
     This class is responsible for the Sentiment Analysis part with textblob. By initialization it will get a list of
     tweets (only tweet_text) handed over.
+
+    Parameters
+    ----------
+    tweets : list
+        list of tweets
+
+    Attributes
+    ----------
+    tweets : list
+    polarity_list : list
+    avg_polarity : double
+    avg_polarity_meaning : str
     """
 
     def __init__(self, tweets):
+        """
+        Constructor of SentimentAnalysis.
+        """
         # list of tweets_text
         self.tweets = tweets
         # polarity list of analysed tweets
@@ -27,9 +42,18 @@ class SentimentAnalysis:
         self.avg_polarity = None
         self.avg_polarity_meaning = None
 
-    def clean_tweet(self, tweet) -> str:
+    def _clean_tweet(self, tweet) -> str:
         """
         Utility function to clean tweet text by removing links, special characters using regex statements.
+
+        Parameters
+        ----------
+        tweet : str
+            Provide Tweet text to clean.
+
+        Returns
+        -------
+        str: cleaned tweet.
         """
         return " ".join(
             re.sub(
@@ -40,16 +64,25 @@ class SentimentAnalysis:
     def analyse_all_tweets(self) -> list:
         """
         analysing all tweets and get average polarity as output.
+
+        Returns
+        -------
+        polarity_list : list
+            Returns list of the polarity of each tweet.
         """
         for eachtweet in self.tweets:
-            cleaned_tweet = self.clean_tweet(eachtweet)
+            cleaned_tweet = self._clean_tweet(eachtweet)
             analysis = textblob.TextBlob(cleaned_tweet)
             self.polarity_list.append(analysis.sentiment.polarity)
         return self.polarity_list
 
     def get_avg_polarity(self) -> dict:
         """
-        After analysing all tweets and writing a polarity row to the dataframe (and to the csv) calculate the avg_polarity and get its textual output
+        After analysing all tweets and writing a polarity row to the dataframe (and to the csv) calculate the avg_polarity and get its textual meaning.
+
+        Returns
+        -------
+        tuple: Returns tuple of avg_polarity and avg_polarity_meaning.
         """
         if len(self.polarity_list) == 0:
             self.analyse_all_tweets()
@@ -64,16 +97,35 @@ class SentimentAnalysis:
 
     def analyse_single_tweet(self, index) -> str:
         """
-        analyse polarity of single tweet.
+        Analyse polarity of single tweet.
+
+        Parameters
+        ----------
+        index : int
+            Index of the entry in the DataFrame tweets_df.
+
+        Returns
+        -------
+        str: polarity meaning of the analyzed tweet.
         """
         tweet_text = self.tweets[index]
-        cleaned_tweet_text = self.clean_tweet(tweet_text)
+        cleaned_tweet_text = self._clean_tweet(tweet_text)
         analysis = textblob.TextBlob(cleaned_tweet_text)
         return self.get_polarity_meaning(analysis.sentiment.polarity)
 
     def get_polarity_meaning(self, polarity) -> str:
         """
-        Translate polarity values from -1 to 1 in textual output.
+        Translate polarity values from -1 to 1 in textual output/meaning.
+
+        Parameters
+        ----------
+        polarity : double
+            Value from -1 to 1 representing the polarity.
+
+        Returns
+        -------
+        polarity_list : list
+            Returns list of the polarity of each tweet.
         """
         if polarity > 0.8:
             return "extremely positive"
@@ -94,10 +146,15 @@ class SentimentAnalysis:
 
     def get_most_used_words(self, querystring):
         """
-        Get the most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
+        Get most used words of all tweets and make a wordcloud with the mask of the official twitterlogo.
+
+        Parameters
+        ----------
+        querystring : str
+            For saving the generated wordcloud png file to the correct directory path.
         """
         # combine all tweets text to one string
-        all_tweets_text = self.clean_tweet(" ".join(self.tweets))
+        all_tweets_text = self._clean_tweet(" ".join(self.tweets))
         # get current working directory
         d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
         # take official twitter logo as mask
@@ -106,7 +163,11 @@ class SentimentAnalysis:
         )
         # generate wordcloud
         wc = WordCloud(
-            background_color="white", max_words=30, mask=twitter_mask, stopwords=STOPWORDS, contour_width=3
+            background_color="white",
+            max_words=30,
+            mask=twitter_mask,
+            stopwords=STOPWORDS,
+            contour_width=3,
         ).generate(all_tweets_text)
         # store to file
         wc.to_file(os.path.join(d, f"fetched/{querystring}/10MostUsedWords_wc.png"))
