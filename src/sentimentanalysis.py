@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
-import wordcloud
+from wordcloud import WordCloud, STOPWORDS
 import src.constants as const
 
 
@@ -105,8 +105,8 @@ class SentimentAnalysis:
             Image.open(os.path.join(d, "wordcloud/masks/twitterlogo.png"))
         )
         # generate wordcloud
-        wc = wordcloud.WordCloud(
-            background_color="white", max_words=30, mask=twitter_mask, contour_width=3
+        wc = WordCloud(
+            background_color="white", max_words=30, mask=twitter_mask, stopwords=STOPWORDS, contour_width=3
         ).generate(all_tweets_text)
         # store to file
         wc.to_file(os.path.join(d, f"fetched/{querystring}/10MostUsedWords_wc.png"))
