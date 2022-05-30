@@ -14,7 +14,18 @@ import shutil
 
 class Menu:
     """
-    This class handles the menu and provides to user a simple user interface in the command line. (Implemented with simple_term_menu)
+    This class handles the menu and provides to user a simple user interface in the command line (implemented with simple_term_menu).
+
+    Parameters
+    ----------
+    default_querystring : str
+        The querystring to start the program for.
+
+    Attributes
+    ----------
+    querystring : str
+    data : DataProcessing
+    sentimentanalysis : SentimentAnalysis
     """
 
     def __init__(self, default_querystring):
@@ -164,7 +175,7 @@ class Menu:
 
     def _menu_selection_loop(self):
         """
-        menu selection loop handles every user request. Main menu and all submenus are controlled within this loop.
+        Menu selection loop handles every user request. Main menu and all submenus are controlled within this loop.
         """
         # needed to make it possible to switch from option 3 to option 4 and get without typing again an user id profiles of followers and tweets of followers
         userid = None
@@ -634,14 +645,24 @@ class Menu:
     def remove_eventually_old_data(self, querystring):
         """
         this function is needed to clean up eventually existing old data of topic if it is entered again.
+
+        Parameters
+        ----------
+        querystring : str
+            The querystring to delete the folder for.
         """
         folder_to_delete = f"fetched/{querystring}/"
         if os.path.exists(folder_to_delete):
             shutil.rmtree(folder_to_delete)
 
-    def input_twitterid(self):
+    def input_twitterid(self) -> int:
         """
         Get user input for which Tweet ID selected.
+
+        Returns
+        -------
+        tiwtterid: int
+            Index of the twitterid, -1 if input of user does not exists in the tweets dataframe.
         """
         while True:
             try:
@@ -663,9 +684,14 @@ class Menu:
         else:
             return -1
 
-    def input_userid(self):
+    def input_userid(self) -> int:
         """
         Get user input for which user ID selected.
+
+        Returns
+        -------
+        users: int
+            User Id of selected user either via userid or index, -1 if input of user does not exists in the users dataframe.
         """
         while True:
             try:
@@ -684,27 +710,50 @@ class Menu:
         else:
             return -1
 
-    def check_twitterid_exists(self, twitterid):
+    def check_twitterid_exists(self, twitterid) -> bool:
         """
         check if entered twitterid exists either as the twitter id or the corresponding index.
+
+        Parameters
+        ----------
+        twitterid : int
+            The twitterid to check for.
+
+        Returns
+        -------
+        bool: True if twitterid exists in tweets datframe, False if not.
         """
         tweets = self.data.get_tweets_id()
         if twitterid in tweets or twitterid < self.data.tweets_df.shape[0]:
             return True
         return False
 
-    def check_userid_exists(self, userid):
+    def check_userid_exists(self, userid) -> bool:
         """
         check if entered userid exists either as the twitter id or the corresponding index.
+
+        Parameters
+        ----------
+        userid : int
+            The twitterid to check for.
+
+        Returns
+        -------
+        bool: True if userid exists in tweets datframe, False if not.
         """
         users = self.data.get_user_ids_without_duplicates()
         if userid in users or userid < self.data.users_df.shape[0]:
             return True
         return False
 
-    def input_querystring_from_user(self):
+    def input_querystring_from_user(self) -> str:
         """
         Get the input for the querystring from the user.
+
+        Returns
+        -------
+        choice : str
+            The entered topic/querystring from the user.
         """
         choice = input("Enter your querystring (or 'enter' to abort): ")
         return choice
