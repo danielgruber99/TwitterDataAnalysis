@@ -13,7 +13,7 @@ class TwitterClient:
     This class is used to firstly create a connection to the Twitter API v2 Endpoint by authenticating
     with required tokens. After the successful creation of the client connection it provides several
     methods to fetch tweets, users, followers and the tweets of followers.
-    
+
     Attributes
     ----------
     client : tweepy.Client
@@ -50,7 +50,7 @@ class TwitterClient:
         Returns
         -------
         tweets_df : pd.DataFrame or None
-            Contains fetched tweets, or None if an error/exception occured. 
+            Contains fetched tweets, or None if an error/exception occured.
         """
         tweets_df = None
         if self.client:
@@ -304,7 +304,7 @@ class TwitterClient:
 
         Parameters
         ----------
-        userid : int 
+        userid : int
             userid to lookup corresponding username.
 
         Returns

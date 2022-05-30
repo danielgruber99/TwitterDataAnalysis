@@ -43,28 +43,92 @@ Client&nbsp;is&nbsp;used&nbsp;for&nbsp;fetching&nbsp;tweets,&nbsp;users,&nbsp;fo
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="TwitterClient">class <strong>TwitterClient</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">Methods defined here:<br>
-<dl><dt><a name="TwitterClient-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
-
-<dl><dt><a name="TwitterClient-authenticate"><strong>authenticate</strong></a>(self)</dt><dd><tt>authenticate&nbsp;to&nbsp;twitter&nbsp;endpoint&nbsp;API&nbsp;v2&nbsp;with&nbsp;client</tt></dd></dl>
-
-<dl><dt><a name="TwitterClient-extract_hashtags"><strong>extract_hashtags</strong></a>(self, tweet) -&gt; list</dt><dd><tt>extract&nbsp;hashtags&nbsp;von&nbsp;retrieved&nbsp;response.data&nbsp;dictionary<br>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;is&nbsp;used&nbsp;to&nbsp;firstly&nbsp;create&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;Twitter&nbsp;API&nbsp;v2&nbsp;Endpoint&nbsp;by&nbsp;authenticating<br>
+with&nbsp;required&nbsp;tokens.&nbsp;After&nbsp;the&nbsp;successful&nbsp;creation&nbsp;of&nbsp;the&nbsp;client&nbsp;connection&nbsp;it&nbsp;provides&nbsp;several<br>
+methods&nbsp;to&nbsp;fetch&nbsp;tweets,&nbsp;users,&nbsp;followers&nbsp;and&nbsp;the&nbsp;tweets&nbsp;of&nbsp;followers.<br>
 &nbsp;<br>
-Returns:<br>
---------<br>
-hashtags_string:&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;of&nbsp;all&nbsp;hashtags&nbsp;separated&nbsp;by&nbsp;commas&nbsp;(for&nbsp;later&nbsp;splitting&nbsp;again)</tt></dd></dl>
+Attributes<br>
+----------<br>
+client&nbsp;:&nbsp;tweepy.Client<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TwitterClient-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Authenticate&nbsp;to&nbsp;the&nbsp;twitter&nbsp;API&nbsp;v2&nbsp;endpoint.</tt></dd></dl>
 
-<dl><dt><a name="TwitterClient-fetch_followers"><strong>fetch_followers</strong></a>(self, userid)</dt><dd><tt>fetch&nbsp;followers&nbsp;for&nbsp;a&nbsp;given&nbsp;user&nbsp;ID.</tt></dd></dl>
+<dl><dt><a name="TwitterClient-authenticate"><strong>authenticate</strong></a>(self)</dt><dd><tt>Authenticate&nbsp;to&nbsp;twitter&nbsp;API&nbsp;v2&nbsp;endpoint&nbsp;by&nbsp;setting&nbsp;the&nbsp;member&nbsp;variable&nbsp;client.</tt></dd></dl>
 
-<dl><dt><a name="TwitterClient-fetch_tweets"><strong>fetch_tweets</strong></a>(self, querystring)</dt><dd><tt>fetch&nbsp;tweets&nbsp;for&nbsp;given&nbsp;querystring.&nbsp;Only&nbsp;tweets&nbsp;in&nbsp;language&nbsp;english,&nbsp;with&nbsp;at&nbsp;least&nbsp;one&nbsp;hashtag&nbsp;are&nbsp;searched.&nbsp;Retweets&nbsp;are&nbsp;excluded.</tt></dd></dl>
+<dl><dt><a name="TwitterClient-extract_hashtags"><strong>extract_hashtags</strong></a>(self, tweet) -&gt; list</dt><dd><tt>Extract&nbsp;hashtags&nbsp;from&nbsp;retrieved&nbsp;response.data&nbsp;dictionary.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+tweet&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;userids&nbsp;to&nbsp;look&nbsp;up&nbsp;the&nbsp;name&nbsp;and&nbsp;username&nbsp;for<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+hashtags_string&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;of&nbsp;all&nbsp;hashtags&nbsp;separated&nbsp;by&nbsp;commas&nbsp;(for&nbsp;later&nbsp;splitting&nbsp;again)</tt></dd></dl>
 
-<dl><dt><a name="TwitterClient-fetch_tweets_of_followers"><strong>fetch_tweets_of_followers</strong></a>(self, followerids)</dt><dd><tt>fetches&nbsp;tweets&nbsp;of&nbsp;specified&nbsp;user.&nbsp;Especially&nbsp;used&nbsp;for&nbsp;fulfilling&nbsp;Task4.</tt></dd></dl>
+<dl><dt><a name="TwitterClient-fetch_followers"><strong>fetch_followers</strong></a>(self, userid) -&gt; pandas.core.frame.DataFrame</dt><dd><tt>Fetch&nbsp;followers&nbsp;for&nbsp;a&nbsp;given&nbsp;user&nbsp;ID.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+userid&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;given&nbsp;userid&nbsp;to&nbsp;fetch&nbsp;followers&nbsp;for<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+followers_df&nbsp;:&nbsp;pd.DataFrame&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Contains&nbsp;fetched&nbsp;followers,&nbsp;or&nbsp;None&nbsp;if&nbsp;an&nbsp;error/exception&nbsp;occured.</tt></dd></dl>
 
-<dl><dt><a name="TwitterClient-fetch_users"><strong>fetch_users</strong></a>(self, userids)</dt><dd><tt>fetch&nbsp;IDs,&nbsp;names&nbsp;and&nbsp;usernames&nbsp;of&nbsp;given&nbsp;userids&nbsp;in&nbsp;previously&nbsp;fetched&nbsp;set&nbsp;of&nbsp;tweets.<br>
-Required&nbsp;for&nbsp;providing&nbsp;the&nbsp;user&nbsp;the&nbsp;possibility&nbsp;to&nbsp;browse&nbsp;through&nbsp;all&nbsp;users.</tt></dd></dl>
+<dl><dt><a name="TwitterClient-fetch_tweets"><strong>fetch_tweets</strong></a>(self, querystring) -&gt; pandas.core.frame.DataFrame</dt><dd><tt>Fetch&nbsp;Tweets&nbsp;for&nbsp;given&nbsp;querystring&nbsp;where&nbsp;only&nbsp;tweets&nbsp;in&nbsp;language&nbsp;english&nbsp;with&nbsp;at&nbsp;least&nbsp;one&nbsp;hashtag&nbsp;are&nbsp;considered.&nbsp;Retweets&nbsp;are&nbsp;excluded.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+querystring&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;topic&nbsp;(querystring)&nbsp;for&nbsp;which&nbsp;tweets&nbsp;is&nbsp;searched&nbsp;to&nbsp;fetch<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+tweets_df&nbsp;:&nbsp;pd.DataFrame&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Contains&nbsp;fetched&nbsp;tweets,&nbsp;or&nbsp;None&nbsp;if&nbsp;an&nbsp;error/exception&nbsp;occured.</tt></dd></dl>
 
-<dl><dt><a name="TwitterClient-lookup_user"><strong>lookup_user</strong></a>(self, userid)</dt><dd><tt>lookup&nbsp;username&nbsp;for&nbsp;given&nbsp;user&nbsp;ID.</tt></dd></dl>
+<dl><dt><a name="TwitterClient-fetch_tweets_of_followers"><strong>fetch_tweets_of_followers</strong></a>(self, followerids) -&gt; pandas.core.frame.DataFrame</dt><dd><tt>Fetch&nbsp;tweets&nbsp;of&nbsp;given&nbsp;followers.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+followerids&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Followerids&nbsp;to&nbsp;fetch&nbsp;tweets&nbsp;for.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+followers_tweets_df&nbsp;:&nbsp;pd.DataFrame&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Contains&nbsp;fetched&nbsp;tweets&nbsp;for&nbsp;given&nbsp;list&nbsp;of&nbsp;followerids,&nbsp;or&nbsp;None&nbsp;if&nbsp;an&nbsp;error/exception&nbsp;occured.</tt></dd></dl>
+
+<dl><dt><a name="TwitterClient-fetch_users"><strong>fetch_users</strong></a>(self, userids) -&gt; pandas.core.frame.DataFrame</dt><dd><tt>Fetch&nbsp;User&nbsp;IDs,&nbsp;names&nbsp;and&nbsp;usernames&nbsp;of&nbsp;given&nbsp;userids&nbsp;in&nbsp;previously&nbsp;fetched&nbsp;set&nbsp;of&nbsp;Tweets.<br>
+Required&nbsp;for&nbsp;providing&nbsp;the&nbsp;user&nbsp;the&nbsp;possibility&nbsp;to&nbsp;browse&nbsp;through&nbsp;all&nbsp;users.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+userids&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;userids&nbsp;to&nbsp;look&nbsp;up&nbsp;the&nbsp;name&nbsp;and&nbsp;username&nbsp;for<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+users_df&nbsp;:&nbsp;pd.DataFrame&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Contains&nbsp;fetched&nbsp;users,&nbsp;or&nbsp;None&nbsp;if&nbsp;an&nbsp;error/exception&nbsp;occured.</tt></dd></dl>
+
+<dl><dt><a name="TwitterClient-lookup_user"><strong>lookup_user</strong></a>(self, userid) -&gt; str</dt><dd><tt>Lookup&nbsp;username&nbsp;for&nbsp;given&nbsp;user&nbsp;ID.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+userid&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;userid&nbsp;to&nbsp;lookup&nbsp;corresponding&nbsp;username.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+user.username&nbsp;:&nbsp;str&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Contains&nbsp;username&nbsp;of&nbsp;given&nbsp;userid,&nbsp;or&nbsp;None&nbsp;if&nbsp;an&nbsp;error/exception&nbsp;occured.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
