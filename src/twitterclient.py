@@ -30,21 +30,17 @@ class TwitterClient:
         """
         Authenticate to twitter API v2 endpoint by setting the member variable client.
         """
-        self.access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
-        self.access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
-        self.consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
-        self.consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
-        self.bearer_token = os.environ.get("TWITTER_BEARER_TOKEN")
+        bearer_token = os.environ.get("TWITTER_BEARER_TOKEN")
         # logon to api v2 endpoint
         try:
-            self.client = tweepy.Client(bearer_token=self.bearer_token)
+            self.client = tweepy.Client(bearer_token=bearer_token)
         except:
             self.client = None
             print("Error: Authentication Failed!")
 
     def fetch_tweets(self, querystring) -> pd.DataFrame:
         """
-        Fetches Tweets for given querystring where only tweets in language english with at least one hashtag are considered. Retweets are excluded.
+        Fetch Tweets for given querystring where only tweets in language english with at least one hashtag are considered. Retweets are excluded.
 
         Parameters
         ----------
