@@ -9,14 +9,26 @@ import src.constants as const
 
 
 class TwitterClient:
+    """
+    This class is used to firstly create a connection to the Twitter API v2 Endpoint by authenticating
+    with required tokens. After the successful creation of the client connection it provides several
+    methods to fetch tweets, users, followers and the tweets of followers.
+    
+    Attributes
+    ----------
+    client : tweepy.Client
+    """
+
     def __init__(self):
-        # authentication to Twitter Endpoint API v2
+        """
+        Authenticate to the twitter API v2 endpoint.
+        """
         self.client = None
         self.authenticate()
 
     def authenticate(self):
         """
-        authenticate to twitter endpoint API v2 with client
+        Authenticate to twitter API v2 endpoint by setting the member variable client.
         """
         self.access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
         self.access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
@@ -30,11 +42,20 @@ class TwitterClient:
             self.client = None
             print("Error: Authentication Failed!")
 
-    def fetch_tweets(self, querystring):
+    def fetch_tweets(self, querystring) -> pd.DataFrame:
         """
-        fetch tweets for given querystring. Only tweets in language english, with at least one hashtag are searched. Retweets are excluded.
+        Fetches Tweets for given querystring where only tweets in language english with at least one hashtag are considered. Retweets are excluded.
+
+        Parameters
+        ----------
+        querystring : str
+            the topic (querystring) for which tweets is searched to fetch
+
+        Returns
+        -------
+        tweets_df : pd.DataFrame or None
+            Contains fetched tweets, or None if an error/exception occured. 
         """
-        # get response for querystring and only consider tweets (no retweets) in english with at least one hashtag
         tweets_df = None
         if self.client:
             try:
@@ -80,10 +101,20 @@ class TwitterClient:
             )
         return tweets_df
 
-    def fetch_users(self, userids):
+    def fetch_users(self, userids) -> pd.DataFrame:
         """
-        fetch IDs, names and usernames of given userids in previously fetched set of tweets.
+        Fetch User IDs, names and usernames of given userids in previously fetched set of Tweets.
         Required for providing the user the possibility to browse through all users.
+
+        Parameters
+        ----------
+        userids : list
+            userids to look up the name and username for
+
+        Returns
+        -------
+        users_df : pd.DataFrame or None
+            Contains fetched users, or None if an error/exception occured.
         """
         columns = [const.user_id, const.user_name, const.user_username]
         data = []
@@ -119,11 +150,17 @@ class TwitterClient:
 
     def extract_hashtags(self, tweet) -> list:
         """
-        extract hashtags von retrieved response.data dictionary
+        Extract hashtags from retrieved response.data dictionary.
 
-        Returns:
-        --------
-        hashtags_string:    string of all hashtags separated by commas (for later splitting again)
+        Parameters
+        ----------
+        tweet : str
+            userids to look up the name and username for
+
+        Returns
+        -------
+        hashtags_string : str
+            string of all hashtags separated by commas (for later splitting again)
         """
         entity_hashtag = tweet.entities["hashtags"]
         hashtags = []
@@ -132,9 +169,19 @@ class TwitterClient:
         hashtags_string = ",".join(hashtags)
         return hashtags_string
 
-    def fetch_followers(self, userid):
+    def fetch_followers(self, userid) -> pd.DataFrame:
         """
-        fetch followers for a given user ID.
+        Fetch followers for a given user ID.
+
+        Parameters
+        ----------
+        userid : int
+            given userid to fetch followers for
+
+        Returns
+        -------
+        followers_df : pd.DataFrame or None
+            Contains fetched followers, or None if an error/exception occured.
         """
         followers_df = None
         if self.client:
@@ -203,9 +250,19 @@ class TwitterClient:
             )
         return followers_df
 
-    def fetch_tweets_of_followers(self, followerids):
+    def fetch_tweets_of_followers(self, followerids) -> pd.DataFrame:
         """
-        fetches tweets of specified user. Especially used for fulfilling Task4.
+        Fetch tweets of given followers.
+
+        Parameters
+        ----------
+        followerids : list
+            Followerids to fetch tweets for.
+
+        Returns
+        -------
+        followers_tweets_df : pd.DataFrame or None
+            Contains fetched tweets for given list of followerids, or None if an error/exception occured.
         """
         columns = [
             const.follower_id,
@@ -245,9 +302,19 @@ class TwitterClient:
         followers_tweets_df = pd.DataFrame(data, columns=columns)
         return followers_tweets_df
 
-    def lookup_user(self, userid):
+    def lookup_user(self, userid) -> str:
         """
-        lookup username for given user ID.
+        Lookup username for given user ID.
+
+        Parameters
+        ----------
+        userid : int 
+            userid to lookup corresponding username.
+
+        Returns
+        -------
+        user.username : str or None
+            Contains username of given userid, or None if an error/exception occured.
         """
         if self.client:
             try:
