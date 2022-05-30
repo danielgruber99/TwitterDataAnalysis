@@ -4,7 +4,7 @@ Dataprocessing module for getting dataframes, generating markdowns, loading only
 import os.path
 import pandas as pd
 import src.constants as const
-from collections import Counter, Iterable
+from collections import Counter
 from src.twitterclient import TwitterClient
 
 
@@ -14,9 +14,28 @@ class DataProcessing:
     followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
     If it is stored in fetched the class will only read those csv into pandas dataframes.
     Moreover getting only one column of certain dataframes is possible.
+
+    Parameters
+    ----------
+    querystring : str
+
+    Attributes
+    ----------
+    querystring : str
+    csv_file_tweets : str
+    csv_file_users : str
+    csv_file_followers_path : str
+    twitterclient : TwitterClient
+    tweets_df : pd.DataFrame
+    users_df : pd.DataFrame
+    followers_df : pd.DataFrame
+    Followers_Tweets_df : pd.DataFrame
     """
 
     def __init__(self, querystring):
+        """
+        Constructor for DataProcessing setting up the file paths correctly. Also instantiates the TwitterClient instance.
+        """
         self.querystring = querystring
         # file paths
         self.csv_file_tweets = f"fetched/{self.querystring}/{self.querystring}.csv"
@@ -40,6 +59,11 @@ class DataProcessing:
     def create_folder(self, folder):
         """
         For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.
+
+        Parameters
+        ----------
+        folder : str
+            The folder to create.
         """
         folder = folder
         CHECK_FOLDER = os.path.isdir(folder)
@@ -51,7 +75,7 @@ class DataProcessing:
 
     def generate_tweets_df_md_file(self):
         """
-        generate tweets_df markdown file if not already generated and show the user the file path.
+        Generate tweets_df markdown file if not already generated and show the user the file path.
         """
         tweets_df_md_path = f"{self.markdown_folder}/tweets_markdown.md"
         if not os.path.exists(tweets_df_md_path):
@@ -60,7 +84,7 @@ class DataProcessing:
 
     def generate_users_df_md_file(self):
         """
-        generate users_df markdown file if not already generated and show the user the file path.
+        Generate users_df markdown file if not already generated and show the user the file path.
         """
         users_df_md_path = f"{self.markdown_folder}/users_markdown.md"
         if not os.path.exists(users_df_md_path):
@@ -69,7 +93,7 @@ class DataProcessing:
 
     def generate_followers_df_md_file(self, userid):
         """
-        generate followers_df markdown file if not already generated and show the user the file path.
+        Generate followers_df markdown file if not already generated and show the user the file path.
         """
         followers_df_md_path = f"{self.markdown_folder}/{userid}_followers_markdown.md"
         if not os.path.exists(followers_df_md_path):
@@ -78,7 +102,7 @@ class DataProcessing:
 
     def generate_followers_tweets_df_md_file(self, userid):
         """
-        generate followers_tweets_df markdown file if not already generated and show the user the file path.
+        Generate followers_tweets_df markdown file if not already generated and show the user the file path.
         """
         followers_tweets_df_md_path = (
             f"{self.markdown_folder}/{userid}_followers_tweets_markdown.md"
@@ -89,7 +113,12 @@ class DataProcessing:
 
     def get_tweets_df(self) -> pd.DataFrame:
         """
-        get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+        Get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        tweets_df : pd.DataFrame or None
+            DataFrame containing tweets, or None if an error occured.
         """
         if self.tweets_df is None:
             if os.path.exists(self.csv_file_tweets):
@@ -102,7 +131,12 @@ class DataProcessing:
 
     def get_users_df(self) -> pd.DataFrame:
         """
-        get users dataframe either by reading csv file if it exists or fetch with twitterclient.
+        Get users dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        users_df : pd.DataFrame or None
+            DataFrame containing users, or None if an error occured.
         """
         if self.users_df is None:
             if os.path.exists(self.csv_file_users):
@@ -116,7 +150,17 @@ class DataProcessing:
 
     def get_followers_df(self, userid) -> pd.DataFrame:
         """
-        get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
+        Get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers dataframe.
+
+        Returns
+        -------
+        followers_df : pd.DataFrame or None
+            DataFrame containing followers for given userid, or None if an error occured.
         """
         self.followers_df = None
         if os.path.exists(f"{self.csv_file_followers_path}/{userid}_followers.csv"):
@@ -134,7 +178,17 @@ class DataProcessing:
 
     def get_followers_tweets_df(self, userid) -> pd.DataFrame:
         """
-        get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+        Get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers_tweets dataframe.
+
+        Returns
+        -------
+        followers_tweets_df : pd.DataFrame or None
+            DataFrame containing Tweets of followers for given userid, or None if an error occured.
         """
         self.followers_tweets_df = None
         if os.path.exists(
@@ -167,7 +221,11 @@ class DataProcessing:
 
     def get_user_ids(self) -> list:
         """
-        Get all users (can contain duplicates).
+        Get all user IDs (can contain duplicates).
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe potentially with duplicates, or None if an error occured.
         """
         if self.tweets_df is None:
             self.get_tweets_df()
@@ -175,7 +233,11 @@ class DataProcessing:
 
     def get_user_ids_without_duplicates(self) -> list:
         """
-        Get users without duplicates.
+        Get user IDs without duplicates.
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe without duplicates, or None if an error occured.
         """
         if self.tweets_df is None:
             self.get_tweets_df()
@@ -184,6 +246,10 @@ class DataProcessing:
     def get_tweets_id(self) -> list:
         """
         Get tweet ids.
+
+        Returns
+        -------
+        list or None: tweet ids existing in tweets_df dataframe, or None if an error occured.
         """
         if self.tweets_df is None:
             self.get_tweets_df()
@@ -195,6 +261,10 @@ class DataProcessing:
     def get_tweets_text(self) -> list:
         """
         Get tweet texts.
+
+        Returns
+        -------
+        list or None: tweet texts existing in tweets_df dataframe, or None if an error occured.
         """
         if self.tweets_df is None:
             self.get_tweets_df()
@@ -206,6 +276,10 @@ class DataProcessing:
     def get_hashtags(self) -> list:
         """
         Get hashtags.
+
+        Returns
+        -------
+        list or None: hashtags existing in tweets_df dataframe, or None if an error occured.
         """
         if self.tweets_df is None:
             self.get_tweets_df()
@@ -220,10 +294,11 @@ class DataProcessing:
 
         Returns
         -------
-        top_10_hashtags:    a list of tuples (hashtag, occurences), which contains the 10 most used hashtags
+        top_10_hashtags : list or None
+            a list of tuples (hashtag, occurences), which contains the 10 most used hashtags, or None if an error occured.
         """
         top_10_hashtags = None
-        # join every element of the list with ',', as also the hashtags in one element are stored as , separated list
+        # join every element of the list with ',', as also the hashtags in one element are stored as ',' separated list
         hashtags = self.get_hashtags()
         if hashtags:
             all_hashtags = ",".join(hashtags)
@@ -239,7 +314,8 @@ class DataProcessing:
 
         Returns
         -------
-        top_10_users:    a list of tuples (userid, occurences), which contains the 10 users with most Tweets
+        top_10_users : list or None
+            a list of tuples (userid, occurences), which contains the 10 users with most Tweets, or None if an error occured.
         """
         top_10_users = None
         users = self.get_user_ids()
