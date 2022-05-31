@@ -37,3 +37,12 @@ Then run:
 ```bash
 python3 main.py
 ```
+
+## Usage without TwitterClient
+Actually this program is even usable without setting the bearer token for the Twitterclient.
+Obviously it's not possible to fetch data from twitter then but besides that the program is fully
+usable for prefetched dataset.
+Only run following command to start the program:
+```bash
+python3 main.py
+```
