@@ -24,7 +24,7 @@ Clone the GitHub repository or download the source code and de-zip it.
 
 Install all needed modules listed in requirements.txt or run:
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
