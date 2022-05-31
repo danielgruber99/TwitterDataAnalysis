@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.dataprocessing API documentation</title>
+<meta name="description" content="Dataprocessing module for getting dataframes, generating markdowns, loading only certain columns of dataframes." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.dataprocessing</code></h1>
+</header>
+<section id="section-intro">
+<p>Dataprocessing module for getting dataframes, generating markdowns, loading only certain columns of dataframes.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Dataprocessing module for getting dataframes, generating markdowns, loading only certain columns of dataframes.
+&#34;&#34;&#34;
+import os.path
+import pandas as pd
+import src.constants as const
+from collections import Counter
+from src.twitterclient import TwitterClient
+
+
+class DataProcessing:
+    &#34;&#34;&#34;
+    This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users,
+    followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
+    If it is stored in fetched the class will only read those csv into pandas dataframes.
+    Moreover getting only one column of certain dataframes is possible.
+
+    Parameters
+    ----------
+    querystring : str
+
+    Attributes
+    ----------
+    querystring : str
+    csv_file_tweets : str
+    csv_file_users : str
+    csv_file_followers_path : str
+    twitterclient : TwitterClient
+    tweets_df : pd.DataFrame
+    users_df : pd.DataFrame
+    followers_df : pd.DataFrame
+    Followers_Tweets_df : pd.DataFrame
+    &#34;&#34;&#34;
+
+    def __init__(self, querystring):
+        &#34;&#34;&#34;
+        Constructor for DataProcessing setting up the file paths correctly. Also instantiates the TwitterClient instance.
+        &#34;&#34;&#34;
+        self.querystring = querystring
+        # file paths
+        self.csv_file_tweets = f&#34;fetched/{self.querystring}/{self.querystring}.csv&#34;
+        self.csv_file_users = f&#34;fetched/{self.querystring}/{self.querystring}_users.csv&#34;
+        self.csv_file_followers_path = f&#34;fetched/{self.querystring}/followers&#34;
+        # create querystring, followers and markdown folder
+        self.create_folder(f&#34;fetched/{self.querystring}&#34;)
+        self.create_folder(f&#34;fetched/{self.querystring}/followers&#34;)
+        self.markdown_folder = f&#34;fetched/{self.querystring}/markdown&#34;
+        self.create_folder(self.markdown_folder)
+        # f&#34;{self.csv_folder_path}followers/{userid}_followers.csv&#34;)
+        # followers_tweets_df.to_csv(f&#34;{self.csv_folder_path}followers/{userid}_followers_tweets.csv&#34;)
+        # twitterclient
+        self.twitterclient = TwitterClient()
+        # dataframes
+        self.tweets_df = None
+        self.users_df = None
+        self.followers_df = None
+        self.followers_tweets_df = None
+
+    def create_folder(self, folder):
+        &#34;&#34;&#34;
+        For each querystring a dedicated folder will be created under &#39;fetched/&#39;. This function will check if the folder already exists and, if not, creates it.
+
+        Parameters
+        ----------
+        folder : str
+            The folder to create.
+        &#34;&#34;&#34;
+        folder = folder
+        CHECK_FOLDER = os.path.isdir(folder)
+
+        if not CHECK_FOLDER:
+            os.makedirs(folder)
+        else:
+            pass
+
+    def generate_tweets_df_md_file(self):
+        &#34;&#34;&#34;
+        Generate tweets_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        tweets_df_md_path = f&#34;{self.markdown_folder}/tweets_markdown.md&#34;
+        if not os.path.exists(tweets_df_md_path):
+            self.tweets_df.to_markdown(tweets_df_md_path)
+        print(f&#34;Markdown file is stored at {tweets_df_md_path}.&#34;)
+
+    def generate_users_df_md_file(self):
+        &#34;&#34;&#34;
+        Generate users_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        users_df_md_path = f&#34;{self.markdown_folder}/users_markdown.md&#34;
+        if not os.path.exists(users_df_md_path):
+            self.users_df.to_markdown(users_df_md_path)
+        print(f&#34;Markdown file is stored at {users_df_md_path}.&#34;)
+
+    def generate_followers_df_md_file(self, userid):
+        &#34;&#34;&#34;
+        Generate followers_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        followers_df_md_path = f&#34;{self.markdown_folder}/{userid}_followers_markdown.md&#34;
+        if not os.path.exists(followers_df_md_path):
+            self.followers_df.to_markdown(followers_df_md_path)
+        print(f&#34;Markdown file is stored at {followers_df_md_path}.&#34;)
+
+    def generate_followers_tweets_df_md_file(self, userid):
+        &#34;&#34;&#34;
+        Generate followers_tweets_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        followers_tweets_df_md_path = (
+            f&#34;{self.markdown_folder}/{userid}_followers_tweets_markdown.md&#34;
+        )
+        if not os.path.exists(followers_tweets_df_md_path):
+            self.followers_tweets_df.to_markdown(followers_tweets_df_md_path)
+        print(f&#34;Markdown file is stored at {followers_tweets_df_md_path}.&#34;)
+
+    def get_tweets_df(self) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        tweets_df : pd.DataFrame or None
+            DataFrame containing tweets, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            if os.path.exists(self.csv_file_tweets):
+                self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator=&#34;\n&#34;)
+            else:
+                self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
+                if self.tweets_df is not None:
+                    self.tweets_df.to_csv(self.csv_file_tweets)
+        return self.tweets_df
+
+    def get_users_df(self) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get users dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        users_df : pd.DataFrame or None
+            DataFrame containing users, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.users_df is None:
+            if os.path.exists(self.csv_file_users):
+                self.users_df = pd.read_csv(self.csv_file_users, lineterminator=&#34;\n&#34;)
+            else:
+                users_without_duplicates = self.get_user_ids_without_duplicates()
+                self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
+                if self.users_df is not None:
+                    self.users_df.to_csv(self.csv_file_users)
+        return self.users_df
+
+    def get_followers_df(self, userid) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers dataframe.
+
+        Returns
+        -------
+        followers_df : pd.DataFrame or None
+            DataFrame containing followers for given userid, or None if an error occured.
+        &#34;&#34;&#34;
+        self.followers_df = None
+        if os.path.exists(f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;):
+            self.followers_df = pd.read_csv(
+                f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;,
+                lineterminator=&#34;\n&#34;,
+            )
+        else:
+            self.followers_df = self.twitterclient.fetch_followers(userid)
+            if self.followers_df is not None:
+                self.followers_df.to_csv(
+                    f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;
+                )
+        return self.followers_df
+
+    def get_followers_tweets_df(self, userid) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers_tweets dataframe.
+
+        Returns
+        -------
+        followers_tweets_df : pd.DataFrame or None
+            DataFrame containing Tweets of followers for given userid, or None if an error occured.
+        &#34;&#34;&#34;
+        self.followers_tweets_df = None
+        if os.path.exists(
+            f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+        ):
+            self.followers_tweets_df = pd.read_csv(
+                f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;,
+                lineterminator=&#34;\n&#34;,
+            )
+        else:
+            if self.followers_df is None:
+                self.get_followers_df(userid)
+            # ensure that followers_df is not None, because get_followers_df(userid) could return None
+            if self.followers_df is not None:
+                followerids = self.followers_df[const.follower_id]
+                # only fetch for first 50 followers tweets (but if less than 50 followers only less can be fetched, check this)
+                nr_followers_to_fetch_tweets_for = (
+                    const.NR_FOLLOWERS_FOR_TWEETS
+                    if len(followerids) &gt; const.NR_FOLLOWERS_FOR_TWEETS
+                    else len(followerids) - 1
+                )
+                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(
+                    followerids[0:nr_followers_to_fetch_tweets_for]
+                )
+                if self.followers_tweets_df is not None:
+                    self.followers_tweets_df.to_csv(
+                        f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+                    )
+        return self.followers_tweets_df
+
+    def get_user_ids(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get all user IDs (can contain duplicates).
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe potentially with duplicates, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        return list(self.tweets_df[const.user_id])
+
+    def get_user_ids_without_duplicates(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get user IDs without duplicates.
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe without duplicates, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        return list(set(self.tweets_df[const.user_id]))
+
+    def get_tweets_id(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get tweet ids.
+
+        Returns
+        -------
+        list or None: tweet ids existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_id])
+
+    def get_tweets_text(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get tweet texts.
+
+        Returns
+        -------
+        list or None: tweet texts existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_text])
+
+    def get_hashtags(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get hashtags.
+
+        Returns
+        -------
+        list or None: hashtags existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_hashtags])
+
+    def get_top_10_hashtags(self) -&gt; list:
+        &#34;&#34;&#34;
+        Determine top 10 most used Hashtags.
+
+        Returns
+        -------
+        top_10_hashtags : list or None
+            a list of tuples (hashtag, occurences), which contains the 10 most used hashtags, or None if an error occured.
+        &#34;&#34;&#34;
+        top_10_hashtags = None
+        # join every element of the list with &#39;,&#39;, as also the hashtags in one element are stored as &#39;,&#39; separated list
+        hashtags = self.get_hashtags()
+        if hashtags:
+            all_hashtags = &#34;,&#34;.join(hashtags)
+            # get all hashtags as list by splitting those by &#39;,&#39;
+            hashtag_list = all_hashtags.split(&#34;,&#34;)
+            c = Counter(hashtag_list)
+            top_10_hashtags = c.most_common(10)
+        return top_10_hashtags
+
+    def get_top_10_users(self) -&gt; list:
+        &#34;&#34;&#34;
+        Determine top 10 Users based on their number of Tweets.
+
+        Returns
+        -------
+        top_10_users : list or None
+            a list of tuples (userid, occurences), which contains the 10 users with most Tweets, or None if an error occured.
+        &#34;&#34;&#34;
+        top_10_users = None
+        users = self.get_user_ids()
+        if users:
+            c = Counter(users)
+            top_10_users = c.most_common(10)
+        return top_10_users</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.dataprocessing.DataProcessing"><code class="flex name class">
+<span>class <span class="ident">DataProcessing</span></span>
+<span>(</span><span>querystring)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users,
+followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
+If it is stored in fetched the class will only read those csv into pandas dataframes.
+Moreover getting only one column of certain dataframes is possible.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>querystring</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>querystring</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>csv_file_tweets</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>csv_file_users</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>csv_file_followers_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>twitterclient</code></strong> :&ensp;<code>TwitterClient</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>tweets_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>users_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>followers_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>Followers_Tweets_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<p>Constructor for DataProcessing setting up the file paths correctly. Also instantiates the TwitterClient instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DataProcessing:
+    &#34;&#34;&#34;
+    This class handles all kind of dataprocessing. It is responsible for Getting required dataframes of tweets, users,
+    followers and tweets_of_followers. This includes fetching the data with the twitterclient if not stored in fetched.
+    If it is stored in fetched the class will only read those csv into pandas dataframes.
+    Moreover getting only one column of certain dataframes is possible.
+
+    Parameters
+    ----------
+    querystring : str
+
+    Attributes
+    ----------
+    querystring : str
+    csv_file_tweets : str
+    csv_file_users : str
+    csv_file_followers_path : str
+    twitterclient : TwitterClient
+    tweets_df : pd.DataFrame
+    users_df : pd.DataFrame
+    followers_df : pd.DataFrame
+    Followers_Tweets_df : pd.DataFrame
+    &#34;&#34;&#34;
+
+    def __init__(self, querystring):
+        &#34;&#34;&#34;
+        Constructor for DataProcessing setting up the file paths correctly. Also instantiates the TwitterClient instance.
+        &#34;&#34;&#34;
+        self.querystring = querystring
+        # file paths
+        self.csv_file_tweets = f&#34;fetched/{self.querystring}/{self.querystring}.csv&#34;
+        self.csv_file_users = f&#34;fetched/{self.querystring}/{self.querystring}_users.csv&#34;
+        self.csv_file_followers_path = f&#34;fetched/{self.querystring}/followers&#34;
+        # create querystring, followers and markdown folder
+        self.create_folder(f&#34;fetched/{self.querystring}&#34;)
+        self.create_folder(f&#34;fetched/{self.querystring}/followers&#34;)
+        self.markdown_folder = f&#34;fetched/{self.querystring}/markdown&#34;
+        self.create_folder(self.markdown_folder)
+        # f&#34;{self.csv_folder_path}followers/{userid}_followers.csv&#34;)
+        # followers_tweets_df.to_csv(f&#34;{self.csv_folder_path}followers/{userid}_followers_tweets.csv&#34;)
+        # twitterclient
+        self.twitterclient = TwitterClient()
+        # dataframes
+        self.tweets_df = None
+        self.users_df = None
+        self.followers_df = None
+        self.followers_tweets_df = None
+
+    def create_folder(self, folder):
+        &#34;&#34;&#34;
+        For each querystring a dedicated folder will be created under &#39;fetched/&#39;. This function will check if the folder already exists and, if not, creates it.
+
+        Parameters
+        ----------
+        folder : str
+            The folder to create.
+        &#34;&#34;&#34;
+        folder = folder
+        CHECK_FOLDER = os.path.isdir(folder)
+
+        if not CHECK_FOLDER:
+            os.makedirs(folder)
+        else:
+            pass
+
+    def generate_tweets_df_md_file(self):
+        &#34;&#34;&#34;
+        Generate tweets_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        tweets_df_md_path = f&#34;{self.markdown_folder}/tweets_markdown.md&#34;
+        if not os.path.exists(tweets_df_md_path):
+            self.tweets_df.to_markdown(tweets_df_md_path)
+        print(f&#34;Markdown file is stored at {tweets_df_md_path}.&#34;)
+
+    def generate_users_df_md_file(self):
+        &#34;&#34;&#34;
+        Generate users_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        users_df_md_path = f&#34;{self.markdown_folder}/users_markdown.md&#34;
+        if not os.path.exists(users_df_md_path):
+            self.users_df.to_markdown(users_df_md_path)
+        print(f&#34;Markdown file is stored at {users_df_md_path}.&#34;)
+
+    def generate_followers_df_md_file(self, userid):
+        &#34;&#34;&#34;
+        Generate followers_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        followers_df_md_path = f&#34;{self.markdown_folder}/{userid}_followers_markdown.md&#34;
+        if not os.path.exists(followers_df_md_path):
+            self.followers_df.to_markdown(followers_df_md_path)
+        print(f&#34;Markdown file is stored at {followers_df_md_path}.&#34;)
+
+    def generate_followers_tweets_df_md_file(self, userid):
+        &#34;&#34;&#34;
+        Generate followers_tweets_df markdown file if not already generated and show the user the file path.
+        &#34;&#34;&#34;
+        followers_tweets_df_md_path = (
+            f&#34;{self.markdown_folder}/{userid}_followers_tweets_markdown.md&#34;
+        )
+        if not os.path.exists(followers_tweets_df_md_path):
+            self.followers_tweets_df.to_markdown(followers_tweets_df_md_path)
+        print(f&#34;Markdown file is stored at {followers_tweets_df_md_path}.&#34;)
+
+    def get_tweets_df(self) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        tweets_df : pd.DataFrame or None
+            DataFrame containing tweets, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            if os.path.exists(self.csv_file_tweets):
+                self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator=&#34;\n&#34;)
+            else:
+                self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
+                if self.tweets_df is not None:
+                    self.tweets_df.to_csv(self.csv_file_tweets)
+        return self.tweets_df
+
+    def get_users_df(self) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get users dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Returns
+        -------
+        users_df : pd.DataFrame or None
+            DataFrame containing users, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.users_df is None:
+            if os.path.exists(self.csv_file_users):
+                self.users_df = pd.read_csv(self.csv_file_users, lineterminator=&#34;\n&#34;)
+            else:
+                users_without_duplicates = self.get_user_ids_without_duplicates()
+                self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
+                if self.users_df is not None:
+                    self.users_df.to_csv(self.csv_file_users)
+        return self.users_df
+
+    def get_followers_df(self, userid) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers dataframe.
+
+        Returns
+        -------
+        followers_df : pd.DataFrame or None
+            DataFrame containing followers for given userid, or None if an error occured.
+        &#34;&#34;&#34;
+        self.followers_df = None
+        if os.path.exists(f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;):
+            self.followers_df = pd.read_csv(
+                f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;,
+                lineterminator=&#34;\n&#34;,
+            )
+        else:
+            self.followers_df = self.twitterclient.fetch_followers(userid)
+            if self.followers_df is not None:
+                self.followers_df.to_csv(
+                    f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;
+                )
+        return self.followers_df
+
+    def get_followers_tweets_df(self, userid) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+        Parameters
+        ----------
+        userid : int
+            For loading the correct followers_tweets dataframe.
+
+        Returns
+        -------
+        followers_tweets_df : pd.DataFrame or None
+            DataFrame containing Tweets of followers for given userid, or None if an error occured.
+        &#34;&#34;&#34;
+        self.followers_tweets_df = None
+        if os.path.exists(
+            f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+        ):
+            self.followers_tweets_df = pd.read_csv(
+                f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;,
+                lineterminator=&#34;\n&#34;,
+            )
+        else:
+            if self.followers_df is None:
+                self.get_followers_df(userid)
+            # ensure that followers_df is not None, because get_followers_df(userid) could return None
+            if self.followers_df is not None:
+                followerids = self.followers_df[const.follower_id]
+                # only fetch for first 50 followers tweets (but if less than 50 followers only less can be fetched, check this)
+                nr_followers_to_fetch_tweets_for = (
+                    const.NR_FOLLOWERS_FOR_TWEETS
+                    if len(followerids) &gt; const.NR_FOLLOWERS_FOR_TWEETS
+                    else len(followerids) - 1
+                )
+                self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(
+                    followerids[0:nr_followers_to_fetch_tweets_for]
+                )
+                if self.followers_tweets_df is not None:
+                    self.followers_tweets_df.to_csv(
+                        f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+                    )
+        return self.followers_tweets_df
+
+    def get_user_ids(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get all user IDs (can contain duplicates).
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe potentially with duplicates, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        return list(self.tweets_df[const.user_id])
+
+    def get_user_ids_without_duplicates(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get user IDs without duplicates.
+
+        Returns
+        -------
+        list or None: userids existing in users_df dataframe without duplicates, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        return list(set(self.tweets_df[const.user_id]))
+
+    def get_tweets_id(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get tweet ids.
+
+        Returns
+        -------
+        list or None: tweet ids existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_id])
+
+    def get_tweets_text(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get tweet texts.
+
+        Returns
+        -------
+        list or None: tweet texts existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_text])
+
+    def get_hashtags(self) -&gt; list:
+        &#34;&#34;&#34;
+        Get hashtags.
+
+        Returns
+        -------
+        list or None: hashtags existing in tweets_df dataframe, or None if an error occured.
+        &#34;&#34;&#34;
+        if self.tweets_df is None:
+            self.get_tweets_df()
+        # if not tweets_df could be fetched return none
+        if self.tweets_df is None:
+            return None
+        return list(self.tweets_df[const.tweet_hashtags])
+
+    def get_top_10_hashtags(self) -&gt; list:
+        &#34;&#34;&#34;
+        Determine top 10 most used Hashtags.
+
+        Returns
+        -------
+        top_10_hashtags : list or None
+            a list of tuples (hashtag, occurences), which contains the 10 most used hashtags, or None if an error occured.
+        &#34;&#34;&#34;
+        top_10_hashtags = None
+        # join every element of the list with &#39;,&#39;, as also the hashtags in one element are stored as &#39;,&#39; separated list
+        hashtags = self.get_hashtags()
+        if hashtags:
+            all_hashtags = &#34;,&#34;.join(hashtags)
+            # get all hashtags as list by splitting those by &#39;,&#39;
+            hashtag_list = all_hashtags.split(&#34;,&#34;)
+            c = Counter(hashtag_list)
+            top_10_hashtags = c.most_common(10)
+        return top_10_hashtags
+
+    def get_top_10_users(self) -&gt; list:
+        &#34;&#34;&#34;
+        Determine top 10 Users based on their number of Tweets.
+
+        Returns
+        -------
+        top_10_users : list or None
+            a list of tuples (userid, occurences), which contains the 10 users with most Tweets, or None if an error occured.
+        &#34;&#34;&#34;
+        top_10_users = None
+        users = self.get_user_ids()
+        if users:
+            c = Counter(users)
+            top_10_users = c.most_common(10)
+        return top_10_users</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.dataprocessing.DataProcessing.create_folder"><code class="name flex">
+<span>def <span class="ident">create_folder</span></span>(<span>self, folder)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>For each querystring a dedicated folder will be created under 'fetched/'. This function will check if the folder already exists and, if not, creates it.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>folder</code></strong> :&ensp;<code>str</code></dt>
+<dd>The folder to create.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_folder(self, folder):
+    &#34;&#34;&#34;
+    For each querystring a dedicated folder will be created under &#39;fetched/&#39;. This function will check if the folder already exists and, if not, creates it.
+
+    Parameters
+    ----------
+    folder : str
+        The folder to create.
+    &#34;&#34;&#34;
+    folder = folder
+    CHECK_FOLDER = os.path.isdir(folder)
+
+    if not CHECK_FOLDER:
+        os.makedirs(folder)
+    else:
+        pass</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.generate_followers_df_md_file"><code class="name flex">
+<span>def <span class="ident">generate_followers_df_md_file</span></span>(<span>self, userid)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate followers_df markdown file if not already generated and show the user the file path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_followers_df_md_file(self, userid):
+    &#34;&#34;&#34;
+    Generate followers_df markdown file if not already generated and show the user the file path.
+    &#34;&#34;&#34;
+    followers_df_md_path = f&#34;{self.markdown_folder}/{userid}_followers_markdown.md&#34;
+    if not os.path.exists(followers_df_md_path):
+        self.followers_df.to_markdown(followers_df_md_path)
+    print(f&#34;Markdown file is stored at {followers_df_md_path}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.generate_followers_tweets_df_md_file"><code class="name flex">
+<span>def <span class="ident">generate_followers_tweets_df_md_file</span></span>(<span>self, userid)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate followers_tweets_df markdown file if not already generated and show the user the file path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_followers_tweets_df_md_file(self, userid):
+    &#34;&#34;&#34;
+    Generate followers_tweets_df markdown file if not already generated and show the user the file path.
+    &#34;&#34;&#34;
+    followers_tweets_df_md_path = (
+        f&#34;{self.markdown_folder}/{userid}_followers_tweets_markdown.md&#34;
+    )
+    if not os.path.exists(followers_tweets_df_md_path):
+        self.followers_tweets_df.to_markdown(followers_tweets_df_md_path)
+    print(f&#34;Markdown file is stored at {followers_tweets_df_md_path}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.generate_tweets_df_md_file"><code class="name flex">
+<span>def <span class="ident">generate_tweets_df_md_file</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate tweets_df markdown file if not already generated and show the user the file path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_tweets_df_md_file(self):
+    &#34;&#34;&#34;
+    Generate tweets_df markdown file if not already generated and show the user the file path.
+    &#34;&#34;&#34;
+    tweets_df_md_path = f&#34;{self.markdown_folder}/tweets_markdown.md&#34;
+    if not os.path.exists(tweets_df_md_path):
+        self.tweets_df.to_markdown(tweets_df_md_path)
+    print(f&#34;Markdown file is stored at {tweets_df_md_path}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.generate_users_df_md_file"><code class="name flex">
+<span>def <span class="ident">generate_users_df_md_file</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate users_df markdown file if not already generated and show the user the file path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_users_df_md_file(self):
+    &#34;&#34;&#34;
+    Generate users_df markdown file if not already generated and show the user the file path.
+    &#34;&#34;&#34;
+    users_df_md_path = f&#34;{self.markdown_folder}/users_markdown.md&#34;
+    if not os.path.exists(users_df_md_path):
+        self.users_df.to_markdown(users_df_md_path)
+    print(f&#34;Markdown file is stored at {users_df_md_path}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_followers_df"><code class="name flex">
+<span>def <span class="ident">get_followers_df</span></span>(<span>self, userid) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get followers dataframe either by reading csv file if it exists or fetch with twitterclient.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>userid</code></strong> :&ensp;<code>int</code></dt>
+<dd>For loading the correct followers dataframe.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>followers_df</code></strong> :&ensp;<code>pd.DataFrame</code> or <code>None</code></dt>
+<dd>DataFrame containing followers for given userid, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_followers_df(self, userid) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Get followers dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+    Parameters
+    ----------
+    userid : int
+        For loading the correct followers dataframe.
+
+    Returns
+    -------
+    followers_df : pd.DataFrame or None
+        DataFrame containing followers for given userid, or None if an error occured.
+    &#34;&#34;&#34;
+    self.followers_df = None
+    if os.path.exists(f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;):
+        self.followers_df = pd.read_csv(
+            f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;,
+            lineterminator=&#34;\n&#34;,
+        )
+    else:
+        self.followers_df = self.twitterclient.fetch_followers(userid)
+        if self.followers_df is not None:
+            self.followers_df.to_csv(
+                f&#34;{self.csv_file_followers_path}/{userid}_followers.csv&#34;
+            )
+    return self.followers_df</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_followers_tweets_df"><code class="name flex">
+<span>def <span class="ident">get_followers_tweets_df</span></span>(<span>self, userid) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>userid</code></strong> :&ensp;<code>int</code></dt>
+<dd>For loading the correct followers_tweets dataframe.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>followers_tweets_df</code></strong> :&ensp;<code>pd.DataFrame</code> or <code>None</code></dt>
+<dd>DataFrame containing Tweets of followers for given userid, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_followers_tweets_df(self, userid) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Get follower_tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+    Parameters
+    ----------
+    userid : int
+        For loading the correct followers_tweets dataframe.
+
+    Returns
+    -------
+    followers_tweets_df : pd.DataFrame or None
+        DataFrame containing Tweets of followers for given userid, or None if an error occured.
+    &#34;&#34;&#34;
+    self.followers_tweets_df = None
+    if os.path.exists(
+        f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+    ):
+        self.followers_tweets_df = pd.read_csv(
+            f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;,
+            lineterminator=&#34;\n&#34;,
+        )
+    else:
+        if self.followers_df is None:
+            self.get_followers_df(userid)
+        # ensure that followers_df is not None, because get_followers_df(userid) could return None
+        if self.followers_df is not None:
+            followerids = self.followers_df[const.follower_id]
+            # only fetch for first 50 followers tweets (but if less than 50 followers only less can be fetched, check this)
+            nr_followers_to_fetch_tweets_for = (
+                const.NR_FOLLOWERS_FOR_TWEETS
+                if len(followerids) &gt; const.NR_FOLLOWERS_FOR_TWEETS
+                else len(followerids) - 1
+            )
+            self.followers_tweets_df = self.twitterclient.fetch_tweets_of_followers(
+                followerids[0:nr_followers_to_fetch_tweets_for]
+            )
+            if self.followers_tweets_df is not None:
+                self.followers_tweets_df.to_csv(
+                    f&#34;{self.csv_file_followers_path}/{userid}_followers_tweets.csv&#34;
+                )
+    return self.followers_tweets_df</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_hashtags"><code class="name flex">
+<span>def <span class="ident">get_hashtags</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get hashtags.</p>
+<h2 id="returns">Returns</h2>
+<p>list or None: hashtags existing in tweets_df dataframe, or None if an error occured.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_hashtags(self) -&gt; list:
+    &#34;&#34;&#34;
+    Get hashtags.
+
+    Returns
+    -------
+    list or None: hashtags existing in tweets_df dataframe, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        self.get_tweets_df()
+    # if not tweets_df could be fetched return none
+    if self.tweets_df is None:
+        return None
+    return list(self.tweets_df[const.tweet_hashtags])</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_top_10_hashtags"><code class="name flex">
+<span>def <span class="ident">get_top_10_hashtags</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine top 10 most used Hashtags.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>top_10_hashtags</code></strong> :&ensp;<code>list</code> or <code>None</code></dt>
+<dd>a list of tuples (hashtag, occurences), which contains the 10 most used hashtags, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_top_10_hashtags(self) -&gt; list:
+    &#34;&#34;&#34;
+    Determine top 10 most used Hashtags.
+
+    Returns
+    -------
+    top_10_hashtags : list or None
+        a list of tuples (hashtag, occurences), which contains the 10 most used hashtags, or None if an error occured.
+    &#34;&#34;&#34;
+    top_10_hashtags = None
+    # join every element of the list with &#39;,&#39;, as also the hashtags in one element are stored as &#39;,&#39; separated list
+    hashtags = self.get_hashtags()
+    if hashtags:
+        all_hashtags = &#34;,&#34;.join(hashtags)
+        # get all hashtags as list by splitting those by &#39;,&#39;
+        hashtag_list = all_hashtags.split(&#34;,&#34;)
+        c = Counter(hashtag_list)
+        top_10_hashtags = c.most_common(10)
+    return top_10_hashtags</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_top_10_users"><code class="name flex">
+<span>def <span class="ident">get_top_10_users</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine top 10 Users based on their number of Tweets.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>top_10_users</code></strong> :&ensp;<code>list</code> or <code>None</code></dt>
+<dd>a list of tuples (userid, occurences), which contains the 10 users with most Tweets, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_top_10_users(self) -&gt; list:
+    &#34;&#34;&#34;
+    Determine top 10 Users based on their number of Tweets.
+
+    Returns
+    -------
+    top_10_users : list or None
+        a list of tuples (userid, occurences), which contains the 10 users with most Tweets, or None if an error occured.
+    &#34;&#34;&#34;
+    top_10_users = None
+    users = self.get_user_ids()
+    if users:
+        c = Counter(users)
+        top_10_users = c.most_common(10)
+    return top_10_users</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_tweets_df"><code class="name flex">
+<span>def <span class="ident">get_tweets_df</span></span>(<span>self) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>tweets_df</code></strong> :&ensp;<code>pd.DataFrame</code> or <code>None</code></dt>
+<dd>DataFrame containing tweets, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tweets_df(self) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Get tweets dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+    Returns
+    -------
+    tweets_df : pd.DataFrame or None
+        DataFrame containing tweets, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        if os.path.exists(self.csv_file_tweets):
+            self.tweets_df = pd.read_csv(self.csv_file_tweets, lineterminator=&#34;\n&#34;)
+        else:
+            self.tweets_df = self.twitterclient.fetch_tweets(self.querystring)
+            if self.tweets_df is not None:
+                self.tweets_df.to_csv(self.csv_file_tweets)
+    return self.tweets_df</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_tweets_id"><code class="name flex">
+<span>def <span class="ident">get_tweets_id</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get tweet ids.</p>
+<h2 id="returns">Returns</h2>
+<p>list or None: tweet ids existing in tweets_df dataframe, or None if an error occured.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tweets_id(self) -&gt; list:
+    &#34;&#34;&#34;
+    Get tweet ids.
+
+    Returns
+    -------
+    list or None: tweet ids existing in tweets_df dataframe, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        self.get_tweets_df()
+    # if not tweets_df could be fetched return none
+    if self.tweets_df is None:
+        return None
+    return list(self.tweets_df[const.tweet_id])</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_tweets_text"><code class="name flex">
+<span>def <span class="ident">get_tweets_text</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get tweet texts.</p>
+<h2 id="returns">Returns</h2>
+<p>list or None: tweet texts existing in tweets_df dataframe, or None if an error occured.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tweets_text(self) -&gt; list:
+    &#34;&#34;&#34;
+    Get tweet texts.
+
+    Returns
+    -------
+    list or None: tweet texts existing in tweets_df dataframe, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        self.get_tweets_df()
+    # if not tweets_df could be fetched return none
+    if self.tweets_df is None:
+        return None
+    return list(self.tweets_df[const.tweet_text])</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_user_ids"><code class="name flex">
+<span>def <span class="ident">get_user_ids</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get all user IDs (can contain duplicates).</p>
+<h2 id="returns">Returns</h2>
+<p>list or None: userids existing in users_df dataframe potentially with duplicates, or None if an error occured.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_user_ids(self) -&gt; list:
+    &#34;&#34;&#34;
+    Get all user IDs (can contain duplicates).
+
+    Returns
+    -------
+    list or None: userids existing in users_df dataframe potentially with duplicates, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        self.get_tweets_df()
+    return list(self.tweets_df[const.user_id])</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_user_ids_without_duplicates"><code class="name flex">
+<span>def <span class="ident">get_user_ids_without_duplicates</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get user IDs without duplicates.</p>
+<h2 id="returns">Returns</h2>
+<p>list or None: userids existing in users_df dataframe without duplicates, or None if an error occured.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_user_ids_without_duplicates(self) -&gt; list:
+    &#34;&#34;&#34;
+    Get user IDs without duplicates.
+
+    Returns
+    -------
+    list or None: userids existing in users_df dataframe without duplicates, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.tweets_df is None:
+        self.get_tweets_df()
+    return list(set(self.tweets_df[const.user_id]))</code></pre>
+</details>
+</dd>
+<dt id="src.dataprocessing.DataProcessing.get_users_df"><code class="name flex">
+<span>def <span class="ident">get_users_df</span></span>(<span>self) ‑> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get users dataframe either by reading csv file if it exists or fetch with twitterclient.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>users_df</code></strong> :&ensp;<code>pd.DataFrame</code> or <code>None</code></dt>
+<dd>DataFrame containing users, or None if an error occured.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_users_df(self) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Get users dataframe either by reading csv file if it exists or fetch with twitterclient.
+
+    Returns
+    -------
+    users_df : pd.DataFrame or None
+        DataFrame containing users, or None if an error occured.
+    &#34;&#34;&#34;
+    if self.users_df is None:
+        if os.path.exists(self.csv_file_users):
+            self.users_df = pd.read_csv(self.csv_file_users, lineterminator=&#34;\n&#34;)
+        else:
+            users_without_duplicates = self.get_user_ids_without_duplicates()
+            self.users_df = self.twitterclient.fetch_users(users_without_duplicates)
+            if self.users_df is not None:
+                self.users_df.to_csv(self.csv_file_users)
+    return self.users_df</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.dataprocessing.DataProcessing" href="#src.dataprocessing.DataProcessing">DataProcessing</a></code></h4>
+<ul class="">
+<li><code><a title="src.dataprocessing.DataProcessing.create_folder" href="#src.dataprocessing.DataProcessing.create_folder">create_folder</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.generate_followers_df_md_file" href="#src.dataprocessing.DataProcessing.generate_followers_df_md_file">generate_followers_df_md_file</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.generate_followers_tweets_df_md_file" href="#src.dataprocessing.DataProcessing.generate_followers_tweets_df_md_file">generate_followers_tweets_df_md_file</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.generate_tweets_df_md_file" href="#src.dataprocessing.DataProcessing.generate_tweets_df_md_file">generate_tweets_df_md_file</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.generate_users_df_md_file" href="#src.dataprocessing.DataProcessing.generate_users_df_md_file">generate_users_df_md_file</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_followers_df" href="#src.dataprocessing.DataProcessing.get_followers_df">get_followers_df</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_followers_tweets_df" href="#src.dataprocessing.DataProcessing.get_followers_tweets_df">get_followers_tweets_df</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_hashtags" href="#src.dataprocessing.DataProcessing.get_hashtags">get_hashtags</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_top_10_hashtags" href="#src.dataprocessing.DataProcessing.get_top_10_hashtags">get_top_10_hashtags</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_top_10_users" href="#src.dataprocessing.DataProcessing.get_top_10_users">get_top_10_users</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_tweets_df" href="#src.dataprocessing.DataProcessing.get_tweets_df">get_tweets_df</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_tweets_id" href="#src.dataprocessing.DataProcessing.get_tweets_id">get_tweets_id</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_tweets_text" href="#src.dataprocessing.DataProcessing.get_tweets_text">get_tweets_text</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_user_ids" href="#src.dataprocessing.DataProcessing.get_user_ids">get_user_ids</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_user_ids_without_duplicates" href="#src.dataprocessing.DataProcessing.get_user_ids_without_duplicates">get_user_ids_without_duplicates</a></code></li>
+<li><code><a title="src.dataprocessing.DataProcessing.get_users_df" href="#src.dataprocessing.DataProcessing.get_users_df">get_users_df</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
