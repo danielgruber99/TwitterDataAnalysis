@@ -4,6 +4,8 @@ This project let the user fetch tweets, users, followers of a user and tweets of
 for an entered topic through which he/she can browse. Moreover, he can analyse the polarity of
 each tweet.
 
+For more have a look at the Documenation at `docs/Documentation.pdf`.
+
 >**Table of Contents**
 >  - [Prerequisites](#Prerequisites)
 >  - [Installation](#Installation)
