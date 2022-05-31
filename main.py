@@ -8,6 +8,7 @@ def main():
     # -----------------------------------------------------------------------
     # START MENU
     myMenu = Menu(default_querystring)
+    myMenu.menu_selection_loop()
 
 
 if __name__ == "__main__":

@@ -59,8 +59,6 @@ class Menu:
         # setup width of command line for pd dataframes
         pd.set_option("display.max_colwidth", 130)
         pd.set_option("display.html.table_schema", True)
-        # start menu loop
-        self._menu_selection_loop()
 
     def _setup_main_menu(self):
         """
@@ -173,7 +171,7 @@ class Menu:
             clear_screen=True,
         )
 
-    def _menu_selection_loop(self):
+    def menu_selection_loop(self):
         """
         Menu selection loop handles every user request. Main menu and all submenus are controlled within this loop.
         """
