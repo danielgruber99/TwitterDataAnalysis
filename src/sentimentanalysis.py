@@ -170,7 +170,7 @@ class SentimentAnalysis:
             contour_width=3,
         ).generate(all_tweets_text)
         # store to file
-        wc.to_file(os.path.join(d, f"fetched/{querystring}/10MostUsedWords_wc.png"))
+        wc.to_file(os.path.join(d, f"fetched/{querystring}/30MostUsedWords_wc.png"))
         print(
             f"10MostUsedWords Wordcloud is stored at 'fetched/{querystring}/10MostUsedWords_wc.png'."
         )
