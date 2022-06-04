@@ -172,7 +172,7 @@ class SentimentAnalysis:
         # store to file
         wc.to_file(os.path.join(d, f"fetched/{querystring}/30MostUsedWords_wc.png"))
         print(
-            f"10MostUsedWords Wordcloud is stored at 'fetched/{querystring}/10MostUsedWords_wc.png'."
+            f"30MostUsedWords Wordcloud is stored at 'fetched/{querystring}/30MostUsedWords_wc.png'."
         )
         # show
         plt.imshow(wc, interpolation="bilinear")
