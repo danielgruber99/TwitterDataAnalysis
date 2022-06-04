@@ -477,7 +477,7 @@ class Menu:
                                 if self.data.followers_df is not None:
                                     start_browse_followers_profiles = 0
                                     browse_followers_profiles_exit = False
-                                    pd.set_option("display.max_colwidth", 35)
+                                    pd.set_option("display.max_colwidth", 23)
                                     while not browse_followers_profiles_exit:
                                         print(
                                             f"Followers {start_browse_followers_profiles} to {start_browse_followers_profiles+c.NR_ENTRIES_PAGE}\n",
