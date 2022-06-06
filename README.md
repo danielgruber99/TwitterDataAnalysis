@@ -10,6 +10,7 @@ For more have a look at the Documenation at `docs/Documentation.pdf`.
 >  - [Prerequisites](#Prerequisites)
 >  - [Installation](#Installation)
 >  - [Usage](#Usage)
+>  - [Usage without TwitterClient](#UsagewithoutTwitterClient)
 
 
 ## Prerequisites
