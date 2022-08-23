@@ -1,6 +1,6 @@
 matplotlib==3.5.1
 pandas==1.4.2
-Pillow==9.1.0
+Pillow==9.1.1
 simple-term-menu==1.4.1
 tabulate==0.8.9
 textblob==0.17.1
